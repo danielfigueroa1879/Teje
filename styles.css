@@ -1,13 +1,15 @@
 /* Variables globales */
 :root {
-    --primary-color: #283593;
-    --secondary-color: #D4AF37;
+    --primary-color: #ff73b9; /* Rosa intenso del encabezado */
+    --secondary-color: #333333; /* Texto oscuro */
     --white: #ffffff;
     --light-gray: #f5f5f5;
     --dark-gray: #333333;
-    --pink: #ff69b4;
-    --light-blue: #c5e8e8;
-    --light-orange: #ffefd5;
+    --light-blue: #c5e8e8; /* Color celeste de secciones */
+    --process-bg: #e8f4f4; /* Color verde-celeste muy claro del fondo de proceso creativo */
+    --light-orange: #ffefd5; /* Color melocotón claro */
+    --light-yellow: #fff7e6; /* Color amarillo claro de la sección de productos */
+    --background-pink: #ffb6c1; /* Rosa claro para fondos de imágenes */
 }
 
 /* Reset básico */
@@ -35,12 +37,12 @@ body {
 
 /* Cabecera */
 header {
-    background-color: #fff;
-    color: var(--primary-color);
+    background-color: #FFEFD5; /* Cambiado a color melocotón claro */
+    color: var(--dark-gray);
     padding: 10px 0;
     width: 100%;
     top: 0;
-    border-bottom: 1px solid #f1f1f1;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .header-container {
@@ -59,7 +61,7 @@ header {
 .logo h1 {
     font-size: 2.5rem;
     font-weight: 500;
-    color: var(--primary-color);
+    color: var(--dark-gray); /* Cambiado a oscuro para mejor contraste con fondo claro */
 }
 
 /* Navegación principal */
@@ -81,7 +83,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: var(--dark-gray);
+    color: var(--dark-gray); /* Cambiado a oscuro para mejor contraste con fondo claro */
     text-decoration: none;
     font-weight: 400;
     transition: color 0.3s;
@@ -92,7 +94,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    color: var(--pink);
+    color: var(--primary-color); /* Efecto hover en rosa */
 }
 
 /* Botón de menú móvil */
@@ -100,7 +102,7 @@ nav ul li a:hover {
     display: none;
     background: none;
     border: none;
-    color: var(--dark-gray);
+    color: var(--dark-gray); /* Cambiado a oscuro para mejor contraste con fondo claro */
     font-size: 2rem;
     cursor: pointer;
     padding: 5px 10px;
@@ -109,7 +111,7 @@ nav ul li a:hover {
 
 /* Hero Banner */
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('https://via.placeholder.com/1200x600');
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://via.placeholder.com/1200x600/ff73b9/ffffff');
     background-size: cover;
     background-position: center;
     color: var(--white);
@@ -184,12 +186,12 @@ section {
     transform: translateX(-50%);
     width: 70px;
     height: 2px;
-    background-color: var(--pink);
+    background-color: var(--primary-color); /* Rosa para la línea decorativa */
 }
 
 /* Productos más vendidos */
 .bestsellers {
-    background-color: #fff7e6;
+    background-color: var(--light-yellow); /* Usando la variable para el amarillo claro */
     padding: 60px 0;
 }
 
@@ -256,7 +258,7 @@ section {
 
 /* Sección destacada */
 .featured-section {
-    background-color: var(--light-blue);
+    background-color: var(--light-blue); /* Manteniendo el celeste para esta sección */
     padding: 60px 0;
     display: flex;
 }
@@ -298,7 +300,7 @@ section {
 
 /* Galería */
 .gallery {
-    background-color: var(--light-orange);
+    background-color: var(--light-orange); /* Volviendo al melocotón claro original */
     padding: 60px 0;
 }
 
@@ -455,7 +457,7 @@ footer {
 }
 
 .footer-column ul li a:hover {
-    color: var(--pink);
+    color: var(--primary-color);
 }
 
 .newsletter-form {
@@ -509,7 +511,7 @@ footer {
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: white;
+        background-color: #FFEFD5; /* Cambiado a color melocotón claro */
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         z-index: 999;
     }
@@ -521,7 +523,7 @@ footer {
     nav ul li {
         margin: 0;
         text-align: center;
-        border-bottom: 1px solid #f1f1f1;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Borde más oscuro para fondo claro */
     }
 
     nav ul li a {
