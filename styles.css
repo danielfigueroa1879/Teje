@@ -500,7 +500,8 @@ footer {
 /* Media Queries */
 @media (max-width: 768px) {
     .logo h1 {
-        font-size: 1.8rem;
+        font-size: 2.2rem; /* Título más grande */
+        font-weight: 700; /* Más negrilla */
     }
 
     .mobile-menu-btn {
@@ -514,10 +515,10 @@ footer {
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: transparent; /* Completamente transparente */
+        background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro semi-transparente */
         backdrop-filter: blur(8px); /* Mayor efecto de desenfoque */
         -webkit-backdrop-filter: blur(8px); /* Para Safari */
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         z-index: 999;
     }
 
@@ -538,14 +539,14 @@ footer {
     nav ul li a {
         padding: 18px; /* Padding aumentado */
         display: block;
-        font-size: 1.2rem; /* Letra más grande */
-        font-weight: 500; /* Un poco más negrita */
-        color: var(--white); /* Texto blanco para mejor contraste con fondo transparente */
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Sombra para mejor legibilidad */
+        font-size: 1.3rem; /* Letra más grande */
+        font-weight: 600; /* Más negrilla */
+        color: var(--white); /* Texto blanco para mejor contraste con fondo oscuro */
+        text-shadow: none; /* Sin sombra ya que el fondo es oscuro */
     }
 
     nav ul li a:hover {
-        color: var(--light-yellow); /* Color dorado al hacer hover */
+        color: #FAE4D4; /* Color melocotón al hacer hover */
         background-color: rgba(255, 255, 255, 0.1); /* Ligero fondo al hacer hover */
     }
 
@@ -574,7 +575,8 @@ footer {
 
 @media (max-width: 576px) {
     .logo h1 {
-        font-size: 1.5rem;
+        font-size: 2rem; /* Título más grande para pantallas muy pequeñas */
+        font-weight: 700; /* Mantener negrilla */
     }
 
     .hero h2 {
@@ -596,6 +598,11 @@ footer {
     .gallery-grid,
     .blog-grid {
         grid-template-columns: 1fr;
+    }
+
+    nav ul li a {
+        font-size: 1.25rem; /* Letra grande también para pantallas muy pequeñas */
+        font-weight: 600; /* Mantener negrilla */
     }
 }
 
