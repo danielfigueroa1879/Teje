@@ -7,7 +7,7 @@
     --dark-gray: #333333;
     --light-blue: #c5e8e8; /* Color celeste de secciones */
     --process-bg: #e8f4f4; /* Color verde-celeste muy claro del fondo de proceso creativo */
-    --light-orange: #ffefd5; /* Color melocotón claro */
+    --light-orange: #FAE4D4; /* Color melocotón actualizado */
     --light-yellow: #fff7e6; /* Color amarillo claro de la sección de productos */
     --background-pink: #ffb6c1; /* Rosa claro para fondos de imágenes */
 }
@@ -37,7 +37,7 @@ body {
 
 /* Cabecera */
 header {
-    background-color: #FFEFD5; /* Cambiado a color melocotón claro */
+    background-color: #FAE4D4; /* Nuevo color melocotón */
     color: var(--dark-gray);
     padding: 10px 0;
     width: 100%;
@@ -511,7 +511,7 @@ footer {
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: rgba(255, 239, 213, 0.8); /* Melocotón claro semi-transparente */
+        background-color: rgba(250, 228, 212, 0.8); /* Nuevo color melocotón semi-transparente */
         backdrop-filter: blur(5px); /* Efecto de desenfoque */
         -webkit-backdrop-filter: blur(5px); /* Para Safari */
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
