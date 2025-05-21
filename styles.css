@@ -511,7 +511,9 @@ footer {
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: #FFEFD5; /* Cambiado a color melocotón claro */
+        background-color: rgba(255, 239, 213, 0.8); /* Melocotón claro semi-transparente */
+        backdrop-filter: blur(5px); /* Efecto de desenfoque */
+        -webkit-backdrop-filter: blur(5px); /* Para Safari */
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         z-index: 999;
     }
@@ -523,12 +525,14 @@ footer {
     nav ul li {
         margin: 0;
         text-align: center;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Borde más oscuro para fondo claro */
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
 
     nav ul li a {
-        padding: 15px;
+        padding: 18px; /* Padding aumentado */
         display: block;
+        font-size: 1.2rem; /* Letra más grande */
+        font-weight: 500; /* Un poco más negrita */
     }
 
     .hero h2 {
