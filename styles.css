@@ -41,7 +41,9 @@ header {
     color: var(--dark-gray);
     padding: 10px 0;
     width: 100%;
+    position: fixed; /* Agregado para que sea fijo */
     top: 0;
+    z-index: 1000; /* Agregado para que esté por encima del contenido */
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
@@ -117,6 +119,7 @@ nav ul li a:hover {
     color: var(--white);
     text-align: center;
     padding: 120px 20px;
+    margin-top: 80px; /* Añadido para compensar el header fijo */
     position: relative;
 }
 
@@ -511,9 +514,9 @@ footer {
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: rgba(250, 228, 212, 0.8); /* Nuevo color melocotón semi-transparente */
-        backdrop-filter: blur(5px); /* Efecto de desenfoque */
-        -webkit-backdrop-filter: blur(5px); /* Para Safari */
+        background-color: transparent; /* Completamente transparente */
+        backdrop-filter: blur(8px); /* Mayor efecto de desenfoque */
+        -webkit-backdrop-filter: blur(8px); /* Para Safari */
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         z-index: 999;
     }
@@ -525,7 +528,11 @@ footer {
     nav ul li {
         margin: 0;
         text-align: center;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Borde claro para contraste */
+    }
+
+    nav ul li:last-child {
+        border-bottom: none;
     }
 
     nav ul li a {
@@ -533,6 +540,13 @@ footer {
         display: block;
         font-size: 1.2rem; /* Letra más grande */
         font-weight: 500; /* Un poco más negrita */
+        color: var(--white); /* Texto blanco para mejor contraste con fondo transparente */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Sombra para mejor legibilidad */
+    }
+
+    nav ul li a:hover {
+        color: var(--light-yellow); /* Color dorado al hacer hover */
+        background-color: rgba(255, 255, 255, 0.1); /* Ligero fondo al hacer hover */
     }
 
     .hero h2 {
