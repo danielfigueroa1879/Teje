@@ -1,4 +1,4 @@
-// Script simplificado y robusto para el menú móvil
+// Script mejorado para el menú móvil con desplazamiento suave a las secciones
 document.addEventListener('DOMContentLoaded', function() {
     // Obtener los elementos del menú
     var menuButton = document.getElementById('menuToggle');
@@ -10,31 +10,37 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault(); // Prevenir comportamiento predeterminado
             mainMenu.classList.toggle('show');
             
-            // Opcional: cambiar el ícono del botón
+            // Cambiar el ícono del botón
             this.innerHTML = mainMenu.classList.contains('show') ? '✕' : '☰';
         });
         
-        // Evento para cerrar el menú al hacer clic en un enlace
+        // Evento para cerrar el menú al hacer clic en un enlace y hacer scroll suave
         var links = mainMenu.getElementsByTagName('a');
         
         for (var i = 0; i < links.length; i++) {
-            links[i].addEventListener('click', function() {
-                // Cerrar el menú
-                mainMenu.classList.remove('show');
-                
-                // Restaurar el ícono del botón
-                if (menuButton) {
-                    menuButton.innerHTML = '☰';
-                }
-                
-                // Si el enlace es a un ancla en la misma página, manejar el desplazamiento suave
+            links[i].addEventListener('click', function(e) {
+                // Verificar si el enlace es interno
                 var href = this.getAttribute('href');
                 if (href.charAt(0) === '#') {
+                    e.preventDefault(); // Prevenir navegación estándar
+                    
                     var targetElement = document.querySelector(href);
                     if (targetElement) {
-                        // Opcional: desplazamiento suave a la sección
-                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                        // Cerrar el menú
+                        mainMenu.classList.remove('show');
+                        menuButton.innerHTML = '☰';
+                        
+                        // Desplazamiento suave hacia la sección
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80, // Ajuste para el encabezado fijo
+                            behavior: 'smooth'
+                        });
                     }
+                }
+                else {
+                    // Cerrar el menú para enlaces externos
+                    mainMenu.classList.remove('show');
+                    menuButton.innerHTML = '☰';
                 }
             });
         }
@@ -52,45 +58,28 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Menú móvil: No se encontraron los elementos necesarios.');
     }
     
+    // Funcionalidad de desplazamiento suave para todos los enlaces internos (no solo móvil)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            var href = this.getAttribute('href');
+            if (href !== '#') { // Evitar enlaces "#" vacíos
+                e.preventDefault();
+                
+                var targetElement = document.querySelector(href);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, // Ajuste para el encabezado fijo
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+    
     // Actualizar año actual en el copyright si existe el elemento
     var currentYearElement = document.getElementById('current-year');
     if (currentYearElement) {
         currentYearElement.textContent = new Date().getFullYear();
-    }
-    
-    // Validación básica del formulario de contacto
-    var contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            let valid = true;
-            const requiredFields = this.querySelectorAll('[required]');
-            
-            // Verificar campos requeridos
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    field.classList.add('error');
-                    valid = false;
-                } else {
-                    field.classList.remove('error');
-                }
-            });
-            
-            // Validar formato de correo electrónico
-            const emailField = document.getElementById('email');
-            if (emailField && emailField.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value)) {
-                emailField.classList.add('error');
-                valid = false;
-            }
-            
-            if (valid) {
-                // En una implementación real, aquí enviarías los datos al servidor
-                alert('Mensaje enviado con éxito. Nos contactaremos a la brevedad.');
-                this.reset();
-            } else {
-                alert('Por favor, complete todos los campos requeridos correctamente.');
-            }
-        });
     }
     
     // Validación básica del formulario de newsletter en el footer
