@@ -75,6 +75,95 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Funcionalidad del botón scroll to top (solo móvil)
+    var scrollToTopBtn = document.getElementById('scrollToTop');
+    var timeoutId = null;
+    var isMobile = window.innerWidth <= 768;
+    
+    if (scrollToTopBtn && isMobile) {
+        // Mostrar/ocultar el botón basado en el scroll
+        window.addEventListener('scroll', function() {
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 300) { // Mostrar después de 300px de scroll
+                if (!scrollToTopBtn.classList.contains('show')) {
+                    scrollToTopBtn.classList.remove('hide');
+                    scrollToTopBtn.classList.add('show');
+                }
+                
+                // Limpiar timeout anterior si existe
+                if (timeoutId) {
+                    clearTimeout(timeoutId);
+                }
+                
+                // Auto-ocultar después de 5 segundos de inactividad
+                timeoutId = setTimeout(function() {
+                    if (scrollToTopBtn.classList.contains('show')) {
+                        scrollToTopBtn.classList.remove('show');
+                        scrollToTopBtn.classList.add('hide');
+                        
+                        // Esperar a que termine la animación antes de ocultar completamente
+                        setTimeout(function() {
+                            scrollToTopBtn.classList.remove('hide');
+                        }, 300);
+                    }
+                }, 5000);
+                
+            } else {
+                // Ocultar cuando esté cerca del top
+                if (scrollToTopBtn.classList.contains('show')) {
+                    scrollToTopBtn.classList.remove('show');
+                    scrollToTopBtn.classList.add('hide');
+                    
+                    setTimeout(function() {
+                        scrollToTopBtn.classList.remove('hide');
+                    }, 300);
+                }
+                
+                // Limpiar timeout
+                if (timeoutId) {
+                    clearTimeout(timeoutId);
+                    timeoutId = null;
+                }
+            }
+        });
+        
+        // Acción al hacer clic en el botón
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Mostrar el botón inmediatamente al llegar al final de la página
+        window.addEventListener('scroll', function() {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
+                if (!scrollToTopBtn.classList.contains('show')) {
+                    scrollToTopBtn.classList.remove('hide');
+                    scrollToTopBtn.classList.add('show');
+                }
+                
+                // Limpiar timeout anterior
+                if (timeoutId) {
+                    clearTimeout(timeoutId);
+                }
+                
+                // Auto-ocultar después de 5 segundos
+                timeoutId = setTimeout(function() {
+                    if (scrollToTopBtn.classList.contains('show')) {
+                        scrollToTopBtn.classList.remove('show');
+                        scrollToTopBtn.classList.add('hide');
+                        
+                        setTimeout(function() {
+                            scrollToTopBtn.classList.remove('hide');
+                        }, 300);
+                    }
+                }, 5000);
+            }
+        });
+    }
     
     // Actualizar año actual en el copyright si existe el elemento
     var currentYearElement = document.getElementById('current-year');
