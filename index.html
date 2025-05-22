@@ -94,18 +94,31 @@
             <p>Descubre nuestras creaciones artesanales confeccionadas con cariño y dedicación para hacer de cada pieza algo único y especial.</p>
             <div class="featured-images">
                 <div class="featured-image">
-                    <img src="Fotos/trajeMujer.jpg" alt="Tejido artesanal" onerror="this.src='https://via.placeholder.com/300x300/cccccc/ffffff?text=Tejido+1'">
+                    <img src="Fotos/trajeMujer.jpg" alt="Tejido artesanal" onclick="openModal(this)" style="cursor: pointer;" onerror="this.src='https://via.placeholder.com/300x300/cccccc/ffffff?text=Tejido+1'">
                 </div>
                 <div class="featured-image">
-                    <img src="Fotos/tejido.jpg" alt="Tejido artesanal" onerror="this.src='https://via.placeholder.com/300x300/cccccc/ffffff?text=Tejido+2'">
+                    <img src="Fotos/tejido.jpg" alt="Tejido artesanal" onclick="openModal(this)" style="cursor: pointer;" onerror="this.src='https://via.placeholder.com/300x300/cccccc/ffffff?text=Tejido+2'">
                 </div>
                 <div class="featured-image">
-                    <img src="Fotos/cubre.jpeg" alt="Tejido artesanal" onerror="this.src='https://via.placeholder.com/300x300/cccccc/ffffff?text=Tejido+3'">
+                    <img src="Fotos/cubre.jpeg" alt="Tejido artesanal" onclick="openModal(this)" style="cursor: pointer;" onerror="this.src='https://via.placeholder.com/300x300/cccccc/ffffff?text=Tejido+3'">
                 </div>
             </div>
             <a href="#productos" class="btn">Ver más</a>
         </div>
     </section>
+
+    <!-- Modal para mostrar imágenes ampliadas -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img id="modalImage" src="" alt="">
+            <div class="modal-controls">
+                <button id="zoomIn" onclick="zoomIn()">+</button>
+                <button id="zoomOut" onclick="zoomOut()">-</button>
+                <button id="resetZoom" onclick="resetZoom()">Reset</button>
+            </div>
+        </div>
+    </div>
 
     <section id="proceso" class="gallery">
         <h2 class="gallery-title">Proceso Creativo</h2>
