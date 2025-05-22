@@ -245,6 +245,109 @@ document.addEventListener('DOMContentLoaded', function() {
     if (currentYearElement) {
         currentYearElement.textContent = new Date().getFullYear();
     }
+
+    // Funcionalidad de música de fondo
+    const backgroundMusic = document.getElementById('backgroundMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    const musicIcon = document.getElementById('musicIcon');
+    let musicPlaying = false;
+
+    // Intentar reproducir música automáticamente (con manejo de políticas del navegador)
+    function initBackgroundMusic() {
+        if (backgroundMusic) {
+            backgroundMusic.volume = 0.3; // Volumen al 30%
+            
+            // Intentar reproducir automáticamente
+            const playPromise = backgroundMusic.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    // Música se reproduce automáticamente
+                    musicPlaying = true;
+                    updateMusicButton();
+                }).catch(() => {
+                    // El navegador bloquea la reproducción automática
+                    console.log('Reproducción automática bloqueada. El usuario debe interactuar primero.');
+                    musicPlaying = false;
+                    updateMusicButton();
+                });
+            }
+        }
+    }
+
+    window.toggleMusic = function() {
+        if (!backgroundMusic) return;
+        
+        if (musicPlaying) {
+            backgroundMusic.pause();
+            musicPlaying = false;
+        } else {
+            backgroundMusic.play().then(() => {
+                musicPlaying = true;
+            }).catch((error) => {
+                console.log('Error al reproducir música:', error);
+                musicPlaying = false;
+            });
+        }
+        updateMusicButton();
+    };
+
+    function updateMusicButton() {
+        if (!musicToggle || !musicIcon) return;
+        
+        if (musicPlaying) {
+            musicIcon.textContent = '🎵';
+            musicToggle.classList.add('playing');
+            musicToggle.title = 'Pausar música';
+        } else {
+            musicIcon.textContent = '🔇';
+            musicToggle.classList.remove('playing');
+            musicToggle.title = 'Reproducir música';
+        }
+    }
+
+    // Event listeners para música
+    if (backgroundMusic) {
+        backgroundMusic.addEventListener('ended', () => {
+            // La música terminó (aunque está en loop, por si acaso)
+            musicPlaying = false;
+            updateMusicButton();
+        });
+
+        backgroundMusic.addEventListener('pause', () => {
+            musicPlaying = false;
+            updateMusicButton();
+        });
+
+        backgroundMusic.addEventListener('play', () => {
+            musicPlaying = true;
+            updateMusicButton();
+        });
+    }
+
+    // Inicializar música después de un pequeño retraso
+    setTimeout(initBackgroundMusic, 1000);
+
+    // También intentar reproducir música en la primera interacción del usuario
+    const startMusicOnInteraction = () => {
+        if (!musicPlaying && backgroundMusic) {
+            const playPromise = backgroundMusic.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    musicPlaying = true;
+                    updateMusicButton();
+                }).catch(() => {
+                    // Si falla, no hacer nada
+                });
+            }
+        }
+        // Remover el event listener después de la primera interacción
+        document.removeEventListener('click', startMusicOnInteraction);
+        document.removeEventListener('keydown', startMusicOnInteraction);
+    };
+
+    document.addEventListener('click', startMusicOnInteraction);
+    document.addEventListener('keydown', startMusicOnInteraction);
     
     // Validación básica del formulario de newsletter en el footer
     var newsletterForm = document.querySelector('.newsletter-form');
