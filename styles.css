@@ -113,14 +113,16 @@ nav ul li a:hover {
 
 /* Hero Banner */
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://via.placeholder.com/1200x600/ff73b9/ffffff');
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('su.jpg');
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     color: var(--white);
     text-align: center;
     padding: 120px 20px;
     margin-top: 80px; /* Añadido para compensar el header fijo */
     position: relative;
+    min-height: 70vh; /* Altura mínima para asegurar que se vea bien la imagen */
 }
 
 .hero-content {
