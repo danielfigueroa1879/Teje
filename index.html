@@ -108,11 +108,11 @@
     </section>
 
     <!-- Modal para mostrar imágenes ampliadas -->
-    <div id="imageModal" class="modal" onclick="closeModal()">
+    <div id="imageModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-            <button class="modal-nav prev" onclick="prevImage()" title="Imagen anterior">‹</button>
-            <button class="modal-nav next" onclick="nextImage()" title="Imagen siguiente">›</button>
+            <button class="modal-nav prev" onclick="prevImage(event)" title="Imagen anterior">‹</button>
+            <button class="modal-nav next" onclick="nextImage(event)" title="Imagen siguiente">›</button>
             <img id="modalImage" src="" alt="">
             <div class="modal-controls">
                 <button id="zoomIn" onclick="zoomIn()">+</button>
