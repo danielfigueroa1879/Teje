@@ -246,28 +246,42 @@ document.addEventListener('DOMContentLoaded', function() {
         currentYearElement.textContent = new Date().getFullYear();
     }
 
-    // Funcionalidad de música de fondo - SIMPLE Y FUNCIONAL
+    // Funcionalidad de música de fondo - CORREGIDA
     const backgroundMusic = document.getElementById('backgroundMusic');
     const musicToggle = document.getElementById('musicToggle');
     const musicIcon = document.getElementById('musicIcon');
     let musicIsPlaying = false;
+    let musicStarted = false;
 
     // Función simple para iniciar música
     function startMusic() {
-        if (!backgroundMusic) return;
+        if (!backgroundMusic || musicStarted) return;
         
         backgroundMusic.volume = 0.3;
-        backgroundMusic.play().then(() => {
-            musicIsPlaying = true;
-            console.log('🎵 Música iniciada');
-        }).catch(() => {
-            musicIsPlaying = false;
-        });
+        const playPromise = backgroundMusic.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                musicIsPlaying = true;
+                musicStarted = true;
+                updateMusicButton();
+                console.log('🎵 Música iniciada');
+                removeAllInteractionListeners();
+            }).catch(() => {
+                console.log('Autoplay bloqueado - esperando interacción');
+            });
+        }
     }
 
     // Toggle de música
     window.toggleMusic = function() {
         if (!backgroundMusic) return;
+        
+        if (!musicStarted) {
+            // Primera vez - intentar iniciar
+            startMusic();
+            return;
+        }
         
         if (backgroundMusic.paused) {
             backgroundMusic.play().then(() => {
@@ -284,7 +298,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateMusicButton() {
         if (!musicIcon || !musicToggle) return;
         
-        if (musicIsPlaying) {
+        if (musicIsPlaying && !backgroundMusic.paused) {
             musicIcon.textContent = '🎵';
             musicToggle.classList.add('playing');
             musicToggle.title = 'Pausar música';
@@ -308,23 +322,39 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Intentar iniciar música inmediatamente
-    setTimeout(startMusic, 500);
-
-    // Iniciar música en cualquier interacción
-    function startOnInteraction() {
+    // Función para manejar interacciones
+    function handleInteraction(e) {
+        // No interferir con otras funcionalidades
+        if (musicStarted) return;
+        
+        // No iniciar música si el usuario está interactuando con controles específicos
+        if (e.target.closest('.modal-nav') || 
+            e.target.closest('.modal-controls') || 
+            e.target.closest('#musicToggle') ||
+            e.target.closest('.close')) {
+            return;
+        }
+        
         startMusic();
-        // Remover listeners después de ejecutar
-        document.removeEventListener('click', startOnInteraction);
-        document.removeEventListener('keydown', startOnInteraction);
-        document.removeEventListener('touchstart', startOnInteraction);
-        document.removeEventListener('mousemove', startOnInteraction);
     }
 
-    document.addEventListener('click', startOnInteraction);
-    document.addEventListener('keydown', startOnInteraction);
-    document.addEventListener('touchstart', startOnInteraction);
-    document.addEventListener('mousemove', startOnInteraction);
+    function removeAllInteractionListeners() {
+        document.removeEventListener('click', handleInteraction, true);
+        document.removeEventListener('keydown', handleInteraction, true);
+        document.removeEventListener('touchstart', handleInteraction, true);
+        document.removeEventListener('scroll', handleInteraction, true);
+        document.removeEventListener('mousemove', handleInteraction, true);
+    }
+
+    // Intentar iniciar música inmediatamente
+    setTimeout(startMusic, 800);
+
+    // Agregar listeners para interacciones (usando capture para ejecutar antes)
+    document.addEventListener('click', handleInteraction, true);
+    document.addEventListener('keydown', handleInteraction, true);
+    document.addEventListener('touchstart', handleInteraction, { passive: true, capture: true });
+    document.addEventListener('scroll', handleInteraction, { passive: true, capture: true });
+    document.addEventListener('mousemove', handleInteraction, { passive: true, capture: true });
     
     // Validación básica del formulario de newsletter en el footer
     var newsletterForm = document.querySelector('.newsletter-form');
