@@ -111,7 +111,7 @@ nav ul li a:hover {
     z-index: 1001;
 }
 
-/* Hero Banner - OPTIMIZADO PARA MÓVIL */
+/* Hero Banner - CAMBIO SOLO LA RUTA A Fotos/su.jpg */
 .hero {
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Fotos/su.jpg');
     background-size: cover;
@@ -124,28 +124,33 @@ nav ul li a:hover {
     margin-top: 80px;
     position: relative;
     min-height: 70vh;
-    /* Optimizaciones para mejor carga */
+    /* Optimizaciones críticas para imagen */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
     will-change: transform;
-    transform: translate3d(0, 0, 0);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    contain: layout style paint;
+    /* Forzar composición en GPU */
     -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 
-/* Optimización específica para móvil */
+/* Optimización específica y agresiva para móvil */
 @media (max-width: 768px) {
     .hero {
-        /* Forzar carga inmediata en móvil */
-        background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Fotos/su.jpg') !important;
+        background-attachment: scroll !important;
         background-size: cover !important;
         background-position: center center !important;
-        background-repeat: no-repeat !important;
-        background-attachment: scroll !important;
         min-height: 60vh;
-        /* Aceleración hardware */
+        /* Forzar aceleración hardware en móvil */
         -webkit-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0);
-        /* Prevenir problemas de renderizado */
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
+        -webkit-perspective: 1000px;
+        perspective: 1000px;
+        /* Prevenir reflow */
+        contain: strict;
     }
 }
 
@@ -523,71 +528,39 @@ footer {
     font-size: 0.9rem;
 }
 
-/* Botón de menú móvil - SIMPLIFICADO */
-.mobile-menu-btn {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--dark-gray);
-    font-size: 2rem;
-    cursor: pointer;
-    padding: 10px;
-    z-index: 1002;
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-/* MENÚ HAMBURGUESA COMPLETAMENTE CORREGIDO */
+/* Media Queries */
 @media (max-width: 768px) {
-    .header-container {
-        position: relative;
-    }
-    
-    .logo {
-        text-align: left;
-        width: auto;
-    }
-    
     .logo h1 {
-        font-size: 1.8rem;
-        font-weight: 700;
+        font-size: 2.2rem; /* Título más grande */
+        font-weight: 700; /* Más negrilla */
     }
 
     .mobile-menu-btn {
-        display: block !important;
-    }
-
-    nav {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        z-index: 1001;
+        display: block;
     }
 
     nav ul {
         display: none;
         flex-direction: column;
-        position: static;
+        position: absolute;
+        top: 100%;
+        left: 0;
         width: 100%;
-        background-color: rgba(0, 0, 0, 0.9);
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        background-color: rgba(0, 0, 0, 0.4); /* Fondo menos oscuro */
+        backdrop-filter: blur(8px); /* Mayor efecto de desenfoque */
+        -webkit-backdrop-filter: blur(8px); /* Para Safari */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        z-index: 999;
     }
 
     nav ul.show {
-        display: flex !important;
+        display: flex;
     }
 
     nav ul li {
         margin: 0;
         text-align: center;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Borde más visible */
     }
 
     nav ul li:last-child {
@@ -595,19 +568,17 @@ footer {
     }
 
     nav ul li a {
+        padding: 18px; /* Padding aumentado */
         display: block;
-        padding: 20px 15px;
-        font-size: 1.4rem;
-        font-weight: 600;
-        color: #ffffff !important;
-        text-decoration: none;
-        text-transform: uppercase;
-        transition: background-color 0.3s ease;
+        font-size: 1.3rem; /* Letra más grande */
+        font-weight: 600; /* Más negrilla */
+        color: var(--white); /* Texto blanco para mejor contraste */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Ligera sombra para legibilidad */
     }
 
     nav ul li a:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-        color: #FAE4D4 !important;
+        color: #FAE4D4; /* Color melocotón al hacer hover */
+        background-color: rgba(255, 255, 255, 0.15); /* Ligero fondo al hacer hover */
     }
 
     .hero h2 {
@@ -671,8 +642,8 @@ footer {
     display: none;
     position: fixed;
     bottom: 20px;
-    right: 20px;
-    width: 40px;
+    right:  20px;
+    width:  40px;
     height: 40px;
     background-color: #FAE4D4;
     border: 2px solid var(--dark-gray);
