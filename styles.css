@@ -642,9 +642,9 @@ footer {
     display: none;
     position: fixed;
     bottom: 20px;
-    right: 20px;
-    width:40px;
-    height: 0px;
+    right:  20px;
+    width:  40px;
+    height: 40px;
     background-color: #FAE4D4;
     border: 2px solid var(--dark-gray);
     border-radius: 50%;
