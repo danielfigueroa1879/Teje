@@ -269,65 +269,78 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-});
 
-// Funciones para el modal de imágenes
-let currentZoom = 1;
+    // Funciones para el modal de imágenes
+    let currentZoom = 1;
 
-function openModal(img) {
+    window.openModal = function(img) {
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        
+        modal.style.display = 'flex';
+        modal.classList.add('show');
+        modalImg.src = img.src;
+        modalImg.alt = img.alt;
+        currentZoom = 1;
+        modalImg.style.transform = `scale(${currentZoom})`;
+        
+        // Prevenir scroll del body cuando el modal está abierto
+        document.body.style.overflow = 'hidden';
+    };
+
+    window.closeModal = function() {
+        const modal = document.getElementById('imageModal');
+        modal.classList.remove('show');
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300);
+        
+        // Restaurar scroll del body
+        document.body.style.overflow = 'auto';
+        currentZoom = 1;
+    };
+
+    window.zoomIn = function() {
+        const modalImg = document.getElementById('modalImage');
+        currentZoom += 0.2;
+        if (currentZoom > 3) currentZoom = 3; // Máximo zoom
+        modalImg.style.transform = `scale(${currentZoom})`;
+    };
+
+    window.zoomOut = function() {
+        const modalImg = document.getElementById('modalImage');
+        currentZoom -= 0.2;
+        if (currentZoom < 0.5) currentZoom = 0.5; // Mínimo zoom
+        modalImg.style.transform = `scale(${currentZoom})`;
+    };
+
+    window.resetZoom = function() {
+        const modalImg = document.getElementById('modalImage');
+        currentZoom = 1;
+        modalImg.style.transform = `scale(${currentZoom})`;
+    };
+
+    // Cerrar modal con tecla Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+
+    // Event listeners para el modal
     const modal = document.getElementById('imageModal');
-    const modalImg = document.getElementById('modalImage');
-    
-    modal.classList.add('show');
-    modalImg.src = img.src;
-    modalImg.alt = img.alt;
-    currentZoom = 1;
-    modalImg.style.transform = `scale(${currentZoom})`;
-    
-    // Prevenir scroll del body cuando el modal está abierto
-    document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-    const modal = document.getElementById('imageModal');
-    modal.classList.remove('show');
-    setTimeout(() => {
-        modal.style.display = 'none';
-    }, 300);
-    
-    // Restaurar scroll del body
-    document.body.style.overflow = 'auto';
-    currentZoom = 1;
-}
-
-function zoomIn() {
-    const modalImg = document.getElementById('modalImage');
-    currentZoom += 0.2;
-    if (currentZoom > 3) currentZoom = 3; // Máximo zoom
-    modalImg.style.transform = `scale(${currentZoom})`;
-}
-
-function zoomOut() {
-    const modalImg = document.getElementById('modalImage');
-    currentZoom -= 0.2;
-    if (currentZoom < 0.5) currentZoom = 0.5; // Mínimo zoom
-    modalImg.style.transform = `scale(${currentZoom})`;
-}
-
-function resetZoom() {
-    const modalImg = document.getElementById('modalImage');
-    currentZoom = 1;
-    modalImg.style.transform = `scale(${currentZoom})`;
-}
-
-// Cerrar modal con tecla Escape
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        closeModal();
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        const modalImg = document.getElementById('modalImage');
+        if (modalImg) {
+            modalImg.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        }
     }
-});
-
-// Prevenir que el clic en la imagen cierre el modal
-document.getElementById('modalImage').addEventListener('click', function(e) {
-    e.stopPropagation();
 });
