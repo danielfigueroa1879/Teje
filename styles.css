@@ -546,13 +546,13 @@ footer {
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: rgba(250, 228, 212, 0.85); /* Fondo melocotón más transparente */
-        backdrop-filter: blur(12px); /* Mayor efecto de desenfoque para compensar transparencia */
-        -webkit-backdrop-filter: blur(12px); /* Para Safari */
+        background-color: rgba(250, 228, 212, 0.6); /* Fondo melocotón con 60% de transparencia */
+        backdrop-filter: blur(15px); /* Mayor desenfoque para mantener legibilidad */
+        -webkit-backdrop-filter: blur(15px); /* Para Safari */
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         border-radius: 0 0 12px 12px; /* Bordes redondeados en la parte inferior */
         z-index: 999;
-        border: 1px solid rgba(255, 255, 255, 0.4); /* Borde ligeramente más visible */
+        border: 1px solid rgba(255, 255, 255, 0.5); /* Borde más visible para compensar transparencia */
     }
 
     nav ul.show {
