@@ -1,6 +1,6 @@
 // Script súper optimizado para carga instantánea de imagen - ADAPTADO para Fotos/su.jpg
 document.addEventListener('DOMContentLoaded', function() {
-    // Carga agresiva e inmediata de la imagen
+    // Carga agresiva e inmediata de la imagen hero
     function forceLoadHeroImage() {
         // Crear múltiples instancias para asegurar carga
         for (let i = 0; i < 3; i++) {
@@ -20,8 +20,32 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    // Función para cargar imágenes de productos - SIMPLIFICADA
+    function forceLoadProductImages() {
+        const productImages = [
+            'Fotos/trajeBebe.jpeg',
+            'Fotos/trajeBebe1.jpeg', 
+            'Fotos/trajeBebe2.jpeg'
+        ];
+        
+        // Solo precargar las imágenes sin manipular el DOM
+        productImages.forEach((src, index) => {
+            const img = new Image();
+            img.onload = function() {
+                console.log('Imagen cargada:', src);
+            };
+            img.onerror = function() {
+                console.error('Error cargando imagen:', src);
+            };
+            img.src = src;
+            // Mantener referencia global
+            window['productImg' + index] = img;
+        });
+    }
+    
     // Ejecutar inmediatamente
     forceLoadHeroImage();
+    // forceLoadProductImages(); // Comentado para evitar interferencia
     
     // Para móviles: técnicas adicionales de optimización
     if (window.innerWidth <= 768) {
