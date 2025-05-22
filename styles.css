@@ -546,11 +546,13 @@ footer {
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: rgba(0, 0, 0, 0.4); /* Fondo menos oscuro */
-        backdrop-filter: blur(8px); /* Mayor efecto de desenfoque */
-        -webkit-backdrop-filter: blur(8px); /* Para Safari */
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        background-color: rgba(250, 228, 212, 0.95); /* Fondo melocotón claro semi-transparente */
+        backdrop-filter: blur(10px); /* Efecto de desenfoque */
+        -webkit-backdrop-filter: blur(10px); /* Para Safari */
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        border-radius: 0 0 12px 12px; /* Bordes redondeados en la parte inferior */
         z-index: 999;
+        border: 1px solid rgba(255, 255, 255, 0.3); /* Borde sutil */
     }
 
     nav ul.show {
@@ -560,7 +562,7 @@ footer {
     nav ul li {
         margin: 0;
         text-align: center;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Borde más visible */
+        border-bottom: 1px solid rgba(51, 51, 51, 0.1); /* Borde muy sutil */
     }
 
     nav ul li:last-child {
@@ -568,17 +570,20 @@ footer {
     }
 
     nav ul li a {
-        padding: 18px; /* Padding aumentado */
+        padding: 20px; /* Padding aumentado para mejor toque */
         display: block;
-        font-size: 1.3rem; /* Letra más grande */
-        font-weight: 600; /* Más negrilla */
-        color: var(--white); /* Texto blanco para mejor contraste */
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Ligera sombra para legibilidad */
+        font-size: 1.1rem; /* Tamaño de letra más legible */
+        font-weight: 600; /* Texto más grueso */
+        color: var(--dark-gray); /* Texto oscuro para mejor contraste */
+        text-transform: uppercase;
+        letter-spacing: 0.5px; /* Espaciado entre letras */
+        transition: all 0.3s ease;
     }
 
     nav ul li a:hover {
-        color: #FAE4D4; /* Color melocotón al hacer hover */
-        background-color: rgba(255, 255, 255, 0.15); /* Ligero fondo al hacer hover */
+        color: var(--primary-color); /* Color rosa al hacer hover */
+        background-color: rgba(255, 115, 185, 0.1); /* Fondo rosa muy sutil al hover */
+        transform: translateX(5px); /* Ligero desplazamiento al hover */
     }
 
     .hero h2 {
@@ -632,8 +637,9 @@ footer {
     }
 
     nav ul li a {
-        font-size: 1.25rem; /* Letra grande también para pantallas muy pequeñas */
-        font-weight: 600; /* Mantener negrilla */
+        font-size: 1rem; /* Tamaño ajustado para pantallas muy pequeñas */
+        font-weight: 600; /* Mantener peso */
+        padding: 18px; /* Padding ajustado */
     }
 }
 
