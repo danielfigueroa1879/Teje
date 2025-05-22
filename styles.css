@@ -111,7 +111,7 @@ nav ul li a:hover {
     z-index: 1001;
 }
 
-/* Hero Banner */
+/* Hero Banner - OPTIMIZADO PARA MÓVIL */
 .hero {
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Fotos/su.jpg');
     background-size: cover;
@@ -124,6 +124,29 @@ nav ul li a:hover {
     margin-top: 80px;
     position: relative;
     min-height: 70vh;
+    /* Optimizaciones para mejor carga */
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+}
+
+/* Optimización específica para móvil */
+@media (max-width: 768px) {
+    .hero {
+        /* Forzar carga inmediata en móvil */
+        background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Fotos/su.jpg') !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+        background-attachment: scroll !important;
+        min-height: 60vh;
+        /* Aceleración hardware */
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        /* Prevenir problemas de renderizado */
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
 }
 
 .hero-content {
@@ -500,7 +523,7 @@ footer {
     font-size: 0.9rem;
 }
 
-/* Media Queries */
+/* MENÚ HAMBURGUESA CORREGIDO PARA MÓVIL */
 @media (max-width: 768px) {
     .logo h1 {
         font-size: 2.2rem; /* Título más grande */
@@ -508,7 +531,15 @@ footer {
     }
 
     .mobile-menu-btn {
-        display: block;
+        display: block !important;
+        position: relative;
+        z-index: 1002;
+        background: none;
+        border: none;
+        color: var(--dark-gray);
+        font-size: 2rem;
+        cursor: pointer;
+        padding: 5px 10px;
     }
 
     nav ul {
@@ -518,39 +549,63 @@ footer {
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: rgba(0, 0, 0, 0.4); /* Fondo menos oscuro */
-        backdrop-filter: blur(8px); /* Mayor efecto de desenfoque */
-        -webkit-backdrop-filter: blur(8px); /* Para Safari */
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        z-index: 999;
+        background-color: rgba(0, 0, 0, 0.6); /* Fondo más oscuro para mejor visibilidad */
+        backdrop-filter: blur(10px); /* Mayor efecto de desenfoque */
+        -webkit-backdrop-filter: blur(10px); /* Para Safari */
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        z-index: 1001;
+        margin: 0;
+        padding: 0;
+        border-radius: 0 0 8px 8px;
     }
 
     nav ul.show {
-        display: flex;
+        display: flex !important;
+        animation: slideDown 0.3s ease-out;
     }
 
     nav ul li {
         margin: 0;
         text-align: center;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Borde más visible */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        width: 100%;
+        list-style: none;
     }
 
     nav ul li:last-child {
         border-bottom: none;
+        border-radius: 0 0 8px 8px;
     }
 
     nav ul li a {
-        padding: 18px; /* Padding aumentado */
+        padding: 20px 15px; /* Padding más grande para mejor táctil */
         display: block;
-        font-size: 1.3rem; /* Letra más grande */
+        font-size: 1.4rem; /* Letra más grande */
         font-weight: 600; /* Más negrilla */
-        color: var(--white); /* Texto blanco para mejor contraste */
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Ligera sombra para legibilidad */
+        color: #ffffff !important; /* Texto blanco forzado */
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Sombra más fuerte */
+        width: 100%;
+        box-sizing: border-box;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        text-transform: uppercase;
     }
 
     nav ul li a:hover {
-        color: #FAE4D4; /* Color melocotón al hacer hover */
-        background-color: rgba(255, 255, 255, 0.15); /* Ligero fondo al hacer hover */
+        color: #FAE4D4 !important; /* Color melocotón al hacer hover */
+        background-color: rgba(255, 255, 255, 0.2); /* Fondo más visible al hacer hover */
+    }
+
+    /* Animación de entrada del menú */
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     .hero h2 {
