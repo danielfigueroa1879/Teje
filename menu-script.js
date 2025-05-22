@@ -270,12 +270,35 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Funciones para el modal de imágenes
+    // Funciones para el modal de imágenes avanzado
     let currentZoom = 1;
+    let currentImageIndex = 0;
+    let allImages = [];
+
+    // Recopilar todas las imágenes clickeables al cargar la página
+    function collectAllImages() {
+        allImages = [];
+        // Imágenes de productos
+        const productImages = document.querySelectorAll('.product-image img[onclick]');
+        productImages.forEach(img => allImages.push(img));
+        
+        // Imágenes de la sección destacada
+        const featuredImages = document.querySelectorAll('.featured-image img[onclick]');
+        featuredImages.forEach(img => allImages.push(img));
+        
+        // Imágenes del blog
+        const blogImages = document.querySelectorAll('.blog-image img[onclick]');
+        blogImages.forEach(img => allImages.push(img));
+    }
 
     window.openModal = function(img) {
+        collectAllImages(); // Actualizar lista de imágenes
         const modal = document.getElementById('imageModal');
         const modalImg = document.getElementById('modalImage');
+        
+        // Encontrar el índice de la imagen actual
+        currentImageIndex = allImages.findIndex(image => image.src === img.src);
+        if (currentImageIndex === -1) currentImageIndex = 0;
         
         modal.style.display = 'flex';
         modal.classList.add('show');
@@ -283,6 +306,9 @@ document.addEventListener('DOMContentLoaded', function() {
         modalImg.alt = img.alt;
         currentZoom = 1;
         modalImg.style.transform = `scale(${currentZoom})`;
+        
+        // Actualizar contador
+        updateImageCounter();
         
         // Prevenir scroll del body cuando el modal está abierto
         document.body.style.overflow = 'hidden';
@@ -300,17 +326,48 @@ document.addEventListener('DOMContentLoaded', function() {
         currentZoom = 1;
     };
 
+    window.nextImage = function() {
+        if (allImages.length === 0) return;
+        currentImageIndex = (currentImageIndex + 1) % allImages.length;
+        showCurrentImage();
+    };
+
+    window.prevImage = function() {
+        if (allImages.length === 0) return;
+        currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
+        showCurrentImage();
+    };
+
+    function showCurrentImage() {
+        const modalImg = document.getElementById('modalImage');
+        const currentImg = allImages[currentImageIndex];
+        modalImg.src = currentImg.src;
+        modalImg.alt = currentImg.alt;
+        currentZoom = 1;
+        modalImg.style.transform = `scale(${currentZoom})`;
+        updateImageCounter();
+    }
+
+    function updateImageCounter() {
+        const currentSpan = document.getElementById('currentImageIndex');
+        const totalSpan = document.getElementById('totalImages');
+        if (currentSpan && totalSpan) {
+            currentSpan.textContent = currentImageIndex + 1;
+            totalSpan.textContent = allImages.length;
+        }
+    }
+
     window.zoomIn = function() {
         const modalImg = document.getElementById('modalImage');
         currentZoom += 0.2;
-        if (currentZoom > 3) currentZoom = 3; // Máximo zoom
+        if (currentZoom > 4) currentZoom = 4; // Máximo zoom aumentado
         modalImg.style.transform = `scale(${currentZoom})`;
     };
 
     window.zoomOut = function() {
         const modalImg = document.getElementById('modalImage');
         currentZoom -= 0.2;
-        if (currentZoom < 0.5) currentZoom = 0.5; // Mínimo zoom
+        if (currentZoom < 0.3) currentZoom = 0.3; // Mínimo zoom
         modalImg.style.transform = `scale(${currentZoom})`;
     };
 
@@ -320,10 +377,53 @@ document.addEventListener('DOMContentLoaded', function() {
         modalImg.style.transform = `scale(${currentZoom})`;
     };
 
-    // Cerrar modal con tecla Escape
+    // Zoom con scroll del mouse
+    function handleMouseWheel(e) {
+        if (!document.getElementById('imageModal').classList.contains('show')) return;
+        
+        e.preventDefault();
+        const modalImg = document.getElementById('modalImage');
+        
+        if (e.deltaY < 0) {
+            // Scroll hacia arriba - zoom in
+            currentZoom += 0.1;
+            if (currentZoom > 4) currentZoom = 4;
+        } else {
+            // Scroll hacia abajo - zoom out
+            currentZoom -= 0.1;
+            if (currentZoom < 0.3) currentZoom = 0.3;
+        }
+        
+        modalImg.style.transform = `scale(${currentZoom})`;
+    }
+
+    // Event listeners mejorados
+    document.addEventListener('wheel', handleMouseWheel, { passive: false });
+
+    // Cerrar modal con tecla Escape, navegación con flechas
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closeModal();
+        if (!document.getElementById('imageModal').classList.contains('show')) return;
+        
+        switch(e.key) {
+            case 'Escape':
+                closeModal();
+                break;
+            case 'ArrowLeft':
+                prevImage();
+                break;
+            case 'ArrowRight':
+                nextImage();
+                break;
+            case '+':
+            case '=':
+                zoomIn();
+                break;
+            case '-':
+                zoomOut();
+                break;
+            case '0':
+                resetZoom();
+                break;
         }
     });
 
@@ -340,6 +440,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (modalImg) {
             modalImg.addEventListener('click', function(e) {
                 e.stopPropagation();
+            });
+            
+            // Prevenir el menú contextual en la imagen
+            modalImg.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
             });
         }
     }
