@@ -1,5 +1,9 @@
 // Script mejorado para el menú móvil con desplazamiento suave a las secciones
 document.addEventListener('DOMContentLoaded', function() {
+    // Precargar imagen del hero para evitar retrasos
+    var heroImage = new Image();
+    heroImage.src = 'su.jpg';
+    
     // Obtener los elementos del menú
     var menuButton = document.getElementById('menuToggle');
     var mainMenu = document.getElementById('mainMenu');
