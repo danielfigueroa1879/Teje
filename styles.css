@@ -546,7 +546,7 @@ footer {
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: rgba(250, 228, 212, 0.7); /* Fondo melocotón con 60% de transparencia */
+        background-color: rgba(250, 228, 212, 0.75); /* Fondo melocotón con 60% de transparencia */
         backdrop-filter: blur(15px); /* Mayor desenfoque para mantener legibilidad */
         -webkit-backdrop-filter: blur(15px); /* Para Safari */
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
