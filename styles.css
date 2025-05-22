@@ -523,45 +523,64 @@ footer {
     font-size: 0.9rem;
 }
 
-/* MENÚ HAMBURGUESA CORREGIDO PARA MÓVIL */
+/* Botón de menú móvil - SIMPLIFICADO */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--dark-gray);
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1002;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* MENÚ HAMBURGUESA COMPLETAMENTE CORREGIDO */
 @media (max-width: 768px) {
+    .header-container {
+        position: relative;
+    }
+    
+    .logo {
+        text-align: left;
+        width: auto;
+    }
+    
     .logo h1 {
-        font-size: 2.2rem; /* Título más grande */
-        font-weight: 700; /* Más negrilla */
+        font-size: 1.8rem;
+        font-weight: 700;
     }
 
     .mobile-menu-btn {
         display: block !important;
-        position: relative;
-        z-index: 1002;
-        background: none;
-        border: none;
-        color: var(--dark-gray);
-        font-size: 2rem;
-        cursor: pointer;
-        padding: 5px 10px;
+    }
+
+    nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        z-index: 1001;
     }
 
     nav ul {
         display: none;
         flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
+        position: static;
         width: 100%;
-        background-color: rgba(0, 0, 0, 0.6); /* Fondo más oscuro para mejor visibilidad */
-        backdrop-filter: blur(10px); /* Mayor efecto de desenfoque */
-        -webkit-backdrop-filter: blur(10px); /* Para Safari */
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-        z-index: 1001;
+        background-color: rgba(0, 0, 0, 0.9);
         margin: 0;
         padding: 0;
-        border-radius: 0 0 8px 8px;
+        list-style: none;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     }
 
     nav ul.show {
         display: flex !important;
-        animation: slideDown 0.3s ease-out;
     }
 
     nav ul li {
@@ -569,43 +588,26 @@ footer {
         text-align: center;
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         width: 100%;
-        list-style: none;
     }
 
     nav ul li:last-child {
         border-bottom: none;
-        border-radius: 0 0 8px 8px;
     }
 
     nav ul li a {
-        padding: 20px 15px; /* Padding más grande para mejor táctil */
         display: block;
-        font-size: 1.4rem; /* Letra más grande */
-        font-weight: 600; /* Más negrilla */
-        color: #ffffff !important; /* Texto blanco forzado */
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Sombra más fuerte */
-        width: 100%;
-        box-sizing: border-box;
-        transition: all 0.3s ease;
+        padding: 20px 15px;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #ffffff !important;
         text-decoration: none;
         text-transform: uppercase;
+        transition: background-color 0.3s ease;
     }
 
     nav ul li a:hover {
-        color: #FAE4D4 !important; /* Color melocotón al hacer hover */
-        background-color: rgba(255, 255, 255, 0.2); /* Fondo más visible al hacer hover */
-    }
-
-    /* Animación de entrada del menú */
-    @keyframes slideDown {
-        from {
-            opacity: 0;
-            transform: translateY(-20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #FAE4D4 !important;
     }
 
     .hero h2 {
