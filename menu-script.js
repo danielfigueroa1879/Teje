@@ -246,41 +246,61 @@ document.addEventListener('DOMContentLoaded', function() {
         currentYearElement.textContent = new Date().getFullYear();
     }
 
-    // Funcionalidad de música de fondo - SIMPLIFICADA
+    // Funcionalidad de música de fondo - MÁXIMA AUTOMATIZACIÓN
     const backgroundMusic = document.getElementById('backgroundMusic');
     const musicToggle = document.getElementById('musicToggle');
     const musicIcon = document.getElementById('musicIcon');
     let userHasInteracted = false;
 
-    // Función para inicializar música
+    // Función para inicializar música con múltiples intentos
     function initBackgroundMusic() {
         if (!backgroundMusic) return;
         
-        backgroundMusic.volume = 0.3; // Volumen al 30%
+        backgroundMusic.volume = 0.3;
         
-        // Intentar reproducir inmediatamente sin cambiar el estado visual
+        // Intento 1: Reproducción inmediata
+        attemptAutoplay();
+        
+        // Intento 2: Después de cargar completamente
+        window.addEventListener('load', () => {
+            setTimeout(attemptAutoplay, 500);
+        });
+        
+        // Intento 3: En el primer movimiento del mouse
+        document.addEventListener('mousemove', attemptAutoplay, { once: true });
+        
+        // Intento 4: En el primer scroll
+        document.addEventListener('scroll', attemptAutoplay, { once: true });
+        
+        // Intento 5: En cualquier interacción mínima
+        ['click', 'keydown', 'touchstart', 'mousedown', 'mouseover'].forEach(event => {
+            document.addEventListener(event, attemptAutoplay, { once: true, passive: true });
+        });
+    }
+
+    function attemptAutoplay() {
+        if (!backgroundMusic || !backgroundMusic.paused) return;
+        
         backgroundMusic.play().then(() => {
-            console.log('Música iniciada automáticamente');
+            console.log('🎵 Mariage d\'Amour iniciada');
+            updateMusicButtonToPlaying();
         }).catch(() => {
-            console.log('Autoplay bloqueado - esperando interacción del usuario');
-            // NO cambiar el estado visual aquí
+            // Silencioso - seguir intentando
         });
     }
 
     window.toggleMusic = function() {
         if (!backgroundMusic) return;
         
-        userHasInteracted = true; // Marcar que el usuario ha interactuado
+        userHasInteracted = true;
         
         if (backgroundMusic.paused) {
-            // Música pausada, reproducir
             backgroundMusic.play().then(() => {
                 updateMusicButtonToPlaying();
             }).catch((error) => {
                 console.log('Error al reproducir música:', error);
             });
         } else {
-            // Música reproduciéndose, pausar
             backgroundMusic.pause();
             updateMusicButtonToPaused();
         }
@@ -309,42 +329,23 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         backgroundMusic.addEventListener('pause', () => {
-            // Solo cambiar visualmente si el usuario ha interactuado
             if (userHasInteracted) {
                 updateMusicButtonToPaused();
             }
         });
 
         backgroundMusic.addEventListener('ended', () => {
-            // La música terminó (aunque está en loop)
             if (userHasInteracted) {
                 updateMusicButtonToPaused();
             }
         });
     }
 
-    // Inicializar música después de un pequeño retraso
+    // Inicializar música inmediatamente y con múltiples intentos
+    initBackgroundMusic();
+    setTimeout(initBackgroundMusic, 100);
+    setTimeout(initBackgroundMusic, 500);
     setTimeout(initBackgroundMusic, 1000);
-
-    // Intentar reproducir música en la primera interacción
-    const startMusicOnFirstInteraction = () => {
-        if (backgroundMusic && backgroundMusic.paused) {
-            backgroundMusic.play().then(() => {
-                console.log('Música iniciada tras primera interacción');
-            }).catch(() => {
-                console.log('No se pudo iniciar la música');
-            });
-        }
-        // Remover listeners después de la primera interacción
-        document.removeEventListener('click', startMusicOnFirstInteraction, true);
-        document.removeEventListener('keydown', startMusicOnFirstInteraction, true);
-        document.removeEventListener('touchstart', startMusicOnFirstInteraction, true);
-    };
-
-    // Usar capture: true para ejecutar antes que otros handlers
-    document.addEventListener('click', startMusicOnFirstInteraction, true);
-    document.addEventListener('keydown', startMusicOnFirstInteraction, true);
-    document.addEventListener('touchstart', startMusicOnFirstInteraction, { passive: true, capture: true });
     
     // Validación básica del formulario de newsletter en el footer
     var newsletterForm = document.querySelector('.newsletter-form');
