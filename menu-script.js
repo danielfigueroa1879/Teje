@@ -5,12 +5,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Crear múltiples instancias para asegurar carga
         for (let i = 0; i < 3; i++) {
             const img = new Image();
-            img.src = "Teje/Fotos/su.jpg";
+            img.src = "/Teje/Fotos/su.jpg";
             img.onload = function() {
                 // Aplicar imagen inmediatamente al elemento hero
                 const hero = document.querySelector('.hero');
                 if (hero) {
-                    hero.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("Teje/Fotos/su.jpg")";
+                    hero.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("/Teje/Fotos/su.jpg")";
                     hero.style.backgroundSize = 'cover';
                     hero.style.backgroundPosition = 'center center';
                 }
