@@ -111,9 +111,9 @@ nav ul li a:hover {
     z-index: 1001;
 }
 
-/* Hero Banner - Optimización máxima para carga de imagen */
+/* Hero Banner */
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('su.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Fotos/su.jpg');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -124,34 +124,6 @@ nav ul li a:hover {
     margin-top: 80px;
     position: relative;
     min-height: 70vh;
-    /* Optimizaciones críticas para imagen */
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    will-change: transform;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    contain: layout style paint;
-    /* Forzar composición en GPU */
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-}
-
-/* Optimización específica y agresiva para móvil */
-@media (max-width: 768px) {
-    .hero {
-        background-attachment: scroll !important;
-        background-size: cover !important;
-        background-position: center center !important;
-        min-height: 60vh;
-        /* Forzar aceleración hardware en móvil */
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-        -webkit-perspective: 1000px;
-        perspective: 1000px;
-        /* Prevenir reflow */
-        contain: strict;
-    }
 }
 
 .hero-content {
@@ -642,8 +614,8 @@ footer {
     display: none;
     position: fixed;
     bottom: 20px;
-    right:  20px;
-    width:  40px;
+    right: 20px;
+    width: 40px;
     height: 40px;
     background-color: #FAE4D4;
     border: 2px solid var(--dark-gray);
