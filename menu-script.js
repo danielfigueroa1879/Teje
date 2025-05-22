@@ -326,13 +326,15 @@ document.addEventListener('DOMContentLoaded', function() {
         currentZoom = 1;
     };
 
-    window.nextImage = function() {
+    window.nextImage = function(e) {
+        if (e) e.stopPropagation(); // Prevenir que se cierre el modal
         if (allImages.length === 0) return;
         currentImageIndex = (currentImageIndex + 1) % allImages.length;
         showCurrentImage();
     };
 
-    window.prevImage = function() {
+    window.prevImage = function(e) {
+        if (e) e.stopPropagation(); // Prevenir que se cierre el modal
         if (allImages.length === 0) return;
         currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
         showCurrentImage();
@@ -430,6 +432,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Event listeners para el modal
     const modal = document.getElementById('imageModal');
     if (modal) {
+        // Cerrar modal solo cuando se hace clic en el fondo
         modal.addEventListener('click', function(e) {
             if (e.target === modal) {
                 closeModal();
@@ -445,6 +448,32 @@ document.addEventListener('DOMContentLoaded', function() {
             // Prevenir el menú contextual en la imagen
             modalImg.addEventListener('contextmenu', function(e) {
                 e.preventDefault();
+            });
+        }
+
+        // Prevenir que los clics en controles cierren el modal
+        const modalContent = document.querySelector('.modal-content');
+        if (modalContent) {
+            modalContent.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        }
+
+        // Event listeners específicos para botones de navegación
+        const prevBtn = document.querySelector('.modal-nav.prev');
+        const nextBtn = document.querySelector('.modal-nav.next');
+        
+        if (prevBtn) {
+            prevBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                prevImage();
+            });
+        }
+        
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                nextImage();
             });
         }
     }
