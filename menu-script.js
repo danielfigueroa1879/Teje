@@ -5,12 +5,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Crear múltiples instancias para asegurar carga
         for (let i = 0; i < 3; i++) {
             const img = new Image();
-            img.src = 'fotos/su.jpg';
+            img.src = '/Teje/fotos/su.jpg';
             img.onload = function() {
                 // Aplicar imagen inmediatamente al elemento hero
                 const hero = document.querySelector('.hero');
                 if (hero) {
-                    hero.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('fotos/su.jpg')";
+                    hero.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/Teje/fotos/su.jpg')";
                     hero.style.backgroundSize = 'cover';
                     hero.style.backgroundPosition = 'center center';
                 }
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Mantener canvas en memoria
             window.heroCanvas = canvas;
         };
-        tempImg.src = 'fotos/su.jpg';
+        tempImg.src = '/Teje/fotos/su.jpg';
         
         // Forzar repaint del hero cada 100ms por 1 segundo
         let attempts = 0;
