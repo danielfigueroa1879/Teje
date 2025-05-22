@@ -1,210 +1,133 @@
-// Script CORREGIDO para móvil - Menú hamburguesa y imagen
+// Script SIMPLIFICADO - Menú hamburguesa que SÍ funciona
 document.addEventListener('DOMContentLoaded', function() {
-    // OPTIMIZACIÓN IMAGEN PARA MÓVIL
-    function forceLoadHeroImage() {
-        // Crear múltiples instancias para asegurar carga
-        for (let i = 0; i < 3; i++) {
-            const img = new Image();
-            img.src = 'Fotos/su.jpg';
-            img.onload = function() {
-                // Aplicar imagen inmediatamente al elemento hero
-                const hero = document.querySelector('.hero');
-                if (hero) {
-                    hero.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Fotos/su.jpg')";
-                    hero.style.backgroundSize = 'cover';
-                    hero.style.backgroundPosition = 'center center';
-                    hero.style.backgroundRepeat = 'no-repeat';
-                    hero.style.backgroundAttachment = 'scroll';
-                }
-            };
-            // Mantener referencias globales
-            window['heroImg' + i] = img;
+    
+    // Precarga de imagen (simplificada)
+    const heroImg = new Image();
+    heroImg.src = 'Fotos/su.jpg';
+    heroImg.onload = function() {
+        const hero = document.querySelector('.hero');
+        if (hero) {
+            hero.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Fotos/su.jpg')";
         }
-    }
+    };
     
-    // Ejecutar inmediatamente
-    forceLoadHeroImage();
+    // MENÚ HAMBURGUESA SIMPLE Y FUNCIONAL
+    const menuButton = document.getElementById('menuToggle');
+    const mainMenu = document.getElementById('mainMenu');
     
-    // Para móviles: crear imagen invisible para mantener en cache
-    if (window.innerWidth <= 768) {
-        const hiddenImg = document.createElement('img');
-        hiddenImg.src = 'Fotos/su.jpg';
-        hiddenImg.style.cssText = 'position:absolute;left:-9999px;width:1px;height:1px;opacity:0;';
-        document.body.appendChild(hiddenImg);
-        window.hiddenHeroImg = hiddenImg;
-    }
-    
-    // MENÚ HAMBURGUESA CORREGIDO
-    var menuButton = document.getElementById('menuToggle');
-    var mainMenu = document.getElementById('mainMenu');
-    
-    console.log('Menú button:', menuButton); // Debug
-    console.log('Main menu:', mainMenu); // Debug
+    console.log('🍔 Menú Button:', menuButton);
+    console.log('📋 Main Menu:', mainMenu);
     
     if (menuButton && mainMenu) {
-        // Evento para mostrar/ocultar el menú móvil
+        
+        // Click en el botón hamburguesa
         menuButton.addEventListener('click', function(e) {
-            console.log('Click en menú hamburguesa'); // Debug
             e.preventDefault();
             e.stopPropagation();
             
-            mainMenu.classList.toggle('show');
+            console.log('🍔 CLICK en menú hamburguesa');
             
-            // Cambiar el ícono del botón
-            this.innerHTML = mainMenu.classList.contains('show') ? '✕' : '☰';
-            
-            console.log('Menú show class:', mainMenu.classList.contains('show')); // Debug
+            // Toggle del menú
+            if (mainMenu.classList.contains('show')) {
+                mainMenu.classList.remove('show');
+                this.innerHTML = '☰';
+                console.log('❌ Menú CERRADO');
+            } else {
+                mainMenu.classList.add('show');
+                this.innerHTML = '✕';
+                console.log('✅ Menú ABIERTO');
+            }
         });
         
-        // Evento para cerrar el menú al hacer clic en un enlace
-        var links = mainMenu.getElementsByTagName('a');
-        console.log('Enlaces encontrados:', links.length); // Debug
+        // Click en enlaces del menú
+        const links = mainMenu.querySelectorAll('a');
+        console.log('🔗 Enlaces encontrados:', links.length);
         
-        for (var i = 0; i < links.length; i++) {
-            links[i].addEventListener('click', function(e) {
-                console.log('Click en enlace:', this.textContent); // Debug
+        links.forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                console.log('🔗 Click en enlace:', this.textContent);
                 
-                // Verificar si el enlace es interno
-                var href = this.getAttribute('href');
-                if (href && href.charAt(0) === '#') {
+                const href = this.getAttribute('href');
+                if (href && href.startsWith('#')) {
                     e.preventDefault();
                     
-                    var targetElement = document.querySelector(href);
-                    if (targetElement) {
-                        // Cerrar el menú
-                        mainMenu.classList.remove('show');
-                        menuButton.innerHTML = '☰';
-                        
-                        // Desplazamiento suave hacia la sección
+                    // Cerrar menú
+                    mainMenu.classList.remove('show');
+                    menuButton.innerHTML = '☰';
+                    
+                    // Scroll suave
+                    const target = document.querySelector(href);
+                    if (target) {
                         setTimeout(function() {
-                            window.scrollTo({
-                                top: targetElement.offsetTop - 80,
-                                behavior: 'smooth'
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
                             });
                         }, 100);
                     }
-                } else {
-                    // Cerrar el menú para enlaces externos
-                    mainMenu.classList.remove('show');
-                    menuButton.innerHTML = '☰';
                 }
             });
-        }
+        });
         
-        // Cerrar el menú al hacer clic fuera de él
+        // Click fuera del menú para cerrarlo
         document.addEventListener('click', function(e) {
             if (!menuButton.contains(e.target) && !mainMenu.contains(e.target)) {
                 if (mainMenu.classList.contains('show')) {
                     mainMenu.classList.remove('show');
                     menuButton.innerHTML = '☰';
+                    console.log('🚪 Menú cerrado por click fuera');
                 }
             }
         });
         
-        console.log('Menú hamburguesa configurado correctamente'); // Debug
+        console.log('✅ MENÚ HAMBURGUESA CONFIGURADO');
+        
     } else {
-        console.error('ERROR: No se encontraron los elementos del menú');
-        console.error('menuButton:', menuButton);
-        console.error('mainMenu:', mainMenu);
+        console.error('❌ ERROR: Elementos del menú no encontrados');
     }
     
-    // Funcionalidad de desplazamiento suave mejorada
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            var href = this.getAttribute('href');
-            if (href !== '#') {
-                e.preventDefault();
-                
-                var targetElement = document.querySelector(href);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            }
-        });
-    });
-
-    // FUNCIONALIDAD FLECHA CORREGIDA PARA MÓVIL
-    var scrollToTopBtn = document.getElementById('scrollToTop');
-    var timeoutId = null;
-    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+    // FLECHA SCROLL (simplificada)
+    const scrollBtn = document.getElementById('scrollToTop');
+    let timeout;
     
-    console.log('Es móvil:', isMobile); // Debug
-    console.log('Botón flecha encontrado:', !!scrollToTopBtn); // Debug
-    
-    if (scrollToTopBtn && isMobile) {
-        // Mostrar/ocultar el botón basado en el scroll
+    if (scrollBtn && window.innerWidth <= 768) {
         window.addEventListener('scroll', function() {
-            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollTop = window.pageYOffset;
             
             if (scrollTop > 300) {
-                if (!scrollToTopBtn.classList.contains('show')) {
-                    scrollToTopBtn.classList.remove('hide');
-                    scrollToTopBtn.classList.add('show');
-                    console.log('Mostrando flecha'); // Debug
-                }
+                scrollBtn.classList.add('show');
+                scrollBtn.classList.remove('hide');
                 
-                // Auto-ocultar después de 5 segundos
-                if (timeoutId) clearTimeout(timeoutId);
-                timeoutId = setTimeout(function() {
-                    if (scrollToTopBtn.classList.contains('show')) {
-                        scrollToTopBtn.classList.remove('show');
-                        scrollToTopBtn.classList.add('hide');
-                        setTimeout(function() {
-                            scrollToTopBtn.classList.remove('hide');
-                        }, 300);
-                    }
+                clearTimeout(timeout);
+                timeout = setTimeout(function() {
+                    scrollBtn.classList.remove('show');
+                    scrollBtn.classList.add('hide');
                 }, 5000);
-                
             } else {
-                // Ocultar cuando esté cerca del top
-                if (scrollToTopBtn.classList.contains('show')) {
-                    scrollToTopBtn.classList.remove('show');
-                    scrollToTopBtn.classList.add('hide');
-                    setTimeout(function() {
-                        scrollToTopBtn.classList.remove('hide');
-                    }, 300);
-                }
-                if (timeoutId) {
-                    clearTimeout(timeoutId);
-                    timeoutId = null;
-                }
+                scrollBtn.classList.remove('show');
+                clearTimeout(timeout);
             }
         });
         
-        // Acción al hacer clic en el botón
-        scrollToTopBtn.addEventListener('click', function() {
-            console.log('Click en flecha'); // Debug
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+        scrollBtn.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
     
-    // Newsletter form
-    var newsletterForm = document.querySelector('.newsletter-form');
+    // Newsletter
+    const newsletterForm = document.querySelector('.newsletter-form');
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            let valid = true;
-            const emailField = this.querySelector('input[type="email"]');
-            
-            if (!emailField.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value)) {
-                emailField.classList.add('error');
-                valid = false;
-            } else {
-                emailField.classList.remove('error');
-            }
-            
-            if (valid) {
-                alert('¡Gracias por suscribirte a nuestra newsletter!');
+            const email = this.querySelector('input[type="email"]').value;
+            if (email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                alert('¡Gracias por suscribirte!');
                 this.reset();
             } else {
-                alert('Por favor, ingresa un correo electrónico válido.');
+                alert('Por favor, ingresa un email válido.');
             }
         });
     }
+    
+    console.log('🚀 SCRIPT CARGADO COMPLETAMENTE');
 });
