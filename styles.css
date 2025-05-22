@@ -117,12 +117,16 @@ nav ul li a:hover {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: scroll; /* Mejor rendimiento que fixed */
     color: var(--white);
     text-align: center;
     padding: 120px 20px;
     margin-top: 80px; /* Añadido para compensar el header fijo */
     position: relative;
     min-height: 70vh; /* Altura mínima para asegurar que se vea bien la imagen */
+    /* Optimización para evitar parpadeo */
+    will-change: background-image;
+    transform: translateZ(0); /* Acelerar hardware */
 }
 
 .hero-content {
