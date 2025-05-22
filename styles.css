@@ -111,36 +111,46 @@ nav ul li a:hover {
     z-index: 1001;
 }
 
-/* Hero Banner */
+/* Hero Banner - Optimización máxima para carga de imagen */
 .hero {
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('su.jpg');
     background-size: cover;
-    background-position: center;
+    background-position: center center;
     background-repeat: no-repeat;
-    background-attachment: scroll; /* Mejor rendimiento que fixed */
+    background-attachment: scroll;
     color: var(--white);
     text-align: center;
     padding: 120px 20px;
-    margin-top: 80px; /* Añadido para compensar el header fijo */
+    margin-top: 80px;
     position: relative;
-    min-height: 70vh; /* Altura mínima para asegurar que se vea bien la imagen */
-    /* Optimizaciones para móvil */
-    will-change: transform; /* Acelerar hardware */
-    transform: translateZ(0); /* Crear capa de composición */
-    backface-visibility: hidden; /* Optimizar renderizado */
-    -webkit-backface-visibility: hidden; /* Safari */
-    contain: layout style paint; /* Aislar renderizado */
+    min-height: 70vh;
+    /* Optimizaciones críticas para imagen */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    contain: layout style paint;
+    /* Forzar composición en GPU */
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 
-/* Optimización específica para móvil */
+/* Optimización específica y agresiva para móvil */
 @media (max-width: 768px) {
     .hero {
-        background-attachment: scroll; /* Forzar scroll en móvil */
-        transform: translate3d(0, 0, 0); /* Forzar aceleración 3D */
-        -webkit-transform: translate3d(0, 0, 0); /* Safari */
-        background-size: cover;
-        background-position: center center;
-        min-height: 60vh; /* Altura optimizada para móvil */
+        background-attachment: scroll !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        min-height: 60vh;
+        /* Forzar aceleración hardware en móvil */
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        -webkit-perspective: 1000px;
+        perspective: 1000px;
+        /* Prevenir reflow */
+        contain: strict;
     }
 }
 
@@ -635,30 +645,38 @@ footer {
     right: 20px;
     width: 50px;
     height: 50px;
-    background-color: transparent;
-    border: none;
+    background-color: #FAE4D4;
+    border: 2px solid var(--dark-gray);
+    border-radius: 50%;
     cursor: pointer;
     z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
     align-items: center;
     justify-content: center;
 }
 
-/* Crear triángulo con dos líneas */
+/* Crear triángulo con dos líneas dentro del círculo */
 .scroll-to-top::before {
     content: '';
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     border-top: 3px solid #000;
     border-right: 3px solid #000;
     transform: rotate(-45deg);
     transition: all 0.3s ease;
 }
 
+.scroll-to-top:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
 .scroll-to-top:hover::before {
-    border-color: var(--primary-color);
-    transform: rotate(-45deg) translateY(-2px);
+    border-color: var(--white);
+    transform: rotate(-45deg) translateY(-1px);
 }
 
 .scroll-to-top.show {
