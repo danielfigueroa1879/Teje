@@ -1,190 +1,248 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Tejidos Luna ofrece creaciones únicas de tejido artesanal creadas por Susana. Descubre trajes de bebé, pasamontañas y otros artículos tejidos a mano.">
-    <meta name="keywords" content="tejidos, tejido, artesanal, Susana, Luna, bebé, pasamontañas, punto, creaciones">
-    <meta name="author" content="Tejidos Luna">
-    <meta name="robots" content="index, follow">
+// Script súper optimizado para carga instantánea de imagen - ADAPTADO para Fotos/su.jpg
+document.addEventListener('DOMContentLoaded', function() {
+    // Carga agresiva e inmediata de la imagen
+    function forceLoadHeroImage() {
+        // Crear múltiples instancias para asegurar carga
+        for (let i = 0; i < 3; i++) {
+            const img = new Image();
+            img.src = 'Fotos/su.jpg'; // CAMBIO AQUÍ: Nueva ruta
+            img.onload = function() {
+                // Aplicar imagen inmediatamente al elemento hero
+                const hero = document.querySelector('.hero');
+                if (hero) {
+                    hero.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Fotos/su.jpg')"; // CAMBIO AQUÍ
+                    hero.style.backgroundSize = 'cover';
+                    hero.style.backgroundPosition = 'center center';
+                }
+            };
+            // Mantener referencias globales
+            window['heroImg' + i] = img;
+        }
+    }
     
-    <title>Tejidos Luna - Creaciones Únicas de Susana</title>
+    // Ejecutar inmediatamente
+    forceLoadHeroImage();
     
-    <!-- Preload critical assets -->
-    <link rel="preload" href="styles.css" as="style">
-    <link rel="preload" href="Fotos/su.jpg" as="image">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    // Para móviles: técnicas adicionales de optimización
+    if (window.innerWidth <= 768) {
+        // Crear canvas invisible para pre-renderizar
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const tempImg = new Image();
+        tempImg.onload = function() {
+            canvas.width = this.width;
+            canvas.height = this.height;
+            ctx.drawImage(this, 0, 0);
+            // Mantener canvas en memoria
+            window.heroCanvas = canvas;
+        };
+        tempImg.src = 'Fotos/su.jpg'; // CAMBIO AQUÍ: Nueva ruta
+        
+        // Forzar repaint del hero cada 100ms por 1 segundo
+        let attempts = 0;
+        const forceRepaint = setInterval(() => {
+            const hero = document.querySelector('.hero');
+            if (hero && attempts < 10) {
+                hero.style.transform = 'translateZ(0)';
+                attempts++;
+            } else {
+                clearInterval(forceRepaint);
+            }
+        }, 100);
+    }
     
-    <link rel="stylesheet" href="styles.css">
-    <script src="menu-script.js" defer></script>
-</head>
-<body>
-    <header>
-        <div class="container header-container">
-            <div class="logo">
-                <h1>TEJIDOS LUNA</h1>
-            </div>
-            <button class="mobile-menu-btn" id="menuToggle" aria-label="Abrir menú de navegación">☰</button>
-            <nav>
-                <ul id="mainMenu">
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#productos">Productos</a></li>
-                    <li><a href="#destacado">Destacados</a></li>
-                    <li><a href="#proceso">Proceso Creativo</a></li>
-                    <li><a href="#blog">Blog</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <section id="inicio" class="hero">
-        <div class="hero-content">
-            <h2>Creaciones Únicas de Susana</h2>
-            <p>Explora tu imaginación</p>
-            <a href="#productos" class="btn">Descubrir</a>
-        </div>
-    </section>
-
-    <section id="productos" class="bestsellers">
-        <h2 class="bestsellers-title">Lo Más Vendido</h2>
-        <div class="products-grid">
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="./Fotos/trajeBebe.jpeg" alt="Traje de Bebé" onerror="this.src='https://via.placeholder.com/300x300/ff73b9/ffffff?text=Traje+de+Bebé'">
-                </div>
-                <div class="product-info">
-                    <h3>Traje de Bebé</h3>
-                    <div class="product-price">$35.00</div>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="./Fotos/trajeBebe1.jpeg" alt="Traje Bebé" onerror="this.src='https://via.placeholder.com/300x300/ff73b9/ffffff?text=Traje+Bebé+1'">
-                </div>
-                <div class="product-info">
-                    <h3>Traje Bebé</h3>
-                    <div class="product-price">$35.00</div>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="./Fotos/trajeBebe2.jpeg" alt="Pasamontañas De Punto" onerror="this.src='https://via.placeholder.com/300x300/ff73b9/ffffff?text=Pasamontañas'">
-                </div>
-                <div class="product-info">
-                    <h3>Pasamontañas De Punto</h3>
-                    <div class="product-price">$28.00</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="destacado" class="featured-section">
-        <div class="featured-text">
-            <h2>No te lo Pierdas</h2>
-            <p>Descubre nuestras creaciones artesanales confeccionadas con cariño y dedicación para hacer de cada pieza algo único y especial.</p>
-            <a href="#productos" class="btn">Ver más</a>
-        </div>
-        <div class="featured-image">
-            <img src="https://via.placeholder.com/500x400/cccccc/ffffff" alt="Tejido artesanal">
-        </div>
-    </section>
-
-    <section id="proceso" class="gallery">
-        <h2 class="gallery-title">Proceso Creativo</h2>
-        <div class="gallery-container">
-            <p style="text-align: center; margin-bottom: 30px;">Te invitamos a conocer nuestro proceso creativo, donde cada pieza está hecha a mano para cumplir con tus demandas creativas. ¡Déjanos ser parte de tu próximo proyecto!</p>
+    // Resto del código del menú
+    var menuButton = document.getElementById('menuToggle');
+    var mainMenu = document.getElementById('mainMenu');
+    
+    if (menuButton && mainMenu) {
+        // Evento para mostrar/ocultar el menú móvil cuando se hace clic en el botón
+        menuButton.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevenir comportamiento predeterminado
+            mainMenu.classList.toggle('show');
             
-            <div class="gallery-grid">
-                    <div class="gallery-item">
-                    <img src="https://via.placeholder.com/300x300/ff73b9/ffffff" alt="Proceso creativo 1">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/300x300/c5e8e8/333333" alt="Proceso creativo 2">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/300x300/ff73b9/ffffff" alt="Proceso creativo 3">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/300x300/c5e8e8/333333" alt="Proceso creativo 4">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/300x300/ff73b9/ffffff" alt="Proceso creativo 5">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/300x300/c5e8e8/333333" alt="Proceso creativo 6">
-                </div>
-            </div>
-        </div>
-    </section>
+            // Cambiar el ícono del botón
+            this.innerHTML = mainMenu.classList.contains('show') ? '✕' : '☰';
+        });
+        
+        // Evento para cerrar el menú al hacer clic en un enlace y hacer scroll suave
+        var links = mainMenu.getElementsByTagName('a');
+        
+        for (var i = 0; i < links.length; i++) {
+            links[i].addEventListener('click', function(e) {
+                // Verificar si el enlace es interno
+                var href = this.getAttribute('href');
+                if (href.charAt(0) === '#') {
+                    e.preventDefault(); // Prevenir navegación estándar
+                    
+                    var targetElement = document.querySelector(href);
+                    if (targetElement) {
+                        // Cerrar el menú
+                        mainMenu.classList.remove('show');
+                        menuButton.innerHTML = '☰';
+                        
+                        // Desplazamiento suave hacia la sección
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80, // Ajuste para el encabezado fijo
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+                else {
+                    // Cerrar el menú para enlaces externos
+                    mainMenu.classList.remove('show');
+                    menuButton.innerHTML = '☰';
+                }
+            });
+        }
+        
+        // Cerrar el menú al hacer clic fuera de él
+        document.addEventListener('click', function(e) {
+            if (!menuButton.contains(e.target) && !mainMenu.contains(e.target)) {
+                if (mainMenu.classList.contains('show')) {
+                    mainMenu.classList.remove('show');
+                    menuButton.innerHTML = '☰';
+                }
+            }
+        });
+    } else {
+        console.error('Menú móvil: No se encontraron los elementos necesarios.');
+    }
+    
+    // Funcionalidad de desplazamiento suave para todos los enlaces internos (no solo móvil)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            var href = this.getAttribute('href');
+            if (href !== '#') { // Evitar enlaces "#" vacíos
+                e.preventDefault();
+                
+                var targetElement = document.querySelector(href);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, // Ajuste para el encabezado fijo
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
 
-    <section id="blog" class="blog-section">
-        <h2 class="blog-title">Síguenos</h2>
-        <div class="blog-grid">
-            <div class="blog-card">
-                <div class="blog-image">
-                    <img src="https://via.placeholder.com/300x200/cccccc/ffffff" alt="Blog 1">
-                </div>
-                <div class="blog-content">
-                    <span class="blog-date">Mayo 2025</span>
-                    <h3>Nuevos diseños para el verano</h3>
-                    <p class="blog-excerpt">Descubre nuestra nueva colección de tejidos frescos y ligeros perfectos para el verano.</p>
-                    <a href="#" class="btn">Leer más</a>
-                </div>
-            </div>
-            <div class="blog-card">
-                <div class="blog-image">
-                    <img src="https://via.placeholder.com/300x200/cccccc/ffffff" alt="Blog 2">
-                </div>
-                <div class="blog-content">
-                    <span class="blog-date">Abril 2025</span>
-                    <h3>Técnicas de tejido avanzadas</h3>
-                    <p class="blog-excerpt">Aprende nuevas técnicas de tejido que te permitirán crear piezas más elaboradas y únicas.</p>
-                    <a href="#" class="btn">Leer más</a>
-                </div>
-            </div>
-            <div class="blog-card">
-                <div class="blog-image">
-                    <img src="https://via.placeholder.com/300x200/cccccc/ffffff" alt="Blog 3">
-                </div>
-                <div class="blog-content">
-                    <span class="blog-date">Marzo 2025</span>
-                    <h3>Cuidados para tus prendas tejidas</h3>
-                    <p class="blog-excerpt">Consejos útiles para mantener tus prendas tejidas en perfecto estado por más tiempo.</p>
-                    <a href="#" class="btn">Leer más</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer id="contacto">
-        <div class="footer-container">
-            <div class="footer-column">
-                <h3>TEJIDOS LUNA</h3>
-                <p>Susana Diaz Gallardo</p>
-                <p>+56123456789</p>
-            </div>
-            <div class="footer-column">
-                <h3>Dirección</h3>
-                <address>
-                    Avda. Mistral, La Serena<br>
-                    Chile
-                </address>
-            </div>
-            <div class="footer-column">
-                <h3>Mantente informado, únete a nuestra newsletter</h3>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Tu correo electrónico" required>
-                    <button type="submit">Suscribir</button>
-                </form>
-            </div>
-        </div>
-        <div class="copyright">
-            <p>&copy; 2025 Tejidos Luna. Todos los derechos reservados.</p>
-        </div>
-    </footer>
-
-    <!-- Botón scroll to top (solo móvil) -->
-    <button class="scroll-to-top" id="scrollToTop" aria-label="Subir al inicio"></button>
-</body>
-</html>
+    // Funcionalidad del botón scroll to top (solo móvil)
+    var scrollToTopBtn = document.getElementById('scrollToTop');
+    var timeoutId = null;
+    var isMobile = window.innerWidth <= 768;
+    
+    if (scrollToTopBtn && isMobile) {
+        // Mostrar/ocultar el botón basado en el scroll
+        window.addEventListener('scroll', function() {
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 300) { // Mostrar después de 300px de scroll
+                if (!scrollToTopBtn.classList.contains('show')) {
+                    scrollToTopBtn.classList.remove('hide');
+                    scrollToTopBtn.classList.add('show');
+                }
+                
+                // Limpiar timeout anterior si existe
+                if (timeoutId) {
+                    clearTimeout(timeoutId);
+                }
+                
+                // Auto-ocultar después de 5 segundos de inactividad
+                timeoutId = setTimeout(function() {
+                    if (scrollToTopBtn.classList.contains('show')) {
+                        scrollToTopBtn.classList.remove('show');
+                        scrollToTopBtn.classList.add('hide');
+                        
+                        // Esperar a que termine la animación antes de ocultar completamente
+                        setTimeout(function() {
+                            scrollToTopBtn.classList.remove('hide');
+                        }, 300);
+                    }
+                }, 5000);
+                
+            } else {
+                // Ocultar cuando esté cerca del top
+                if (scrollToTopBtn.classList.contains('show')) {
+                    scrollToTopBtn.classList.remove('show');
+                    scrollToTopBtn.classList.add('hide');
+                    
+                    setTimeout(function() {
+                        scrollToTopBtn.classList.remove('hide');
+                    }, 300);
+                }
+                
+                // Limpiar timeout
+                if (timeoutId) {
+                    clearTimeout(timeoutId);
+                    timeoutId = null;
+                }
+            }
+        });
+        
+        // Acción al hacer clic en el botón
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Mostrar el botón inmediatamente al llegar al final de la página
+        window.addEventListener('scroll', function() {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
+                if (!scrollToTopBtn.classList.contains('show')) {
+                    scrollToTopBtn.classList.remove('hide');
+                    scrollToTopBtn.classList.add('show');
+                }
+                
+                // Limpiar timeout anterior
+                if (timeoutId) {
+                    clearTimeout(timeoutId);
+                }
+                
+                // Auto-ocultar después de 5 segundos
+                timeoutId = setTimeout(function() {
+                    if (scrollToTopBtn.classList.contains('show')) {
+                        scrollToTopBtn.classList.remove('show');
+                        scrollToTopBtn.classList.add('hide');
+                        
+                        setTimeout(function() {
+                            scrollToTopBtn.classList.remove('hide');
+                        }, 300);
+                    }
+                }, 5000);
+            }
+        });
+    }
+    
+    // Actualizar año actual en el copyright si existe el elemento
+    var currentYearElement = document.getElementById('current-year');
+    if (currentYearElement) {
+        currentYearElement.textContent = new Date().getFullYear();
+    }
+    
+    // Validación básica del formulario de newsletter en el footer
+    var newsletterForm = document.querySelector('.newsletter-form');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            let valid = true;
+            const emailField = this.querySelector('input[type="email"]');
+            
+            if (!emailField.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value)) {
+                emailField.classList.add('error');
+                valid = false;
+            } else {
+                emailField.classList.remove('error');
+            }
+            
+            if (valid) {
+                alert('¡Gracias por suscribirte a nuestra newsletter!');
+                this.reset();
+            } else {
+                alert('Por favor, ingresa un correo electrónico válido.');
+            }
+        });
+    }
+});
