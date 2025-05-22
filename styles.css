@@ -628,8 +628,18 @@ footer {
     }
 
     .featured-text,
-    .featured-image {
+    .featured-images {
         padding: 20px;
+    }
+    
+    .featured-images {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .featured-image img {
+        max-width: 250px;
+        height: 180px;
     }
 
     .product-image,
