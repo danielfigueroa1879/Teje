@@ -124,9 +124,24 @@ nav ul li a:hover {
     margin-top: 80px; /* Añadido para compensar el header fijo */
     position: relative;
     min-height: 70vh; /* Altura mínima para asegurar que se vea bien la imagen */
-    /* Optimización para evitar parpadeo */
-    will-change: background-image;
-    transform: translateZ(0); /* Acelerar hardware */
+    /* Optimizaciones para móvil */
+    will-change: transform; /* Acelerar hardware */
+    transform: translateZ(0); /* Crear capa de composición */
+    backface-visibility: hidden; /* Optimizar renderizado */
+    -webkit-backface-visibility: hidden; /* Safari */
+    contain: layout style paint; /* Aislar renderizado */
+}
+
+/* Optimización específica para móvil */
+@media (max-width: 768px) {
+    .hero {
+        background-attachment: scroll; /* Forzar scroll en móvil */
+        transform: translate3d(0, 0, 0); /* Forzar aceleración 3D */
+        -webkit-transform: translate3d(0, 0, 0); /* Safari */
+        background-size: cover;
+        background-position: center center;
+        min-height: 60vh; /* Altura optimizada para móvil */
+    }
 }
 
 .hero-content {
