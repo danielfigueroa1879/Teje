@@ -635,24 +635,30 @@ footer {
     right: 20px;
     width: 50px;
     height: 50px;
-    background-color: #FAE4D4;
-    border: 2px solid var(--dark-gray);
-    border-radius: 50%;
+    background-color: transparent;
+    border: none;
     cursor: pointer;
     z-index: 1000;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
-    color: var(--dark-gray);
 }
 
-.scroll-to-top:hover {
-    background-color: var(--primary-color);
-    color: var(--white);
-    transform: translateY(-3px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+/* Crear triángulo con dos líneas */
+.scroll-to-top::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-top: 3px solid #000;
+    border-right: 3px solid #000;
+    transform: rotate(-45deg);
+    transition: all 0.3s ease;
+}
+
+.scroll-to-top:hover::before {
+    border-color: var(--primary-color);
+    transform: rotate(-45deg) translateY(-2px);
 }
 
 .scroll-to-top.show {
