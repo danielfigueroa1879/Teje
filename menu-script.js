@@ -246,106 +246,85 @@ document.addEventListener('DOMContentLoaded', function() {
         currentYearElement.textContent = new Date().getFullYear();
     }
 
-    // Funcionalidad de música de fondo - MÁXIMA AUTOMATIZACIÓN
+    // Funcionalidad de música de fondo - SIMPLE Y FUNCIONAL
     const backgroundMusic = document.getElementById('backgroundMusic');
     const musicToggle = document.getElementById('musicToggle');
     const musicIcon = document.getElementById('musicIcon');
-    let userHasInteracted = false;
+    let musicIsPlaying = false;
 
-    // Función para inicializar música con múltiples intentos
-    function initBackgroundMusic() {
+    // Función simple para iniciar música
+    function startMusic() {
         if (!backgroundMusic) return;
         
         backgroundMusic.volume = 0.3;
-        
-        // Intento 1: Reproducción inmediata
-        attemptAutoplay();
-        
-        // Intento 2: Después de cargar completamente
-        window.addEventListener('load', () => {
-            setTimeout(attemptAutoplay, 500);
-        });
-        
-        // Intento 3: En el primer movimiento del mouse
-        document.addEventListener('mousemove', attemptAutoplay, { once: true });
-        
-        // Intento 4: En el primer scroll
-        document.addEventListener('scroll', attemptAutoplay, { once: true });
-        
-        // Intento 5: En cualquier interacción mínima
-        ['click', 'keydown', 'touchstart', 'mousedown', 'mouseover'].forEach(event => {
-            document.addEventListener(event, attemptAutoplay, { once: true, passive: true });
-        });
-    }
-
-    function attemptAutoplay() {
-        if (!backgroundMusic || !backgroundMusic.paused) return;
-        
         backgroundMusic.play().then(() => {
-            console.log('🎵 Mariage d\'Amour iniciada');
-            updateMusicButtonToPlaying();
+            musicIsPlaying = true;
+            console.log('🎵 Música iniciada');
         }).catch(() => {
-            // Silencioso - seguir intentando
+            musicIsPlaying = false;
         });
     }
 
+    // Toggle de música
     window.toggleMusic = function() {
         if (!backgroundMusic) return;
         
-        userHasInteracted = true;
-        
         if (backgroundMusic.paused) {
             backgroundMusic.play().then(() => {
-                updateMusicButtonToPlaying();
-            }).catch((error) => {
-                console.log('Error al reproducir música:', error);
+                musicIsPlaying = true;
+                updateMusicButton();
             });
         } else {
             backgroundMusic.pause();
-            updateMusicButtonToPaused();
+            musicIsPlaying = false;
+            updateMusicButton();
         }
     };
 
-    function updateMusicButtonToPlaying() {
-        if (musicIcon && musicToggle) {
+    function updateMusicButton() {
+        if (!musicIcon || !musicToggle) return;
+        
+        if (musicIsPlaying) {
             musicIcon.textContent = '🎵';
             musicToggle.classList.add('playing');
             musicToggle.title = 'Pausar música';
-        }
-    }
-
-    function updateMusicButtonToPaused() {
-        if (musicIcon && musicToggle) {
+        } else {
             musicIcon.textContent = '🔇';
             musicToggle.classList.remove('playing');
             musicToggle.title = 'Reproducir música';
         }
     }
 
-    // Event listeners para el audio
+    // Event listeners del audio
     if (backgroundMusic) {
         backgroundMusic.addEventListener('play', () => {
-            updateMusicButtonToPlaying();
+            musicIsPlaying = true;
+            updateMusicButton();
         });
 
         backgroundMusic.addEventListener('pause', () => {
-            if (userHasInteracted) {
-                updateMusicButtonToPaused();
-            }
-        });
-
-        backgroundMusic.addEventListener('ended', () => {
-            if (userHasInteracted) {
-                updateMusicButtonToPaused();
-            }
+            musicIsPlaying = false;
+            updateMusicButton();
         });
     }
 
-    // Inicializar música inmediatamente y con múltiples intentos
-    initBackgroundMusic();
-    setTimeout(initBackgroundMusic, 100);
-    setTimeout(initBackgroundMusic, 500);
-    setTimeout(initBackgroundMusic, 1000);
+    // Intentar iniciar música inmediatamente
+    setTimeout(startMusic, 500);
+
+    // Iniciar música en cualquier interacción
+    function startOnInteraction() {
+        startMusic();
+        // Remover listeners después de ejecutar
+        document.removeEventListener('click', startOnInteraction);
+        document.removeEventListener('keydown', startOnInteraction);
+        document.removeEventListener('touchstart', startOnInteraction);
+        document.removeEventListener('mousemove', startOnInteraction);
+    }
+
+    document.addEventListener('click', startOnInteraction);
+    document.addEventListener('keydown', startOnInteraction);
+    document.addEventListener('touchstart', startOnInteraction);
+    document.addEventListener('mousemove', startOnInteraction);
     
     // Validación básica del formulario de newsletter en el footer
     var newsletterForm = document.querySelector('.newsletter-form');
