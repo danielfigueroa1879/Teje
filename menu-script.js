@@ -250,7 +250,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const backgroundMusic = document.getElementById('backgroundMusic');
     const musicToggle = document.getElementById('musicToggle');
     const musicIcon = document.getElementById('musicIcon');
-    let musicPlaying = true; // CAMBIO: Iniciar como true para que esté activa por defecto
+    let musicPlaying = true; // Estado visual inicial
+    let musicReady = true; // Estado de si la música está lista para reproducirse
 
     // Intentar reproducir música automáticamente (con manejo de políticas del navegador)
     function initBackgroundMusic() {
@@ -264,11 +265,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 playPromise.then(() => {
                     // Música se reproduce automáticamente
                     musicPlaying = true;
+                    musicReady = true;
                     updateMusicButton();
+                    console.log('Música iniciada automáticamente');
                 }).catch(() => {
                     // El navegador bloquea la reproducción automática
-                    console.log('Reproducción automática bloqueada. El usuario debe interactuar primero.');
-                    musicPlaying = false; // Solo cambiar a false si realmente falla
+                    console.log('Reproducción automática bloqueada. La música iniciará con la primera interacción.');
+                    // MANTENER musicPlaying = true para mostrar como activo
+                    musicReady = false; // Pero marcar que no está realmente reproduciéndose
                     updateMusicButton();
                 });
             }
@@ -280,15 +284,21 @@ document.addEventListener('DOMContentLoaded', function() {
     window.toggleMusic = function() {
         if (!backgroundMusic) return;
         
-        if (musicPlaying) {
+        if (musicPlaying && !backgroundMusic.paused) {
+            // Música está sonando, pausarla
             backgroundMusic.pause();
             musicPlaying = false;
+            musicReady = false;
         } else {
+            // Música está pausada o nunca se ha reproducido, reproducirla
             backgroundMusic.play().then(() => {
                 musicPlaying = true;
+                musicReady = true;
+                console.log('Música reproducida manualmente');
             }).catch((error) => {
                 console.log('Error al reproducir música:', error);
                 musicPlaying = false;
+                musicReady = false;
             });
         }
         updateMusicButton();
@@ -332,24 +342,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // También intentar reproducir música en la primera interacción del usuario
     const startMusicOnInteraction = () => {
-        if (!backgroundMusic.paused) return; // Si ya está reproduciéndose, no hacer nada
-        
-        const playPromise = backgroundMusic.play();
-        if (playPromise !== undefined) {
-            playPromise.then(() => {
-                musicPlaying = true;
-                updateMusicButton();
-                console.log('Música iniciada tras interacción del usuario');
-            }).catch((error) => {
-                console.log('No se pudo iniciar la música:', error);
-                musicPlaying = false;
-                updateMusicButton();
-            });
+        // Solo intentar si la música está lista pero no reproduciéndose
+        if (!musicReady && musicPlaying) {
+            const playPromise = backgroundMusic.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    musicPlaying = true;
+                    musicReady = true;
+                    updateMusicButton();
+                    console.log('Música iniciada tras interacción del usuario');
+                    // Remover los event listeners solo después del éxito
+                    document.removeEventListener('click', startMusicOnInteraction);
+                    document.removeEventListener('keydown', startMusicOnInteraction);
+                    document.removeEventListener('touchstart', startMusicOnInteraction);
+                }).catch((error) => {
+                    console.log('No se pudo iniciar la música:', error);
+                    // No cambiar el estado visual, mantener como si estuviera lista
+                });
+            }
         }
-        // Remover el event listener después de la primera interacción exitosa
-        document.removeEventListener('click', startMusicOnInteraction);
-        document.removeEventListener('keydown', startMusicOnInteraction);
-        document.removeEventListener('touchstart', startMusicOnInteraction);
     };
 
     document.addEventListener('click', startMusicOnInteraction);
