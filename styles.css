@@ -876,6 +876,64 @@ footer {
     }
 }
 
+/* Control de música */
+.music-control {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    z-index: 1500;
+}
+
+.music-control button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(250, 228, 212, 0.9);
+    border: 2px solid var(--primary-color);
+    cursor: pointer;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.music-control button:hover {
+    background-color: var(--primary-color);
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.music-control button.playing {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 115, 185, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 115, 185, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 115, 185, 0); }
+}
+
+/* Responsive para control de música */
+@media (max-width: 768px) {
+    .music-control {
+        top: auto;
+        bottom: 80px;
+        right: 15px;
+        transform: none;
+    }
+    
+    .music-control button {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+}
+
 /* Botón de subir arriba (solo móvil) */
 .scroll-to-top {
     display: none;
