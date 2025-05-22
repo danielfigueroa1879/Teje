@@ -1,6 +1,6 @@
 // Script súper optimizado para carga instantánea de imagen - ADAPTADO para Fotos/su.jpg
 document.addEventListener('DOMContentLoaded', function() {
-    // Carga agresiva e inmediata de la imagen
+    // Carga agresiva e inmediata de la imagen hero
     function forceLoadHeroImage() {
         // Crear múltiples instancias para asegurar carga
         for (let i = 0; i < 3; i++) {
@@ -20,8 +20,45 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    // Función para cargar imágenes de productos
+    function forceLoadProductImages() {
+        const productImages = [
+            { selector: '.product-card:nth-child(1) img', src: 'Fotos/trajeBebe.jpg', alt: 'Traje de Bebé' },
+            { selector: '.product-card:nth-child(2) img', src: 'Fotos/trajeBebe1.jpg', alt: 'Traje Bebé' },
+            { selector: '.product-card:nth-child(3) img', src: 'Fotos/trajeBebe2.jpg', alt: 'Pasamontañas De Punto' }
+        ];
+        
+        productImages.forEach((product, index) => {
+            // Precargar imagen
+            const img = new Image();
+            img.onload = function() {
+                const targetImg = document.querySelector(product.selector);
+                if (targetImg) {
+                    targetImg.src = product.src;
+                    targetImg.alt = product.alt;
+                    targetImg.style.opacity = '0';
+                    targetImg.style.transition = 'opacity 0.3s ease';
+                    setTimeout(() => {
+                        targetImg.style.opacity = '1';
+                    }, 100);
+                }
+            };
+            img.onerror = function() {
+                console.error('Error cargando imagen:', product.src);
+                const targetImg = document.querySelector(product.selector);
+                if (targetImg) {
+                    targetImg.src = `https://via.placeholder.com/300x300/ff73b9/ffffff?text=${encodeURIComponent(product.alt)}`;
+                }
+            };
+            img.src = product.src;
+            // Mantener referencia global
+            window['productImg' + index] = img;
+        });
+    }
+    
     // Ejecutar inmediatamente
     forceLoadHeroImage();
+    forceLoadProductImages();
     
     // Para móviles: técnicas adicionales de optimización
     if (window.innerWidth <= 768) {
