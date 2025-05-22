@@ -1,8 +1,36 @@
-// Script mejorado para el menú móvil con desplazamiento suave a las secciones
+// Script optimizado para carga rápida de imágenes en móvil
 document.addEventListener('DOMContentLoaded', function() {
-    // Precargar imagen del hero para evitar retrasos
-    var heroImage = new Image();
-    heroImage.src = 'su.jpg';
+    // Función para precargar y mantener imagen en memoria
+    function preloadHeroImage() {
+        var heroImage = new Image();
+        heroImage.onload = function() {
+            // Forzar que la imagen se mantenga en caché
+            document.querySelector('.hero').style.backgroundImage = 
+                "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('su.jpg')";
+        };
+        heroImage.src = 'su.jpg';
+        
+        // Mantener referencia para evitar garbage collection
+        window.heroImageRef = heroImage;
+    }
+    
+    // Precargar inmediatamente
+    preloadHeroImage();
+    
+    // Para dispositivos móvil: crear elementos invisibles para mantener imagen en memoria
+    if (window.innerWidth <= 768) {
+        var hiddenImg = document.createElement('img');
+        hiddenImg.src = 'su.jpg';
+        hiddenImg.style.position = 'absolute';
+        hiddenImg.style.left = '-9999px';
+        hiddenImg.style.width = '1px';
+        hiddenImg.style.height = '1px';
+        hiddenImg.style.opacity = '0';
+        document.body.appendChild(hiddenImg);
+        
+        // Forzar que se mantenga en memoria
+        window.hiddenImageRef = hiddenImg;
+    }
     
     // Obtener los elementos del menú
     var menuButton = document.getElementById('menuToggle');
