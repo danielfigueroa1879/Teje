@@ -225,6 +225,20 @@
         </div>
     </footer>
 
+    <!-- Audio de fondo -->
+    <audio id="backgroundMusic" loop preload="auto">
+        <source src="Fotos/musica.mp3" type="audio/mpeg">
+        <source src="Fotos/musica.ogg" type="audio/ogg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <!-- Control de música -->
+    <div id="musicControl" class="music-control">
+        <button id="musicToggle" onclick="toggleMusic()" title="Reproducir/Pausar música">
+            <span id="musicIcon">🎵</span>
+        </button>
+    </div>
+
     <!-- Botón scroll to top (solo móvil) -->
     <button class="scroll-to-top" id="scrollToTop" aria-label="Subir al inicio"></button>
 </body>
