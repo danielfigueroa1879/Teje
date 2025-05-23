@@ -58,12 +58,49 @@ header {
     text-align: center;
     padding: 10px 0;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.logo-image {
+    height: 40px;
+    width: auto;
+    margin-right: 12px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.logo-image:hover {
+    transform: scale(1.1);
+}
+
+.logo-emoji {
+    font-size: 35px;
+    margin-right: 12px;
+    display: none; /* Se muestra solo si falla la imagen */
+    animation: wag 2s infinite;
+}
+
+@keyframes wag {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
 }
 
 .logo h1 {
     font-size: 2.5rem;
     font-weight: 500;
     color: var(--dark-gray); /* Cambiado a oscuro para mejor contraste con fondo claro */
+    margin: 0;
 }
 
 /* Navegación principal */
@@ -744,6 +781,16 @@ footer {
         font-size: 2.2rem; /* Título más grande */
         font-weight: 700; /* Más negrilla */
     }
+    
+    .logo-image {
+        height: 35px;
+        margin-right: 10px;
+    }
+    
+    .logo-emoji {
+        font-size: 30px;
+        margin-right: 10px;
+    }
 
     .mobile-menu-btn {
         display: block;
@@ -841,6 +888,16 @@ footer {
     .logo h1 {
         font-size: 2rem; /* Título más grande para pantallas muy pequeñas */
         font-weight: 700; /* Mantener negrilla */
+    }
+    
+    .logo-image {
+        height: 32px;
+        margin-right: 8px;
+    }
+    
+    .logo-emoji {
+        font-size: 28px;
+        margin-right: 8px;
     }
 
     .hero h2 {
