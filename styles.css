@@ -1456,17 +1456,19 @@ footer {
 .ballet-dancer:hover {
     animation-play-state: paused;
 }
-/* Agrega o modifica esto en tu archivo styles.css */
+
+
+/* Modifica esto en tu archivo styles.css */
 
 @keyframes pendulumSwing {
     0% {
-        transform: rotateZ(-5deg); /* Inicia ligeramente inclinado a la izquierda */
+        transform: rotateZ(-12deg); /* Aumentamos la inclinación inicial (antes era -5deg) */
     }
     50% {
-        transform: rotateZ(5deg); /* Oscila ligeramente a la derecha */
+        transform: rotateZ(12deg); /* Aumentamos la inclinación al otro lado (antes era 5deg) */
     }
     100% {
-        transform: rotateZ(-5deg); /* Vuelve a la posición inicial, completando el ciclo */
+        transform: rotateZ(-12deg); /* Vuelve a la posición inicial */
     }
 }
 
@@ -1479,9 +1481,8 @@ footer {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease; /* Mantén esto para el efecto hover */
 
-    /* Agrega o modifica estas propiedades para el movimiento de manecilla */
-    transform-origin: top center; /* PUNTO CLAVE: Rota desde la parte superior central de la imagen */
-    animation: pendulumSwing 4s infinite alternate ease-in-out; /* 4 segundos, alterna dirección, suave */
+    transform-origin: top center; /* Sigue rotando desde la parte superior central */
+    animation: pendulumSwing 3s infinite alternate ease-in-out; /* Velocidad ajustada a 3s (antes 4s) */
 }
 
 .logo-image:hover {
