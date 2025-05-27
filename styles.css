@@ -1456,14 +1456,18 @@ footer {
 .ballet-dancer:hover {
     animation-play-state: paused;
 }
-/* Agrega esto a tu archivo styles.css */
+/* Agrega o modifica esto en tu archivo styles.css */
 
-@keyframes quarterTurn {
-    0% { transform: rotateY(0deg); } /* Empieza sin giro */
-    25% { transform: rotateY(90deg); } /* Gira 90 grados en el eje Y (cuarto de giro) */
-    50% { transform: rotateY(0deg); } /* Vuelve a la posición original */
-    75% { transform: rotateY(-90deg); } /* Gira 90 grados en la dirección opuesta */
-    100% { transform: rotateY(0deg); } /* Vuelve a la posición original */
+@keyframes pendulumSwing {
+    0% {
+        transform: rotateZ(-5deg); /* Inicia ligeramente inclinado a la izquierda */
+    }
+    50% {
+        transform: rotateZ(5deg); /* Oscila ligeramente a la derecha */
+    }
+    100% {
+        transform: rotateZ(-5deg); /* Vuelve a la posición inicial, completando el ciclo */
+    }
 }
 
 .logo-image {
@@ -1475,11 +1479,12 @@ footer {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease; /* Mantén esto para el efecto hover */
 
-    /* Agrega las propiedades de animación para el cuarto de giro */
-    animation: quarterTurn 8s infinite ease-in-out; /* 8 segundos, se repite para siempre, con aceleración/desaceleración suave */
+    /* Agrega o modifica estas propiedades para el movimiento de manecilla */
+    transform-origin: top center; /* PUNTO CLAVE: Rota desde la parte superior central de la imagen */
+    animation: pendulumSwing 4s infinite alternate ease-in-out; /* 4 segundos, alterna dirección, suave */
 }
 
 .logo-image:hover {
     transform: scale(1.1); /* Esto anulará la animación mientras se pasa el ratón */
-    animation-play-state: paused; /* Pausa la animación de giro al pasar el ratón */
+    animation-play-state: paused; /* Pausa la animación al pasar el ratón */
 }
