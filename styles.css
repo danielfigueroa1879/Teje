@@ -71,7 +71,7 @@ header {
 }
 
 .logo-image {
-    height: 50px; /* Aumentado de 40px a 50px para PC */
+    height: 40px;
     width: auto;
     margin-right: 12px;
     border-radius: 50%;
@@ -84,18 +84,10 @@ header {
 }
 
 .logo-emoji {
-    font-size: 45px; /* Aumentado de 35px a 45px para PC */
-    margin-right: 8px;
+    font-size: 35px;
+    margin-right: 12px;
     display: none; /* Se muestra solo si falla la imagen */
     animation: wag 2s infinite;
-}
-
-.ballerina-emoji {
-    font-size: 40px;
-    margin-left: 8px;
-    display: inline-block;
-    animation: spin 3s linear infinite;
-    transform-origin: center;
 }
 
 @keyframes wag {
@@ -103,10 +95,6 @@ header {
     25% { transform: rotate(-10deg); }
     75% { transform: rotate(10deg); }
 }
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
 
 .logo h1 {
     font-size: 2.5rem;
@@ -801,12 +789,7 @@ footer {
     
     .logo-emoji {
         font-size: 30px;
-        margin-right: 8px;
-    }
-    
-    .ballerina-emoji {
-        font-size: 28px;
-        margin-left: 6px;
+        margin-right: 10px;
     }
 
     .mobile-menu-btn {
@@ -915,11 +898,6 @@ footer {
     .logo-emoji {
         font-size: 28px;
         margin-right: 8px;
-    }
-    
-    .ballerina-emoji {
-        font-size: 25px;
-        margin-left: 5px;
     }
 
     .hero h2 {
