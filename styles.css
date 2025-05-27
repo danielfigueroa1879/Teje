@@ -1456,3 +1456,30 @@ footer {
 .ballet-dancer:hover {
     animation-play-state: paused;
 }
+/* Agrega esto a tu archivo styles.css */
+
+@keyframes quarterTurn {
+    0% { transform: rotateY(0deg); } /* Empieza sin giro */
+    25% { transform: rotateY(90deg); } /* Gira 90 grados en el eje Y (cuarto de giro) */
+    50% { transform: rotateY(0deg); } /* Vuelve a la posición original */
+    75% { transform: rotateY(-90deg); } /* Gira 90 grados en la dirección opuesta */
+    100% { transform: rotateY(0deg); } /* Vuelve a la posición original */
+}
+
+.logo-image {
+    /* Mantén tus estilos existentes para .logo-image */
+    height: 40px;
+    width: auto;
+    margin-right: 12px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease; /* Mantén esto para el efecto hover */
+
+    /* Agrega las propiedades de animación para el cuarto de giro */
+    animation: quarterTurn 8s infinite ease-in-out; /* 8 segundos, se repite para siempre, con aceleración/desaceleración suave */
+}
+
+.logo-image:hover {
+    transform: scale(1.1); /* Esto anulará la animación mientras se pasa el ratón */
+    animation-play-state: paused; /* Pausa la animación de giro al pasar el ratón */
+}
