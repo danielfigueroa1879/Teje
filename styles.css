@@ -1589,26 +1589,27 @@ footer {
     transform: scale(1.1); /* Esto anulará la animación mientras se pasa el ratón */
     animation-play-state: paused; /* Pausa la animación al pasar el ratón */
 }
-/* Control de música - FORZAR LADO DERECHO EN PC */
+/* Control de música - CENTRO DERECHA EN PC */
 .music-control {
     position: fixed !important;
     bottom: 80px !important;
-    right: 20px !important; /* LADO DERECHO */
-    left: auto !important;   /* IMPORTANTE: Eliminar cualquier left */
+    /* CAMBIO PRINCIPAL: En lugar de right: 20px, usar right: 45% para estar casi en el centro hacia la derecha */
+    right: 45% !important;
+    left: auto !important;
     z-index: 9999 !important;
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
-    /* Eliminar cualquier transform que pueda moverlo */
     transform: none !important;
     translate: none !important;
-    /* Asegurar que no haya margin/padding que lo desplace */
     margin: 0 !important;
     padding: 0 !important;
-    /* Eliminar cualquier flexbox o grid que pueda afectar */
+    /* Eliminar cualquier interferencia */
     flex: none !important;
     grid-area: none !important;
     float: none !important;
+    width: auto !important;
+    height: auto !important;
 }
 
 .music-control button {
@@ -1626,13 +1627,11 @@ footer {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    /* Asegurar posición relativa dentro del contenedor */
     position: relative !important;
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
     bottom: 0 !important;
-    /* Eliminar cualquier desplazamiento */
     transform: none !important;
     translate: none !important;
     margin: 0 !important;
@@ -1655,25 +1654,25 @@ footer {
     100% { box-shadow: 0 0 0 0 rgba(255, 115, 185, 0) !important; }
 }
 
-/* ESPECÍFICO PARA PC - MUY IMPORTANTE */
+/* ESPECÍFICO PARA PC - CENTRO DERECHA */
 @media (min-width: 769px) {
     .music-control {
         position: fixed !important;
         bottom: 80px !important;
-        right: 20px !important;     /* DERECHA */
-        left: auto !important;      /* NO IZQUIERDA */
-        top: auto !important;       /* NO ARRIBA */
-        transform: none !important; /* SIN TRANSFORMACIONES */
-        translate: none !important; /* SIN TRANSLATE */
+        right: 45% !important;      /* CENTRO DERECHA - casi a la mitad */
+        left: auto !important;
+        top: auto !important;
+        transform: none !important;
+        translate: none !important;
     }
 }
 
-/* Móvil - mantener como estaba */
+/* Móvil - mantener en el borde derecho */
 @media (max-width: 768px) {
     .music-control {
         bottom: 80px !important;
-        right: 15px !important;     /* DERECHA EN MÓVIL TAMBIÉN */
-        left: auto !important;      /* NO IZQUIERDA */
+        right: 15px !important;     /* En móvil sí va al borde */
+        left: auto !important;
     }
     
     .music-control button {
@@ -1683,13 +1682,14 @@ footer {
     }
 }
 
-/* OVERRIDE CUALQUIER OTRO CSS QUE PUEDA INTERFERIR */
+/* OVERRIDE TOTAL - ELIMINAR CUALQUIER CONFLICTO */
 #musicControl,
 .music-control,
-div[id="musicControl"] {
+div[id="musicControl"],
+*[id="musicControl"] {
     position: fixed !important;
     bottom: 80px !important;
-    right: 20px !important;
+    right: 45% !important;      /* CENTRO DERECHA */
     left: auto !important;
     top: auto !important;
     transform: none !important;
@@ -1698,20 +1698,33 @@ div[id="musicControl"] {
     padding: 0 !important;
 }
 
-/* Si hay conflictos con Flexbox o Grid del body/main */
-body, main, .container {
-    /* Asegurar que no afecten al botón fijo */
+/* Override específico para PC */
+@media (min-width: 769px) {
+    #musicControl,
+    .music-control,
+    div[id="musicControl"] {
+        right: 45% !important;  /* CONFIRMAR CENTRO DERECHA EN PC */
+        left: auto !important;
+    }
 }
 
-/* Debug temporal - línea roja alrededor del botón */
+/* Debug temporal - línea roja MÁS VISIBLE */
 .music-control {
-    outline: 2px dashed red !important;
-    outline-offset: 2px !important;
+    outline: 3px solid red !important;
+    outline-offset: 3px !important;
+    background: rgba(255, 0, 0, 0.1) !important; /* Fondo rojo semi-transparente para debug */
 }
 
-/* Eliminar la línea de debug después de confirmar posición */
-/* 
+.music-control button {
+    outline: 2px solid blue !important; /* Borde azul en el botón para debug */
+}
+
+/* ELIMINAR DESPUÉS DE VERIFICAR POSICIÓN:
 .music-control {
+    outline: none !important;
+    background: none !important;
+}
+.music-control button {
     outline: none !important;
 }
 */
