@@ -1,16 +1,24 @@
-// Script súper optimizado para carga instantánea de imagen - ADAPTADO para Fotos/su.jpg
+// Script súper optimizado para carga instantánea de imagen - CORREGIDO
 document.addEventListener('DOMContentLoaded', function() {
+    // Evitar múltiples inicializaciones
+    if (window.tejidosLunaInitialized) {
+        return;
+    }
+    window.tejidosLunaInitialized = true;
+
+    console.log('🧶 Tejidos Luna cargado correctamente');
+    
     // Carga agresiva e inmediata de la imagen hero
     function forceLoadHeroImage() {
         // Crear múltiples instancias para asegurar carga
         for (let i = 0; i < 3; i++) {
             const img = new Image();
-            img.src = 'Fotos/su.jpg'; // CAMBIO AQUÍ: Nueva ruta
+            img.src = 'Fotos/su.jpg';
             img.onload = function() {
                 // Aplicar imagen inmediatamente al elemento hero
                 const hero = document.querySelector('.hero');
                 if (hero) {
-                    hero.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Fotos/su.jpg')"; // CAMBIO AQUÍ
+                    hero.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Fotos/su.jpg')";
                     hero.style.backgroundSize = 'cover';
                     hero.style.backgroundPosition = 'center center';
                 }
@@ -20,32 +28,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Función para cargar imágenes de productos - SIMPLIFICADA
-    function forceLoadProductImages() {
-        const productImages = [
-            'Fotos/trajeBebe.jpeg',
-            'Fotos/trajeBebe1.jpeg', 
-            'Fotos/trajeBebe2.jpeg'
-        ];
-        
-        // Solo precargar las imágenes sin manipular el DOM
-        productImages.forEach((src, index) => {
-            const img = new Image();
-            img.onload = function() {
-                console.log('Imagen cargada:', src);
-            };
-            img.onerror = function() {
-                console.error('Error cargando imagen:', src);
-            };
-            img.src = src;
-            // Mantener referencia global
-            window['productImg' + index] = img;
-        });
-    }
-    
     // Ejecutar inmediatamente
     forceLoadHeroImage();
-    // forceLoadProductImages(); // Comentado para evitar interferencia
     
     // Para móviles: técnicas adicionales de optimización
     if (window.innerWidth <= 768) {
@@ -60,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Mantener canvas en memoria
             window.heroCanvas = canvas;
         };
-        tempImg.src = 'Fotos/su.jpg'; // CAMBIO AQUÍ: Nueva ruta
+        tempImg.src = 'Fotos/su.jpg';
         
         // Forzar repaint del hero cada 100ms por 1 segundo
         let attempts = 0;
@@ -75,189 +59,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 100);
     }
     
-    // Resto del código del menú
-    var menuButton = document.getElementById('menuToggle');
-    var mainMenu = document.getElementById('mainMenu');
-    
-    if (menuButton && mainMenu) {
-        // Evento para mostrar/ocultar el menú móvil cuando se hace clic en el botón
-        menuButton.addEventListener('click', function(e) {
-            e.preventDefault(); // Prevenir comportamiento predeterminado
-            mainMenu.classList.toggle('show');
-            
-            // Cambiar el ícono del botón
-            this.innerHTML = mainMenu.classList.contains('show') ? '✕' : '☰';
-        });
-        
-        // Evento para cerrar el menú al hacer clic en un enlace y hacer scroll suave
-        var links = mainMenu.getElementsByTagName('a');
-        
-        for (var i = 0; i < links.length; i++) {
-            links[i].addEventListener('click', function(e) {
-                // Verificar si el enlace es interno
-                var href = this.getAttribute('href');
-                if (href.charAt(0) === '#') {
-                    e.preventDefault(); // Prevenir navegación estándar
-                    
-                    var targetElement = document.querySelector(href);
-                    if (targetElement) {
-                        // Cerrar el menú
-                        mainMenu.classList.remove('show');
-                        menuButton.innerHTML = '☰';
-                        
-                        // Desplazamiento suave hacia la sección
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80, // Ajuste para el encabezado fijo
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-                else {
-                    // Cerrar el menú para enlaces externos
-                    mainMenu.classList.remove('show');
-                    menuButton.innerHTML = '☰';
-                }
-            });
-        }
-        
-        // Cerrar el menú al hacer clic fuera de él
-        document.addEventListener('click', function(e) {
-            if (!menuButton.contains(e.target) && !mainMenu.contains(e.target)) {
-                if (mainMenu.classList.contains('show')) {
-                    mainMenu.classList.remove('show');
-                    menuButton.innerHTML = '☰';
-                }
-            }
-        });
-    } else {
-        console.error('Menú móvil: No se encontraron los elementos necesarios.');
-    }
-    
-    // Funcionalidad de desplazamiento suave para todos los enlaces internos (no solo móvil)
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            var href = this.getAttribute('href');
-            if (href !== '#') { // Evitar enlaces "#" vacíos
-                e.preventDefault();
-                
-                var targetElement = document.querySelector(href);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80, // Ajuste para el encabezado fijo
-                        behavior: 'smooth'
-                    });
-                }
-            }
-        });
-    });
-
-    // Funcionalidad del botón scroll to top (solo móvil)
-    var scrollToTopBtn = document.getElementById('scrollToTop');
-    var timeoutId = null;
-    var isMobile = window.innerWidth <= 768;
-    
-    if (scrollToTopBtn && isMobile) {
-        // Mostrar/ocultar el botón basado en el scroll
-        window.addEventListener('scroll', function() {
-            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (scrollTop > 300) { // Mostrar después de 300px de scroll
-                if (!scrollToTopBtn.classList.contains('show')) {
-                    scrollToTopBtn.classList.remove('hide');
-                    scrollToTopBtn.classList.add('show');
-                }
-                
-                // Limpiar timeout anterior si existe
-                if (timeoutId) {
-                    clearTimeout(timeoutId);
-                }
-                
-                // Auto-ocultar después de 5 segundos de inactividad
-                timeoutId = setTimeout(function() {
-                    if (scrollToTopBtn.classList.contains('show')) {
-                        scrollToTopBtn.classList.remove('show');
-                        scrollToTopBtn.classList.add('hide');
-                        
-                        // Esperar a que termine la animación antes de ocultar completamente
-                        setTimeout(function() {
-                            scrollToTopBtn.classList.remove('hide');
-                        }, 300);
-                    }
-                }, 5000);
-                
-            } else {
-                // Ocultar cuando esté cerca del top
-                if (scrollToTopBtn.classList.contains('show')) {
-                    scrollToTopBtn.classList.remove('show');
-                    scrollToTopBtn.classList.add('hide');
-                    
-                    setTimeout(function() {
-                        scrollToTopBtn.classList.remove('hide');
-                    }, 300);
-                }
-                
-                // Limpiar timeout
-                if (timeoutId) {
-                    clearTimeout(timeoutId);
-                    timeoutId = null;
-                }
-            }
-        });
-        
-        // Acción al hacer clic en el botón
-        scrollToTopBtn.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-        
-        // Mostrar el botón inmediatamente al llegar al final de la página
-        window.addEventListener('scroll', function() {
-            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
-                if (!scrollToTopBtn.classList.contains('show')) {
-                    scrollToTopBtn.classList.remove('hide');
-                    scrollToTopBtn.classList.add('show');
-                }
-                
-                // Limpiar timeout anterior
-                if (timeoutId) {
-                    clearTimeout(timeoutId);
-                }
-                
-                // Auto-ocultar después de 5 segundos
-                timeoutId = setTimeout(function() {
-                    if (scrollToTopBtn.classList.contains('show')) {
-                        scrollToTopBtn.classList.remove('show');
-                        scrollToTopBtn.classList.add('hide');
-                        
-                        setTimeout(function() {
-                            scrollToTopBtn.classList.remove('hide');
-                        }, 300);
-                    }
-                }, 5000);
-            }
-        });
-    }
-    
-    // Actualizar año actual en el copyright si existe el elemento
-    var currentYearElement = document.getElementById('current-year');
-    if (currentYearElement) {
-        currentYearElement.textContent = new Date().getFullYear();
-    }
-
     // Funcionalidad de música de fondo - CORREGIDA
     const backgroundMusic = document.getElementById('backgroundMusic');
     const musicToggle = document.getElementById('musicToggle');
     const musicIcon = document.getElementById('musicIcon');
     let musicIsPlaying = false;
     let musicStarted = false;
+    let musicInitialized = false;
 
-    // Función simple para iniciar música
+    // Función para iniciar música - SOLO UNA VEZ
     function startMusic() {
-        if (!backgroundMusic || musicStarted) return;
+        if (!backgroundMusic || musicStarted || musicInitialized) return;
         
+        musicInitialized = true;
         backgroundMusic.volume = 0.3;
+        
         const playPromise = backgroundMusic.play();
         
         if (playPromise !== undefined) {
@@ -265,10 +81,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 musicIsPlaying = true;
                 musicStarted = true;
                 updateMusicButton();
-                console.log('🎵 Música iniciada');
+                console.log('🎵 Música iniciada correctamente');
                 removeAllInteractionListeners();
-            }).catch(() => {
-                console.log('Autoplay bloqueado - esperando interacción');
+            }).catch((error) => {
+                console.log('⚠️ Autoplay bloqueado - esperando interacción del usuario');
+                musicInitialized = false;
             });
         }
     }
@@ -278,7 +95,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!backgroundMusic) return;
         
         if (!musicStarted) {
-            // Primera vez - intentar iniciar
             startMusic();
             return;
         }
@@ -287,6 +103,8 @@ document.addEventListener('DOMContentLoaded', function() {
             backgroundMusic.play().then(() => {
                 musicIsPlaying = true;
                 updateMusicButton();
+            }).catch(() => {
+                console.log('Error al reproducir música');
             });
         } else {
             backgroundMusic.pause();
@@ -309,25 +127,36 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Event listeners del audio
+    // Event listeners del audio - SOLO SI EXISTEN
     if (backgroundMusic) {
-        backgroundMusic.addEventListener('play', () => {
+        // Remover listeners anteriores si existen
+        backgroundMusic.removeEventListener('play', handleMusicPlay);
+        backgroundMusic.removeEventListener('pause', handleMusicPause);
+        
+        function handleMusicPlay() {
             musicIsPlaying = true;
             updateMusicButton();
-        });
-
-        backgroundMusic.addEventListener('pause', () => {
+        }
+        
+        function handleMusicPause() {
             musicIsPlaying = false;
             updateMusicButton();
-        });
+        }
+        
+        backgroundMusic.addEventListener('play', handleMusicPlay);
+        backgroundMusic.addEventListener('pause', handleMusicPause);
     }
 
-    // Función para manejar interacciones
+    // Función para manejar interacciones - CORREGIDA
     function handleInteraction(e) {
-        // No interferir con otras funcionalidades
-        if (musicStarted) return;
+        if (musicStarted || musicInitialized) return;
         
-        // No iniciar música si el usuario está interactuando con controles específicos
+        // CORRECCIÓN: Verificar que e.target existe y tiene el método closest
+        if (!e || !e.target || typeof e.target.closest !== 'function') {
+            return;
+        }
+        
+        // No interferir con controles específicos
         if (e.target.closest('.modal-nav') || 
             e.target.closest('.modal-controls') || 
             e.target.closest('#musicToggle') ||
@@ -346,67 +175,171 @@ document.addEventListener('DOMContentLoaded', function() {
         document.removeEventListener('mousemove', handleInteraction, true);
     }
 
-    // Intentar iniciar música inmediatamente
-    setTimeout(startMusic, 800);
+    // Intentar iniciar música después de un delay
+    setTimeout(() => {
+        if (!musicInitialized) {
+            startMusic();
+        }
+    }, 1000);
 
-    // Agregar listeners para interacciones (usando capture para ejecutar antes)
-    document.addEventListener('click', handleInteraction, true);
-    document.addEventListener('keydown', handleInteraction, true);
-    document.addEventListener('touchstart', handleInteraction, { passive: true, capture: true });
-    document.addEventListener('scroll', handleInteraction, { passive: true, capture: true });
-    document.addEventListener('mousemove', handleInteraction, { passive: true, capture: true });
-    
-    // Validación básica del formulario de newsletter en el footer
-    var newsletterForm = document.querySelector('.newsletter-form');
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            let valid = true;
-            const emailField = this.querySelector('input[type="email"]');
+    // Agregar listeners para interacciones - SOLO UNA VEZ
+    if (!window.interactionListenersAdded) {
+        window.interactionListenersAdded = true;
+        
+        document.addEventListener('click', handleInteraction, { capture: true, once: false });
+        document.addEventListener('keydown', handleInteraction, { capture: true, once: false });
+        document.addEventListener('touchstart', handleInteraction, { passive: true, capture: true, once: false });
+        document.addEventListener('scroll', handleInteraction, { passive: true, capture: true, once: false });
+        document.addEventListener('mousemove', handleInteraction, { passive: true, capture: true, once: false });
+    }
+
+    // Resto del código del menú (solo si no se ha inicializado)
+    if (!window.menuInitialized) {
+        window.menuInitialized = true;
+        
+        var menuButton = document.getElementById('menuToggle');
+        var mainMenu = document.getElementById('mainMenu');
+        
+        if (menuButton && mainMenu) {
+            menuButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                mainMenu.classList.toggle('show');
+                this.innerHTML = mainMenu.classList.contains('show') ? '✕' : '☰';
+            });
             
-            if (!emailField.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value)) {
-                emailField.classList.add('error');
-                valid = false;
-            } else {
-                emailField.classList.remove('error');
+            // Cerrar menú al hacer clic en enlaces
+            var links = mainMenu.getElementsByTagName('a');
+            for (var i = 0; i < links.length; i++) {
+                links[i].addEventListener('click', function(e) {
+                    var href = this.getAttribute('href');
+                    if (href.charAt(0) === '#') {
+                        e.preventDefault();
+                        var targetElement = document.querySelector(href);
+                        if (targetElement) {
+                            mainMenu.classList.remove('show');
+                            menuButton.innerHTML = '☰';
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    } else {
+                        mainMenu.classList.remove('show');
+                        menuButton.innerHTML = '☰';
+                    }
+                });
             }
             
-            if (valid) {
-                alert('¡Gracias por suscribirte a nuestra newsletter!');
-                this.reset();
-            } else {
-                alert('Por favor, ingresa un correo electrónico válido.');
-            }
+            // Cerrar menú al hacer clic fuera
+            document.addEventListener('click', function(e) {
+                if (!menuButton.contains(e.target) && !mainMenu.contains(e.target)) {
+                    if (mainMenu.classList.contains('show')) {
+                        mainMenu.classList.remove('show');
+                        menuButton.innerHTML = '☰';
+                    }
+                }
+            });
+        }
+    }
+
+    // Scroll suave para enlaces internos
+    if (!window.smoothScrollInitialized) {
+        window.smoothScrollInitialized = true;
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                var href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    var targetElement = document.querySelector(href);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
         });
     }
 
-    // Funciones para el modal de imágenes avanzado
+    // Botón scroll to top (solo móvil)
+    var scrollToTopBtn = document.getElementById('scrollToTop');
+    var isMobile = window.innerWidth <= 768;
+    
+    if (scrollToTopBtn && isMobile && !window.scrollToTopInitialized) {
+        window.scrollToTopInitialized = true;
+        
+        var timeoutId = null;
+        
+        function handleScroll() {
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 300) {
+                if (!scrollToTopBtn.classList.contains('show')) {
+                    scrollToTopBtn.classList.remove('hide');
+                    scrollToTopBtn.classList.add('show');
+                }
+                
+                if (timeoutId) clearTimeout(timeoutId);
+                
+                timeoutId = setTimeout(function() {
+                    if (scrollToTopBtn.classList.contains('show')) {
+                        scrollToTopBtn.classList.remove('show');
+                        scrollToTopBtn.classList.add('hide');
+                        setTimeout(() => scrollToTopBtn.classList.remove('hide'), 300);
+                    }
+                }, 5000);
+            } else {
+                if (scrollToTopBtn.classList.contains('show')) {
+                    scrollToTopBtn.classList.remove('show');
+                    scrollToTopBtn.classList.add('hide');
+                    setTimeout(() => scrollToTopBtn.classList.remove('hide'), 300);
+                }
+                if (timeoutId) {
+                    clearTimeout(timeoutId);
+                    timeoutId = null;
+                }
+            }
+        }
+        
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // Actualizar año del copyright
+    var currentYearElement = document.getElementById('current-year');
+    if (currentYearElement) {
+        currentYearElement.textContent = new Date().getFullYear();
+    }
+
+    // Funciones del modal (definir globalmente)
     let currentZoom = 1;
     let currentImageIndex = 0;
     let allImages = [];
 
-    // Recopilar todas las imágenes clickeables al cargar la página
     function collectAllImages() {
         allImages = [];
-        // Imágenes de productos
         const productImages = document.querySelectorAll('.product-image img[onclick]');
-        productImages.forEach(img => allImages.push(img));
-        
-        // Imágenes de la sección destacada
         const featuredImages = document.querySelectorAll('.featured-image img[onclick]');
-        featuredImages.forEach(img => allImages.push(img));
-        
-        // Imágenes del blog
         const blogImages = document.querySelectorAll('.blog-image img[onclick]');
+        
+        productImages.forEach(img => allImages.push(img));
+        featuredImages.forEach(img => allImages.push(img));
         blogImages.forEach(img => allImages.push(img));
     }
 
+    // Definir funciones globales del modal
     window.openModal = function(img) {
-        collectAllImages(); // Actualizar lista de imágenes
+        collectAllImages();
         const modal = document.getElementById('imageModal');
         const modalImg = document.getElementById('modalImage');
         
-        // Encontrar el índice de la imagen actual
+        if (!modal || !modalImg) return;
+        
         currentImageIndex = allImages.findIndex(image => image.src === img.src);
         if (currentImageIndex === -1) currentImageIndex = 0;
         
@@ -417,34 +350,29 @@ document.addEventListener('DOMContentLoaded', function() {
         currentZoom = 1;
         modalImg.style.transform = `scale(${currentZoom})`;
         
-        // Actualizar contador
         updateImageCounter();
-        
-        // Prevenir scroll del body cuando el modal está abierto
         document.body.style.overflow = 'hidden';
     };
 
     window.closeModal = function() {
         const modal = document.getElementById('imageModal');
-        modal.classList.remove('show');
-        setTimeout(() => {
-            modal.style.display = 'none';
-        }, 300);
+        if (!modal) return;
         
-        // Restaurar scroll del body
+        modal.classList.remove('show');
+        setTimeout(() => modal.style.display = 'none', 300);
         document.body.style.overflow = 'auto';
         currentZoom = 1;
     };
 
     window.nextImage = function(e) {
-        if (e) e.stopPropagation(); // Prevenir que se cierre el modal
+        if (e) e.stopPropagation();
         if (allImages.length === 0) return;
         currentImageIndex = (currentImageIndex + 1) % allImages.length;
         showCurrentImage();
     };
 
     window.prevImage = function(e) {
-        if (e) e.stopPropagation(); // Prevenir que se cierre el modal
+        if (e) e.stopPropagation();
         if (allImages.length === 0) return;
         currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
         showCurrentImage();
@@ -452,6 +380,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function showCurrentImage() {
         const modalImg = document.getElementById('modalImage');
+        if (!modalImg || !allImages[currentImageIndex]) return;
+        
         const currentImg = allImages[currentImageIndex];
         modalImg.src = currentImg.src;
         modalImg.alt = currentImg.alt;
@@ -471,73 +401,59 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.zoomIn = function() {
         const modalImg = document.getElementById('modalImage');
+        if (!modalImg) return;
         currentZoom += 0.2;
-        if (currentZoom > 4) currentZoom = 4; // Máximo zoom aumentado
+        if (currentZoom > 4) currentZoom = 4;
         modalImg.style.transform = `scale(${currentZoom})`;
     };
 
     window.zoomOut = function() {
         const modalImg = document.getElementById('modalImage');
+        if (!modalImg) return;
         currentZoom -= 0.2;
-        if (currentZoom < 0.3) currentZoom = 0.3; // Mínimo zoom
+        if (currentZoom < 0.3) currentZoom = 0.3;
         modalImg.style.transform = `scale(${currentZoom})`;
     };
 
     window.resetZoom = function() {
         const modalImg = document.getElementById('modalImage');
+        if (!modalImg) return;
         currentZoom = 1;
         modalImg.style.transform = `scale(${currentZoom})`;
     };
 
-    // Zoom con scroll del mouse
-    function handleMouseWheel(e) {
-        if (!document.getElementById('imageModal').classList.contains('show')) return;
+    // Event listeners para el modal - SOLO UNA VEZ
+    if (!window.modalListenersAdded) {
+        window.modalListenersAdded = true;
         
-        e.preventDefault();
-        const modalImg = document.getElementById('modalImage');
-        
-        if (e.deltaY < 0) {
-            // Scroll hacia arriba - zoom in
-            currentZoom += 0.1;
-            if (currentZoom > 4) currentZoom = 4;
-        } else {
-            // Scroll hacia abajo - zoom out
-            currentZoom -= 0.1;
-            if (currentZoom < 0.3) currentZoom = 0.3;
-        }
-        
-        modalImg.style.transform = `scale(${currentZoom})`;
+        // Cerrar con Escape, navegación con flechas
+        document.addEventListener('keydown', function(e) {
+            const modal = document.getElementById('imageModal');
+            if (!modal || !modal.classList.contains('show')) return;
+            
+            switch(e.key) {
+                case 'Escape': window.closeModal(); break;
+                case 'ArrowLeft': window.prevImage(); break;
+                case 'ArrowRight': window.nextImage(); break;
+                case '+': case '=': window.zoomIn(); break;
+                case '-': window.zoomOut(); break;
+                case '0': window.resetZoom(); break;
+            }
+        });
+
+        // Zoom con scroll del mouse
+        document.addEventListener('wheel', function(e) {
+            const modal = document.getElementById('imageModal');
+            if (!modal || !modal.classList.contains('show')) return;
+            
+            e.preventDefault();
+            if (e.deltaY < 0) {
+                window.zoomIn();
+            } else {
+                window.zoomOut();
+            }
+        }, { passive: false });
     }
-
-    // Event listeners mejorados
-    document.addEventListener('wheel', handleMouseWheel, { passive: false });
-
-    // Cerrar modal con tecla Escape, navegación con flechas
-    document.addEventListener('keydown', function(e) {
-        if (!document.getElementById('imageModal').classList.contains('show')) return;
-        
-        switch(e.key) {
-            case 'Escape':
-                closeModal();
-                break;
-            case 'ArrowLeft':
-                prevImage();
-                break;
-            case 'ArrowRight':
-                nextImage();
-                break;
-            case '+':
-            case '=':
-                zoomIn();
-                break;
-            case '-':
-                zoomOut();
-                break;
-            case '0':
-                resetZoom();
-                break;
-        }
-    });
 
     // Event listeners para el modal
     const modal = document.getElementById('imageModal');
@@ -545,7 +461,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Cerrar modal solo cuando se hace clic en el fondo
         modal.addEventListener('click', function(e) {
             if (e.target === modal) {
-                closeModal();
+                window.closeModal();
             }
         });
         
@@ -576,15 +492,41 @@ document.addEventListener('DOMContentLoaded', function() {
         if (prevBtn) {
             prevBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
-                prevImage();
+                window.prevImage();
             });
         }
         
         if (nextBtn) {
             nextBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
-                nextImage();
+                window.nextImage();
             });
         }
     }
+
+    // Validación básica del formulario de newsletter en el footer
+    var newsletterForm = document.querySelector('.newsletter-form');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            let valid = true;
+            const emailField = this.querySelector('input[type="email"]');
+            
+            if (!emailField.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value)) {
+                emailField.classList.add('error');
+                valid = false;
+            } else {
+                emailField.classList.remove('error');
+            }
+            
+            if (valid) {
+                alert('¡Gracias por suscribirte a nuestra newsletter!');
+                this.reset();
+            } else {
+                alert('Por favor, ingresa un correo electrónico válido.');
+            }
+        });
+    }
+
+    console.log('✅ Tejidos Luna inicializado correctamente');
 });
