@@ -942,16 +942,16 @@ footer {
 }
 
 /* Control de música */
-/* Control de música - SOLUCIONADO */
+/* Control de música - POSICIÓN CORREGIDA PARA PC Y MÓVIL */
 .music-control {
     position: fixed;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    z-index: 9999; /* Z-index alto para estar por encima de todo */
+    bottom: 80px; /* IGUAL POSICIÓN PARA PC y MÓVIL - 3/4 hacia abajo */
+    right: 20px;  /* LADO DERECHO EN PC */
+    z-index: 9999;
     display: block;
     visibility: visible;
     opacity: 1;
+    /* QUITAR top: 50% y transform: translateY(-50%) */
 }
 
 .music-control button {
@@ -990,10 +990,8 @@ footer {
 /* Responsive para control de música */
 @media (max-width: 768px) {
     .music-control {
-        top: auto;
-        bottom: 80px;
-        right: 15px;
-        transform: none;
+        bottom: 80px; /* MISMA POSICIÓN QUE PC */
+        right: 15px;  /* SOLO CAMBIA EL MARGEN DERECHO */
     }
     
     .music-control button {
@@ -1002,7 +1000,6 @@ footer {
         font-size: 18px;
     }
 }
-
     
 
 /* Botón de subir arriba (solo móvil) */
