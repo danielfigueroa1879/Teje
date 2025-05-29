@@ -779,7 +779,7 @@ footer {
 @media (max-width: 768px) {
     /* Header más angosto en móvil */
     header {
-        padding: 5px 0 !important; /* MENOS PADDING VERTICAL */
+        padding: 4px 0 !important; /* MENOS PADDING VERTICAL */
     }
 
 
