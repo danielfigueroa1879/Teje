@@ -942,23 +942,21 @@ footer {
 }
 
 /* Control de música */
-/* Control de música - POSICIÓN CORREGIDA PARA PC Y MÓVIL */
+/* Control de música */
 .music-control {
     position: fixed;
-    bottom: 80px; /* 4 pulgas desde abajo (aproximadamente 80px) */
-    right: 20px;  /* LADO DERECHO tanto en PC como en móvil */
-    z-index: 9999;
-    display: block;
-    visibility: visible;
-    opacity: 1;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    z-index: 1500;
 }
 
 .music-control button {
     width: 50px;
     height: 50px;
-    border-radius: 50%; /* Completamente redondo */
-    background-color: rgba(250, 228, 212, 0.9); /* Color melocotón con transparencia */
-    border: 2px solid var(--primary-color); /* Borde rosa */
+    border-radius: 50%;
+    background-color: rgba(250, 228, 212, 0.9);
+    border: 2px solid var(--primary-color);
     cursor: pointer;
     font-size: 20px;
     transition: all 0.3s ease;
@@ -968,10 +966,6 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Asegurar que sea completamente circular */
-    min-width: 50px;
-    min-height: 50px;
-    padding: 0;
 }
 
 .music-control button:hover {
@@ -993,27 +987,18 @@ footer {
 /* Responsive para control de música */
 @media (max-width: 768px) {
     .music-control {
-        bottom: 80px; /* MISMA POSICIÓN que PC - 4 pulgas desde abajo */
-        right: 15px; /* Ligeramente más pegado al borde en móvil */
+        top: auto;
+        bottom: 80px;
+        right: 15px;
+        transform: none;
     }
     
     .music-control button {
         width: 45px;
         height: 45px;
         font-size: 18px;
-        min-width: 45px;
-        min-height: 45px;
     }
 }
-
-/* Asegurar que esté por encima de otros elementos */
-@media (min-width: 769px) {
-    .music-control {
-        bottom: 80px; /* CONFIRMADO: 4 pulgas desde abajo en PC */
-        right: 20px; /* CONFIRMADO: lado derecho en PC */
-    }
-}
-    
 
 /* Botón de subir arriba (solo móvil) */
 .scroll-to-top {
