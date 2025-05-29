@@ -180,8 +180,7 @@ nav ul li a:hover {
         background-attachment: scroll !important;
         background-size: cover !important;
         background-position: center center !important;
-        min-height: 60vh !important; /* MÁS PEQUEÑO (era 60vh) */
-        
+        min-height: 60vh;
         /* Forzar aceleración hardware en móvil */
         -webkit-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0);
@@ -776,13 +775,6 @@ footer {
     font-size: 0.9rem;
 }
 
-@media (max-width: 768px) {
-    /* Header más angosto en móvil */
-    header {
-        padding: 3px 0 !important; /* MENOS PADDING VERTICAL */
-    }
-
-
 /* Media Queries */
 @media (max-width: 768px) {
     .logo h1 {
@@ -791,8 +783,8 @@ footer {
     }
     
     .logo-image {
-        height: 45px !important;   
-        margin-right: 10px !important;
+        height: 35px;
+        margin-right: 10px;
     }
     
     .logo-emoji {
@@ -942,16 +934,12 @@ footer {
 }
 
 /* Control de música */
-/* Control de música - POSICIÓN CORREGIDA PARA PC Y MÓVIL */
 .music-control {
     position: fixed;
-    bottom: 80px; /* IGUAL POSICIÓN PARA PC y MÓVIL - 3/4 hacia abajo */
-    right: 20px;  /* LADO DERECHO EN PC */
-    z-index: 9999;
-    display: block;
-    visibility: visible;
-    opacity: 1;
-    /* QUITAR top: 50% y transform: translateY(-50%) */
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    z-index: 1500;
 }
 
 .music-control button {
@@ -990,8 +978,10 @@ footer {
 /* Responsive para control de música */
 @media (max-width: 768px) {
     .music-control {
-        bottom: 80px; /* MISMA POSICIÓN QUE PC */
-        right: 15px;  /* SOLO CAMBIA EL MARGEN DERECHO */
+        top: auto;
+        bottom: 80px;
+        right: 15px;
+        transform: none;
     }
     
     .music-control button {
@@ -1000,7 +990,6 @@ footer {
         font-size: 18px;
     }
 }
-    
 
 /* Botón de subir arriba (solo móvil) */
 .scroll-to-top {
@@ -1425,8 +1414,8 @@ footer {
     }
     
     .ballet-dancer {
-        width: 15px;  /* Más pequeña en móvil */
-        height: 35px; /* Más pequeña en móvil */
+        width: 20px;  /* Más pequeña en móvil */
+        height: 40px; /* Más pequeña en móvil */
         animation-duration: 3s; /* Más lento en móvil */
     }
     
