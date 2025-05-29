@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
+<!-- Sección <head> corregida - Reemplazar solo la parte de preload -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,13 +15,15 @@
     <!-- Favicon corregido -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧶</text></svg>">
     
-    <!-- Preload de recursos críticos -->
+    <!-- Preload CORREGIDO - solo recursos críticos que se usan inmediatamente -->
     <link rel="preload" href="styles.css" as="style">
+    <!-- ELIMINADO: <link rel="preload" href="Fotos/su.jpg" as="image"> porque se carga via JavaScript -->
     <link rel="preload" href="menu-script.js" as="script">
     
     <link rel="stylesheet" href="styles.css">
     <script src="menu-script.js" defer></script>
     
+    <!-- El resto del contenido del <style> se mantiene igual -->
     <style>
         /* ==========================================================================
            LAYOUT PRINCIPAL - OPTIMIZADO
@@ -55,7 +57,7 @@
 
         /* Imagen corriente.png más grande en PC */
         .logo-image {
-            height: 65px; /* Aumentada de tamaño base (antes 50-60px) */
+            height: 65px;
             width: auto;
             border-radius: 50%;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
