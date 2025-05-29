@@ -1,9 +1,4 @@
-/* Cabello rubio largo con moño - tamaño normal */
-.ballet-dancer .hair {
-    width: 11px; /* TAMAÑO NORMAL */
-    height: 8px; /* TAMAÑO NORMAL */
-    background: #f4d03f; /* Rubio dorado */
-    border-radius: 50/* Variables globales */
+/* Variables globales */
 :root {
     --primary-color: #ff73b9; /* Rosa intenso del encabezado */
     --secondary-color: #333333; /* Texto oscuro */
@@ -76,35 +71,20 @@ header {
 }
 
 .logo-image {
-    height: 75px; /* TAMAÑO NORMAL PARA DESKTOP */
+    height: 75px;
     width: auto;
     margin-right: 12px;
     border-radius: 50%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
-    transform-origin: top center;
-    animation: pendulumSwing 3s infinite alternate ease-in-out;
 }
 
 .logo-image:hover {
     transform: scale(1.1);
-    animation-play-state: paused;
-}
-
-@keyframes pendulumSwing {
-    0% {
-        transform: rotateZ(-12deg);
-    }
-    50% {
-        transform: rotateZ(12deg);
-    }
-    100% {
-        transform: rotateZ(-12deg);
-    }
 }
 
 .logo-emoji {
-    font-size: 35px; /* TAMAÑO NORMAL PARA DESKTOP */
+    font-size: 35px;
     margin-right: 12px;
     display: none; /* Se muestra solo si falla la imagen */
     animation: wag 2s infinite;
@@ -795,376 +775,21 @@ footer {
     font-size: 0.9rem;
 }
 
-/* BAILARINA DE BALLET RUBIA EN PIRUETA PARA TEJIDOS LUNA */
-/* Contenedor de la bailarina FIJO al lado del perro */
-.ballet-dancer-container {
-    position: absolute;
-    top: 50%;
-    left: 140px; /* POSICIÓN NORMAL PARA DESKTOP */
-    transform: translateY(-50%);
-    z-index: 100;
-    perspective: 200px; /* PERSPECTIVA NORMAL */
-}
-
-/* Bailarina de Ballet - Gira HORIZONTALMENTE en pirueta clásica - TAMAÑO NORMAL */
-.ballet-dancer {
-    position: relative;
-    width: 25px;  /* TAMAÑO NORMAL PARA DESKTOP */
-    height: 50px; /* TAMAÑO NORMAL PARA DESKTOP */
-    animation: balletPirouette 2.5s linear infinite;
-    transform-origin: center center; /* Gira en su centro exacto */
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
-    transform-style: preserve-3d; /* Para efecto 3D */
-}
-
-/* Animación de pirueta HORIZONTAL */
-@keyframes balletPirouette {
-    0% { transform: rotateY(0deg); }
-    100% { transform: rotateY(360deg); }
-}
-
-/* Cabeza - tamaño normal */
-.ballet-dancer .head {
-    width: 9px;  /* TAMAÑO NORMAL */
-    height: 9px; /* TAMAÑO NORMAL */
-    background: #fdbcb4;
-    border-radius: 50%;
-    position: absolute;
-    top: 4px;    /* Tamaño normal */
-    left: 8px;   /* Tamaño normal */
-    border: 1px solid #f4a394;
-    z-index: 10;
-}
-
-/* Cabello rubio largo con moño - tamaño DOBLE */
-.ballet-dancer .hair {
-    width: 22px; /* DOBLE (era 11px) */
-    height: 16px; /* DOBLE (era 8px) */
-    background: #f4d03f; /* Rubio dorado */
-    border-radius: 50%;
-    position: absolute;
-    top: 6px;    /* Ajustado al doble */
-    left: 14px;   /* Ajustado al doble */
-    z-index: 5;
-    box-shadow: inset 0 2px 4px rgba(218, 165, 32, 0.3); /* Sombra más grande */
-}
-
-.ballet-dancer .bun {
-    width: 14px;  /* DOBLE (era 7px) */
-    height: 14px; /* DOBLE (era 7px) */
-    background: #f4d03f; /* Rubio dorado */
-    border-radius: 50%;
-    position: absolute;
-    top: 2px;    /* Ajustado al doble */
-    left: 18px;   /* Ajustado al doble */
-    z-index: 6;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra más grande */
-}
-
-/* Mechones sueltos de cabello rubio - tamaño DOBLE */
-.ballet-dancer .hair-strand {
-    width: 4px;  /* DOBLE (era 2px) */
-    height: 8px; /* DOBLE (era 4px) */
-    background: #f4d03f;
-    border-radius: 50%;
-    position: absolute;
-    animation: hairFlow 3s ease-in-out infinite;
-}
-
-.ballet-dancer .hair-strand.left {
-    top: 12px;    /* Ajustado al doble */
-    left: 12px;   /* Ajustado al doble */
-    transform: rotate(-20deg);
-}
-
-.ballet-dancer .hair-strand.right {
-    top: 12px;    /* Ajustado al doble */
-    right: 12px;  /* Ajustado al doble */
-    transform: rotate(20deg);
-}
-
-@keyframes hairFlow {
-    0%, 100% { transform: rotate(var(--hair-rotation)) translateY(0px); }
-    50% { transform: rotate(calc(var(--hair-rotation) + 5deg)) translateY(-2px); } /* Doble movimiento */
-}
-
-.ballet-dancer .hair-strand.left { --hair-rotation: -20deg; }
-.ballet-dancer .hair-strand.right { --hair-rotation: 20deg; }
-
-/* BRAZOS EN POSICIÓN DE PIRUETA - AMBOS EN LA CABEZA - tamaño DOBLE */
-.ballet-dancer .arm {
-    width: 6px;  /* DOBLE (era 3px) */
-    height: 18px; /* DOBLE (era 9px) */
-    background: #fdbcb4;
-    position: absolute;
-    border-radius: 4px; /* Más redondeado */
-    z-index: 8;
-}
-
-/* Brazo izquierdo curvado hacia la cabeza */
-.ballet-dancer .arm.left {
-    top: 16px;    /* Ajustado al doble */
-    left: 8px;   /* Ajustado al doble */
-    transform: rotate(-45deg);
-    transform-origin: bottom center;
-    animation: armPirouette 2.5s ease-in-out infinite;
-}
-
-/* Brazo derecho curvado hacia la cabeza */
-.ballet-dancer .arm.right {
-    top: 16px;    /* Ajustado al doble */
-    right: 8px;  /* Ajustado al doble */
-    transform: rotate(45deg);
-    transform-origin: bottom center;
-    animation: armPirouette 2.5s ease-in-out infinite;
-    animation-delay: 0.2s;
-}
-
-/* Manos en la cabeza - tamaño DOBLE */
-.ballet-dancer .hand {
-    width: 5px;  /* DOBLE (era 2.5px) */
-    height: 5px; /* DOBLE (era 2.5px) */
-    background: #fdbcb4;
-    border-radius: 50%;
-    position: absolute;
-}
-
-.ballet-dancer .hand.left {
-    top: 8px;    /* Ajustado al doble */
-    left: 12px;   /* Ajustado al doble */
-    z-index: 12;
-}
-
-.ballet-dancer .hand.right {
-    top: 8px;    /* Ajustado al doble */
-    right: 12px;  /* Ajustado al doble */
-    z-index: 12;
-}
-
-@keyframes armPirouette {
-    0%, 100% { transform: rotate(var(--arm-angle)) translateY(0px); }
-    50% { transform: rotate(calc(var(--arm-angle) + 3deg)) translateY(-2px); } /* Doble movimiento */
-}
-
-.ballet-dancer .arm.left { --arm-angle: -45deg; }
-.ballet-dancer .arm.right { --arm-angle: 45deg; }
-
-/* Cuerpo (torso) alargado - tamaño DOBLE */
-.ballet-dancer .torso {
-    width: 12px;   /* DOBLE (era 6px) */
-    height: 36px; /* DOBLE (era 18px) */
-    background: linear-gradient(45deg, var(--primary-color), #ff9dd4);
-    position: absolute;
-    top: 26px;    /* Ajustado al doble */
-    left: 19px;  /* Ajustado para centrar */
-    border-radius: 6px 6px 0 0; /* Más redondeado */
-    z-index: 7;
-}
-
-/* VESTIDO BLANCO CORTO en lugar de tutú - tamaño DOBLE */
-.ballet-dancer .tutu {
-    width: 28px;  /* DOBLE (era 14px) */
-    height: 14px;  /* DOBLE (era 7px) */
-    background: #ffffff; /* BLANCO en lugar de rosa */
-    position: absolute;
-    top: 52px;    /* Ajustado al doble */
-    left: 11px;  /* Ajustado para centrar */
-    border-radius: 50%;
-    border: 2px solid #f0f0f0; /* Borde más grueso */
-    box-shadow: 
-        inset 0 0 8px rgba(200, 200, 200, 0.2), /* Sombra más grande */
-        0 2px 6px rgba(0, 0, 0, 0.15);
-    animation: tutuSpin 2.5s ease-in-out infinite;
-    z-index: 6;
-}
-    animation: tutuSpin 2.5s ease-in-out infinite;
-    z-index: 6;
-}
-
-@keyframes tutuSpin {
-    0%, 100% { transform: scale(1) translateY(0px); }
-    50% { transform: scale(1.03) translateY(-2px); } /* Doble movimiento */
-}
-
-/* Piernas EN PUNTAS - más largas y elegantes - tamaño DOBLE */
-.ballet-dancer .leg {
-    width: 5px; /* DOBLE (era 2.5px) */
-    height: 28px; /* DOBLE (era 14px) */
-    background: #fdbcb4;
-    position: absolute;
-    border-radius: 2px; /* Más redondeado */
-    z-index: 5;
-}
-
-/* Piernas juntas en quinta posición en puntas */
-.ballet-dancer .leg.left {
-    top: 60px;    /* Ajustado al doble */
-    left: 20px;   /* Ajustado al doble */
-    transform: rotate(-2deg);
-}
-
-.ballet-dancer .leg.right {
-    top: 60px;    /* Ajustado al doble */
-    right: 20px;  /* Ajustado al doble */
-    transform: rotate(2deg);
-}
-
-/* ZAPATILLAS DE BALLET BLANCAS EN PUNTA - tamaño DOBLE */
-.ballet-dancer .shoe {
-    width: 8px;   /* DOBLE (era 4px) */
-    height: 12px;  /* DOBLE (era 6px) */
-    background: #ffffff; /* BLANCAS */
-    position: absolute;
-    border-radius: 40% 40% 60% 60%;
-    border: 1px solid #f0f0f0; /* Borde más grueso */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra más grande */
-    z-index: 4;
-}
-
-.ballet-dancer .shoe.left {
-    bottom: -12px; /* Ajustado al doble */
-    left: -1.5px; /* Ajustado al doble */
-    transform: rotate(-5deg);
-}
-
-.ballet-dancer .shoe.right {
-    bottom: -12px; /* Ajustado al doble */
-    right: -1.5px; /* Ajustado al doble */
-    transform: rotate(5deg);
-}
-
-/* Cintas blancas de las zapatillas - tamaño DOBLE */
-.ballet-dancer .ribbon {
-    width: 1.5px; /* DOBLE (era 0.75px) */
-    height: 15px; /* DOBLE (era 7.5px) */
-    background: #ffffff; /* BLANCAS */
-    position: absolute;
-    border-radius: 1px; /* Más redondeado */
-    animation: ribbonPirouette 2.5s ease-in-out infinite;
-    opacity: 0.9;
-}
-
-.ballet-dancer .ribbon.left-1 {
-    bottom: 25px; /* Ajustado al doble */
-    left: 16px;      /* Ajustado al doble */
-    transform: rotate(-25deg);
-    animation-delay: 0s;
-}
-
-.ballet-dancer .ribbon.left-2 {
-    bottom: 23px; /* Ajustado al doble */
-    left: 18px;      /* Ajustado al doble */
-    transform: rotate(25deg);
-    animation-delay: 0.3s;
-}
-
-.ballet-dancer .ribbon.right-1 {
-    bottom: 25px; /* Ajustado al doble */
-    right: 16px;     /* Ajustado al doble */
-    transform: rotate(25deg);
-    animation-delay: 0.6s;
-}
-
-.ballet-dancer .ribbon.right-2 {
-    bottom: 23px; /* Ajustado al doble */
-    right: 18px;     /* Ajustado al doble */
-    transform: rotate(-25deg);
-    animation-delay: 0.9s;
-}
-
-@keyframes ribbonPirouette {
-    0%, 100% { 
-        transform: rotate(var(--ribbon-rotation)) translateY(0px);
-        opacity: 0.8;
-    }
-    50% { 
-        transform: rotate(calc(var(--ribbon-rotation) + 5deg)) translateY(-4px); /* Doble movimiento */
-        opacity: 1;
-    }
-}--ribbon-rotation)) translateY(0px);
-        opacity: 0.8;
-    }
-    50% { 
-        transform: rotate(calc(var(--ribbon-rotation) + 5deg)) translateY(-2px);
-        opacity: 1;
-    }
-}
-
-.ballet-dancer .ribbon.left-1 { --ribbon-rotation: -25deg; }
-.ballet-dancer .ribbon.left-2 { --ribbon-rotation: 25deg; }
-.ballet-dancer .ribbon.right-1 { --ribbon-rotation: 25deg; }
-.ballet-dancer .ribbon.right-2 { --ribbon-rotation: -25deg; }
-
-/* Efectos de elegancia y gracia - tamaño DOBLE */
-.ballet-dancer::before {
-    content: '✨';
-    position: absolute;
-    top: -8px;    /* Ajustado al doble */
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 14px; /* DOBLE (era 7px) */
-    animation: pirouetteSparkle 2.5s ease-in-out infinite;
-    opacity: 0.8;
-    z-index: 15;
-}
-
-@keyframes pirouetteSparkle {
-    0%, 100% { 
-        opacity: 0.4; 
-        transform: translateX(-50%) translateY(0px) scale(0.8); 
-    }
-    50% { 
-        opacity: 1; 
-        transform: translateX(-50%) translateY(-3px) scale(1.2); /* Doble movimiento */
-    }
-}
-
-/* Sombra de la bailarina en el suelo - tamaño DOBLE */
-.ballet-dancer::after {
-    content: '';
-    position: absolute;
-    bottom: -5px; /* Ajustado al doble */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 30px;    /* DOBLE (era 15px) */
-    height: 8px;    /* DOBLE (era 4px) */
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 50%;
-    animation: shadowPirouette 2.5s ease-in-out infinite;
-}
-
-@keyframes shadowPirouette {
-    0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.2; }
-    50% { transform: translateX(-50%) scale(0.8); opacity: 0.3; }
-}
-
-/* Efectos adicionales para mejor visualización del giro horizontal */
-.ballet-dancer * {
-    backface-visibility: visible; /* Mantiene visibles ambos lados durante el giro */
-}
-
-/* Pausa al hacer hover (opcional) */
-.ballet-dancer:hover {
-    animation-play-state: paused;
-}
-
-/* Media Queries - CORRECCIÓN PARA ACHICAR LOGO EN MÓVIL */
+/* Media Queries */
 @media (max-width: 768px) {
     .logo h1 {
         font-size: 2.2rem; /* Título más grande */
         font-weight: 700; /* Más negrilla */
     }
     
-    /* AQUÍ SE HACE MÁS GRANDE LA IMAGEN corriente.png EN MÓVIL */
     .logo-image {
-        height: 150px !important; /* DOBLE DE GRANDE EN MÓVIL (era 75px en PC) */
-        margin-right: 24px !important; /* Margen proporcional */
-        animation: pendulumSwing 3s infinite alternate ease-in-out; /* Mantener animación */
+        height: 35px;
+        margin-right: 10px;
     }
     
     .logo-emoji {
-        font-size: 70px !important; /* También más grande el emoji de respaldo */
-        margin-right: 24px !important;
+        font-size: 30px;
+        margin-right: 10px;
     }
 
     .mobile-menu-btn {
@@ -1257,32 +882,6 @@ footer {
     .gallery-item {
         height: 200px;
     }
-    
-    /* BAILARINA TAMBIÉN MÁS GRANDE PARA MÓVIL */
-    .ballet-dancer-container {
-        left: 280px !important; /* Ajustada para el logo más grande en móvil */
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 10;
-        perspective: 400px; /* Perspectiva mayor para móvil */
-    }
-    
-    .ballet-dancer {
-        width: 50px !important; /* DOBLE DE GRANDE EN MÓVIL */
-        height: 100px !important; /* DOBLE DE GRANDE EN MÓVIL */
-        animation-duration: 3s; /* Más lento en móvil */
-    }
-    
-    .ballet-dancer::before { 
-        font-size: 14px !important; /* Estrella más grande */
-        top: -8px !important; 
-    }
-    
-    .ballet-dancer::after { 
-        width: 30px !important; /* Sombra más grande */
-        height: 8px !important; /* Sombra más grande */
-        bottom: -5px !important; 
-    }
 }
 
 @media (max-width: 576px) {
@@ -1291,16 +890,14 @@ footer {
         font-weight: 700; /* Mantener negrilla */
     }
     
-    /* IMAGEN MÁS GRANDE para móviles muy pequeños también */
     .logo-image {
-        height: 120px !important; /* GRANDE PARA MÓVILES MUY PEQUEÑOS */
-        margin-right: 20px !important;
-        animation: pendulumSwing 3s infinite alternate ease-in-out; /* Mantener animación */
+        height: 32px;
+        margin-right: 8px;
     }
     
     .logo-emoji {
-        font-size: 60px !important;
-        margin-right: 20px !important;
+        font-size: 28px;
+        margin-right: 8px;
     }
 
     .hero h2 {
@@ -1333,27 +930,6 @@ footer {
         font-size: 1rem; /* Tamaño ajustado para pantallas muy pequeñas */
         font-weight: 600; /* Mantener peso */
         padding: 18px; /* Padding ajustado */
-    }
-    
-    /* BAILARINA GRANDE PARA MÓVILES MUY PEQUEÑOS */
-    .ballet-dancer-container {
-        left: 240px !important; /* Posición ajustada para logo grande */
-    }
-    
-    .ballet-dancer {
-        width: 40px !important; /* Grande pero no tanto como en móvil normal */
-        height: 80px !important; /* Grande pero no tanto como en móvil normal */
-    }
-    
-    .ballet-dancer::before { 
-        font-size: 12px !important; 
-        top: -6px !important; 
-    }
-    
-    .ballet-dancer::after { 
-        width: 25px !important; 
-        height: 6px !important; 
-        bottom: -4px !important; 
     }
 }
 
@@ -1493,4 +1069,423 @@ footer {
     .scroll-to-top {
         display: none !important;
     }
+}
+/* BAILARINA DE BALLET RUBIA EN PIRUETA PARA TEJIDOS LUNA */
+/* Agregar este CSS al archivo styles.css existente */
+
+/* Contenedor de la bailarina FIJO al lado del perro */
+.ballet-dancer-container {
+    position: absolute;
+    top: 50%;
+    left: 140px; /* Posicionada justo al lado del logo del perro */
+    transform: translateY(-50%);
+    z-index: 100;
+    perspective: 200px; /* Para el efecto 3D del giro */
+}
+
+/* Bailarina de Ballet - Gira HORIZONTALMENTE en pirueta clásica - TAMAÑO PEQUEÑO */
+.ballet-dancer {
+    position: relative;
+    width: 25px;  /* LA MITAD del tamaño original */
+    height: 50px; /* LA MITAD del tamaño original */
+    animation: balletPirouette 2.5s linear infinite;
+    transform-origin: center center; /* Gira en su centro exacto */
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    transform-style: preserve-3d; /* Para efecto 3D */
+}
+
+/* Animación de pirueta HORIZONTAL */
+@keyframes balletPirouette {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+}
+
+/* Cabeza - tamaño pequeño */
+.ballet-dancer .head {
+    width: 9px;  /* Reducido a la mitad */
+    height: 9px; /* Reducido a la mitad */
+    background: #fdbcb4;
+    border-radius: 50%;
+    position: absolute;
+    top: 4px;    /* Ajustado */
+    left: 8px;   /* Ajustado */
+    border: 1px solid #f4a394;
+    z-index: 10;
+}
+
+/* Cabello rubio largo con moño - tamaño pequeño */
+.ballet-dancer .hair {
+    width: 11px; /* Reducido a la mitad */
+    height: 8px; /* Reducido a la mitad */
+    background: #f4d03f; /* Rubio dorado */
+    border-radius: 50%;
+    position: absolute;
+    top: 3px;    /* Ajustado */
+    left: 7px;   /* Ajustado */
+    z-index: 5;
+    box-shadow: inset 0 1px 2px rgba(218, 165, 32, 0.3);
+}
+
+.ballet-dancer .bun {
+    width: 7px;  /* Reducido a la mitad */
+    height: 7px; /* Reducido a la mitad */
+    background: #f4d03f; /* Rubio dorado */
+    border-radius: 50%;
+    position: absolute;
+    top: 1px;    /* Ajustado */
+    left: 9px;   /* Ajustado */
+    z-index: 6;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Mechones sueltos de cabello rubio - tamaño pequeño */
+.ballet-dancer .hair-strand {
+    width: 2px;  /* Reducido a la mitad */
+    height: 4px; /* Reducido a la mitad */
+    background: #f4d03f;
+    border-radius: 50%;
+    position: absolute;
+    animation: hairFlow 3s ease-in-out infinite;
+}
+
+.ballet-dancer .hair-strand.left {
+    top: 6px;    /* Ajustado */
+    left: 6px;   /* Ajustado */
+    transform: rotate(-20deg);
+}
+
+.ballet-dancer .hair-strand.right {
+    top: 6px;    /* Ajustado */
+    right: 6px;  /* Ajustado */
+    transform: rotate(20deg);
+}
+
+@keyframes hairFlow {
+    0%, 100% { transform: rotate(var(--hair-rotation)) translateY(0px); }
+    50% { transform: rotate(calc(var(--hair-rotation) + 5deg)) translateY(-1px); }
+}
+
+.ballet-dancer .hair-strand.left { --hair-rotation: -20deg; }
+.ballet-dancer .hair-strand.right { --hair-rotation: 20deg; }
+
+/* BRAZOS EN POSICIÓN DE PIRUETA - AMBOS EN LA CABEZA - tamaño pequeño */
+.ballet-dancer .arm {
+    width: 3px;  /* Reducido a la mitad */
+    height: 9px; /* Reducido a la mitad */
+    background: #fdbcb4;
+    position: absolute;
+    border-radius: 2px;
+    z-index: 8;
+}
+
+/* Brazo izquierdo curvado hacia la cabeza */
+.ballet-dancer .arm.left {
+    top: 8px;    /* Ajustado */
+    left: 4px;   /* Ajustado */
+    transform: rotate(-45deg);
+    transform-origin: bottom center;
+    animation: armPirouette 2.5s ease-in-out infinite;
+}
+
+/* Brazo derecho curvado hacia la cabeza */
+.ballet-dancer .arm.right {
+    top: 8px;    /* Ajustado */
+    right: 4px;  /* Ajustado */
+    transform: rotate(45deg);
+    transform-origin: bottom center;
+    animation: armPirouette 2.5s ease-in-out infinite;
+    animation-delay: 0.2s;
+}
+
+/* Manos en la cabeza - tamaño pequeño */
+.ballet-dancer .hand {
+    width: 2.5px;  /* Reducido a la mitad */
+    height: 2.5px; /* Reducido a la mitad */
+    background: #fdbcb4;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.ballet-dancer .hand.left {
+    top: 4px;    /* Ajustado */
+    left: 6px;   /* Ajustado */
+    z-index: 12;
+}
+
+.ballet-dancer .hand.right {
+    top: 4px;    /* Ajustado */
+    right: 6px;  /* Ajustado */
+    z-index: 12;
+}
+
+@keyframes armPirouette {
+    0%, 100% { transform: rotate(var(--arm-angle)) translateY(0px); }
+    50% { transform: rotate(calc(var(--arm-angle) + 3deg)) translateY(-1px); }
+}
+
+.ballet-dancer .arm.left { --arm-angle: -45deg; }
+.ballet-dancer .arm.right { --arm-angle: 45deg; }
+
+/* Cuerpo (torso) alargado - tamaño pequeño */
+.ballet-dancer .torso {
+    width: 6px;   /* Reducido a la mitad */
+    height: 18px; /* Reducido a la mitad */
+    background: linear-gradient(45deg, var(--primary-color), #ff9dd4);
+    position: absolute;
+    top: 13px;    /* Ajustado */
+    left: 9.5px;  /* Ajustado para centrar */
+    border-radius: 3px 3px 0 0;
+    z-index: 7;
+}
+
+/* VESTIDO BLANCO CORTO en lugar de tutú */
+.ballet-dancer .tutu {
+    width: 14px;  /* Reducido a la mitad */
+    height: 7px;  /* Más corto y reducido */
+    background: #ffffff; /* BLANCO en lugar de rosa */
+    position: absolute;
+    top: 26px;    /* Ajustado */
+    left: 5.5px;  /* Ajustado para centrar */
+    border-radius: 50%;
+    border: 1px solid #f0f0f0; /* Borde sutil blanco */
+    box-shadow: 
+        inset 0 0 4px rgba(200, 200, 200, 0.2), /* Sombra más sutil */
+        0 1px 3px rgba(0, 0, 0, 0.15);
+    animation: tutuSpin 2.5s ease-in-out infinite;
+    z-index: 6;
+}
+
+@keyframes tutuSpin {
+    0%, 100% { transform: scale(1) translateY(0px); }
+    50% { transform: scale(1.03) translateY(-1px); }
+}
+
+/* Piernas EN PUNTAS - más largas y elegantes - tamaño pequeño */
+.ballet-dancer .leg {
+    width: 2.5px; /* Reducido a la mitad */
+    height: 14px; /* Reducido a la mitad */
+    background: #fdbcb4;
+    position: absolute;
+    border-radius: 1px;
+    z-index: 5;
+}
+
+/* Piernas juntas en quinta posición en puntas */
+.ballet-dancer .leg.left {
+    top: 30px;    /* Ajustado */
+    left: 10px;   /* Ajustado */
+    transform: rotate(-2deg);
+}
+
+.ballet-dancer .leg.right {
+    top: 30px;    /* Ajustado */
+    right: 10px;  /* Ajustado */
+    transform: rotate(2deg);
+}
+
+/* ZAPATILLAS DE BALLET BLANCAS EN PUNTA - tamaño pequeño */
+.ballet-dancer .shoe {
+    width: 4px;   /* Reducido a la mitad */
+    height: 6px;  /* Reducido a la mitad - Más altas para efecto en puntas */
+    background: #ffffff; /* BLANCAS */
+    position: absolute;
+    border-radius: 40% 40% 60% 60%;
+    border: 0.5px solid #f0f0f0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    z-index: 4;
+}
+
+.ballet-dancer .shoe.left {
+    bottom: -6px; /* Ajustado - Posición en puntas */
+    left: -0.75px;
+    transform: rotate(-5deg);
+}
+
+.ballet-dancer .shoe.right {
+    bottom: -6px; /* Ajustado - Posición en puntas */
+    right: -0.75px;
+    transform: rotate(5deg);
+}
+
+/* Cintas blancas de las zapatillas - tamaño pequeño */
+.ballet-dancer .ribbon {
+    width: 0.75px; /* Reducido a la mitad */
+    height: 7.5px; /* Reducido a la mitad */
+    background: #ffffff; /* BLANCAS */
+    position: absolute;
+    border-radius: 0.5px;
+    animation: ribbonPirouette 2.5s ease-in-out infinite;
+    opacity: 0.9;
+}
+
+.ballet-dancer .ribbon.left-1 {
+    bottom: 12.5px; /* Ajustado */
+    left: 8px;      /* Ajustado */
+    transform: rotate(-25deg);
+    animation-delay: 0s;
+}
+
+.ballet-dancer .ribbon.left-2 {
+    bottom: 11.5px; /* Ajustado */
+    left: 9px;      /* Ajustado */
+    transform: rotate(25deg);
+    animation-delay: 0.3s;
+}
+
+.ballet-dancer .ribbon.right-1 {
+    bottom: 12.5px; /* Ajustado */
+    right: 8px;     /* Ajustado */
+    transform: rotate(25deg);
+    animation-delay: 0.6s;
+}
+
+.ballet-dancer .ribbon.right-2 {
+    bottom: 11.5px; /* Ajustado */
+    right: 9px;     /* Ajustado */
+    transform: rotate(-25deg);
+    animation-delay: 0.9s;
+}
+
+@keyframes ribbonPirouette {
+    0%, 100% { 
+        transform: rotate(var(--ribbon-rotation)) translateY(0px);
+        opacity: 0.8;
+    }
+    50% { 
+        transform: rotate(calc(var(--ribbon-rotation) + 5deg)) translateY(-2px);
+        opacity: 1;
+    }
+}
+
+.ballet-dancer .ribbon.left-1 { --ribbon-rotation: -25deg; }
+.ballet-dancer .ribbon.left-2 { --ribbon-rotation: 25deg; }
+.ballet-dancer .ribbon.right-1 { --ribbon-rotation: 25deg; }
+.ballet-dancer .ribbon.right-2 { --ribbon-rotation: -25deg; }
+
+/* Efectos de elegancia y gracia - tamaño pequeño */
+.ballet-dancer::before {
+    content: '✨';
+    position: absolute;
+    top: -4px;    /* Ajustado */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 7px; /* Reducido a la mitad */
+    animation: pirouetteSparkle 2.5s ease-in-out infinite;
+    opacity: 0.8;
+    z-index: 15;
+}
+
+@keyframes pirouetteSparkle {
+    0%, 100% { 
+        opacity: 0.4; 
+        transform: translateX(-50%) translateY(0px) scale(0.8); 
+    }
+    50% { 
+        opacity: 1; 
+        transform: translateX(-50%) translateY(-1.5px) scale(1.2); /* Ajustado */
+    }
+}
+
+/* Sombra de la bailarina en el suelo - tamaño pequeño */
+.ballet-dancer::after {
+    content: '';
+    position: absolute;
+    bottom: -2.5px; /* Ajustado */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 15px;    /* Reducido a la mitad */
+    height: 4px;    /* Reducido a la mitad */
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    animation: shadowPirouette 2.5s ease-in-out infinite;
+}
+
+@keyframes shadowPirouette {
+    0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.2; }
+    50% { transform: translateX(-50%) scale(0.8); opacity: 0.3; }
+}
+
+/* Responsive para móvil - FIJA al lado del perro */
+@media (max-width: 768px) {
+    .ballet-dancer-container {
+        left: 90px; /* Al lado del logo en móvil */
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .ballet-dancer {
+        width: 20px;  /* Más pequeña en móvil */
+        height: 40px; /* Más pequeña en móvil */
+        animation-duration: 3s; /* Más lento en móvil */
+    }
+    
+    /* Ajustes para elementos muy pequeños en móvil */
+    .ballet-dancer .head { width: 7px; height: 7px; left: 6.5px; top: 3px; }
+    .ballet-dancer .hair { width: 9px; height: 6px; left: 5.5px; top: 2px; }
+    .ballet-dancer .bun { width: 5px; height: 5px; left: 7.5px; top: 0.5px; }
+    .ballet-dancer .torso { width: 4px; height: 14px; left: 8px; top: 10px; }
+    .ballet-dancer .tutu { width: 10px; height: 5px; left: 5px; top: 20px; }
+    
+    .ballet-dancer .arm { width: 2px; height: 7px; }
+    .ballet-dancer .arm.left { left: 3px; top: 6px; }
+    .ballet-dancer .arm.right { right: 3px; top: 6px; }
+    
+    .ballet-dancer .hand { width: 2px; height: 2px; }
+    .ballet-dancer .hand.left { left: 5px; top: 3px; }
+    .ballet-dancer .hand.right { right: 5px; top: 3px; }
+    
+    .ballet-dancer .leg { width: 1.5px; height: 10px; }
+    .ballet-dancer .leg.left { left: 8px; top: 24px; }
+    .ballet-dancer .leg.right { right: 8px; top: 24px; }
+    
+    .ballet-dancer .shoe { width: 3px; height: 4px; }
+    
+    .ballet-dancer .ribbon { width: 0.5px; height: 5px; }
+    .ballet-dancer .ribbon.left-1 { bottom: 8px; left: 6px; }
+    .ballet-dancer .ribbon.left-2 { bottom: 7px; left: 7px; }
+    .ballet-dancer .ribbon.right-1 { bottom: 8px; right: 6px; }
+    .ballet-dancer .ribbon.right-2 { bottom: 7px; right: 7px; }
+}
+
+/* Efectos adicionales para mejor visualización del giro horizontal */
+.ballet-dancer * {
+    backface-visibility: visible; /* Mantiene visibles ambos lados durante el giro */
+}
+
+/* Pausa al hacer hover (opcional) */
+.ballet-dancer:hover {
+    animation-play-state: paused;
+}
+
+
+/* Modifica esto en tu archivo styles.css */
+
+@keyframes pendulumSwing {
+    0% {
+        transform: rotateZ(-12deg); /* Aumentamos la inclinación inicial (antes era -5deg) */
+    }
+    50% {
+        transform: rotateZ(12deg); /* Aumentamos la inclinación al otro lado (antes era 5deg) */
+    }
+    100% {
+        transform: rotateZ(-12deg); /* Vuelve a la posición inicial */
+    }
+}
+
+.logo-image {
+    /* Mantén tus estilos existentes para .logo-image */
+    height: 40px;
+    width: auto;
+    margin-right: 12px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease; /* Mantén esto para el efecto hover */
+
+    transform-origin: top center; /* Sigue rotando desde la parte superior central */
+    animation: pendulumSwing 3s infinite alternate ease-in-out; /* Velocidad ajustada a 3s (antes 4s) */
+}
+
+.logo-image:hover {
+    transform: scale(1.1); /* Esto anulará la animación mientras se pasa el ratón */
+    animation-play-state: paused; /* Pausa la animación al pasar el ratón */
 }
