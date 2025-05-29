@@ -1589,3 +1589,129 @@ footer {
     transform: scale(1.1); /* Esto anulará la animación mientras se pasa el ratón */
     animation-play-state: paused; /* Pausa la animación al pasar el ratón */
 }
+/* Control de música - FORZAR LADO DERECHO EN PC */
+.music-control {
+    position: fixed !important;
+    bottom: 80px !important;
+    right: 20px !important; /* LADO DERECHO */
+    left: auto !important;   /* IMPORTANTE: Eliminar cualquier left */
+    z-index: 9999 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    /* Eliminar cualquier transform que pueda moverlo */
+    transform: none !important;
+    translate: none !important;
+    /* Asegurar que no haya margin/padding que lo desplace */
+    margin: 0 !important;
+    padding: 0 !important;
+    /* Eliminar cualquier flexbox o grid que pueda afectar */
+    flex: none !important;
+    grid-area: none !important;
+    float: none !important;
+}
+
+.music-control button {
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50% !important;
+    background-color: rgba(250, 228, 212, 0.95) !important;
+    border: 2px solid #ff73b9 !important;
+    cursor: pointer !important;
+    font-size: 20px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    /* Asegurar posición relativa dentro del contenedor */
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    /* Eliminar cualquier desplazamiento */
+    transform: none !important;
+    translate: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.music-control button:hover {
+    background-color: #ff73b9 !important;
+    transform: scale(1.1) !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+.music-control button.playing {
+    animation: pulse 2s infinite !important;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 115, 185, 0.7) !important; }
+    70% { box-shadow: 0 0 0 10px rgba(255, 115, 185, 0) !important; }
+    100% { box-shadow: 0 0 0 0 rgba(255, 115, 185, 0) !important; }
+}
+
+/* ESPECÍFICO PARA PC - MUY IMPORTANTE */
+@media (min-width: 769px) {
+    .music-control {
+        position: fixed !important;
+        bottom: 80px !important;
+        right: 20px !important;     /* DERECHA */
+        left: auto !important;      /* NO IZQUIERDA */
+        top: auto !important;       /* NO ARRIBA */
+        transform: none !important; /* SIN TRANSFORMACIONES */
+        translate: none !important; /* SIN TRANSLATE */
+    }
+}
+
+/* Móvil - mantener como estaba */
+@media (max-width: 768px) {
+    .music-control {
+        bottom: 80px !important;
+        right: 15px !important;     /* DERECHA EN MÓVIL TAMBIÉN */
+        left: auto !important;      /* NO IZQUIERDA */
+    }
+    
+    .music-control button {
+        width: 45px !important;
+        height: 45px !important;
+        font-size: 18px !important;
+    }
+}
+
+/* OVERRIDE CUALQUIER OTRO CSS QUE PUEDA INTERFERIR */
+#musicControl,
+.music-control,
+div[id="musicControl"] {
+    position: fixed !important;
+    bottom: 80px !important;
+    right: 20px !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    translate: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Si hay conflictos con Flexbox o Grid del body/main */
+body, main, .container {
+    /* Asegurar que no afecten al botón fijo */
+}
+
+/* Debug temporal - línea roja alrededor del botón */
+.music-control {
+    outline: 2px dashed red !important;
+    outline-offset: 2px !important;
+}
+
+/* Eliminar la línea de debug después de confirmar posición */
+/* 
+.music-control {
+    outline: none !important;
+}
+*/
