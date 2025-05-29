@@ -942,62 +942,153 @@ footer {
 }
 
 /* Control de música */
-/* Control de música */
+/* Control de música - FORZADO VISIBLE EN PC Y MÓVIL */
 .music-control {
-    position: fixed;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    z-index: 1500;
+    position: fixed !important;
+    bottom: 80px !important; /* 4 pulgas desde abajo */
+    right: 20px !important;  /* Lado derecho */
+    z-index: 9999 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: auto !important;
+    height: auto !important;
+    /* Asegurar que no haya estilos conflictivos */
+    transform: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: none !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 .music-control button {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: rgba(250, 228, 212, 0.9);
-    border: 2px solid var(--primary-color);
-    cursor: pointer;
-    font-size: 20px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50% !important; /* Completamente redondo */
+    background-color: rgba(250, 228, 212, 0.95) !important; /* Color melocotón más opaco */
+    border: 2px solid #ff73b9 !important; /* Borde rosa */
+    cursor: pointer !important;
+    font-size: 20px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important; /* Sombra más visible */
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    /* Asegurar dimensiones exactas */
+    min-width: 50px !important;
+    min-height: 50px !important;
+    max-width: 50px !important;
+    max-height: 50px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    /* Eliminar cualquier posible conflicto */
+    transform: none !important;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    /* Asegurar visibilidad */
+    visibility: visible !important;
+    opacity: 1 !important;
+    overflow: visible !important;
 }
 
 .music-control button:hover {
-    background-color: var(--primary-color);
-    transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    background-color: #ff73b9 !important;
+    transform: scale(1.1) !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
 }
 
 .music-control button.playing {
-    animation: pulse 2s infinite;
+    animation: pulse 2s infinite !important;
 }
 
 @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(255, 115, 185, 0.7); }
-    70% { box-shadow: 0 0 0 10px rgba(255, 115, 185, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(255, 115, 185, 0); }
+    0% { box-shadow: 0 0 0 0 rgba(255, 115, 185, 0.7) !important; }
+    70% { box-shadow: 0 0 0 10px rgba(255, 115, 185, 0) !important; }
+    100% { box-shadow: 0 0 0 0 rgba(255, 115, 185, 0) !important; }
 }
 
-/* Responsive para control de música */
-@media (max-width: 768px) {
+/* Específico para PC - Asegurar visibilidad */
+@media (min-width: 769px) {
     .music-control {
-        top: auto;
-        bottom: 80px;
-        right: 15px;
-        transform: none;
+        position: fixed !important;
+        bottom: 80px !important;
+        right: 20px !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        z-index: 9999 !important;
     }
     
     .music-control button {
-        width: 45px;
-        height: 45px;
-        font-size: 18px;
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 20px !important;
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
+}
+
+/* Responsive para móvil */
+@media (max-width: 768px) {
+    .music-control {
+        bottom: 80px !important;
+        right: 15px !important;
+    }
+    
+    .music-control button {
+        width: 45px !important;
+        height: 45px !important;
+        font-size: 18px !important;
+        min-width: 45px !important;
+        min-height: 45px !important;
+        max-width: 45px !important;
+        max-height: 45px !important;
+    }
+}
+
+/* Forzar visibilidad del icono dentro del botón */
+.music-control button span,
+.music-control button #musicIcon {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    font-size: inherit !important;
+    line-height: 1 !important;
+    color: #333 !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+/* Eliminar cualquier estilo que pueda ocultar el botón */
+.music-control,
+.music-control * {
+    pointer-events: auto !important;
+}
+
+/* Asegurar que esté por encima de todo */
+.music-control {
+    isolation: isolate !important;
+}
+
+/* Debug - Temporal para verificar posición */
+.music-control::before {
+    content: "" !important;
+    position: absolute !important;
+    top: -5px !important;
+    left: -5px !important;
+    right: -5px !important;
+    bottom: -5px !important;
+    border: 1px dashed red !important;
+    pointer-events: none !important;
+    z-index: -1 !important;
+    /* Comentar o eliminar esta regla después de verificar */
+    /* display: none; */
 }
 
 /* Botón de subir arriba (solo móvil) */
