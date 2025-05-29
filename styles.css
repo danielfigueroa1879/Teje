@@ -1142,8 +1142,8 @@ footer {
     
     /* AQUÍ SE ACHICA LA IMAGEN corriente.png EN MÓVIL */
     .logo-image {
-        height: 25px !important; /* FORZAMOS EL TAMAÑO PEQUEÑO */
-        margin-right: 8px !important;
+        height: 55px !important; /* FORZAMOS EL TAMAÑO PEQUEÑO */
+        margin-right: 9px !important;
         animation: pendulumSwing 3s infinite alternate ease-in-out; /* Mantener animación */
     }
     
