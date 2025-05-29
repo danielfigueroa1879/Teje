@@ -180,7 +180,9 @@ nav ul li a:hover {
         background-attachment: scroll !important;
         background-size: cover !important;
         background-position: center center !important;
-        min-height: 55vh;
+        min-height: 50vh !important; /* MÁS PEQUEÑO (era 60vh) */
+        padding: 60px 15px !important; /* Menos padding vertical */
+        
         /* Forzar aceleración hardware en móvil */
         -webkit-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0);
