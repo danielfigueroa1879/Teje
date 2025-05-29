@@ -783,7 +783,7 @@ footer {
     }
     
     .logo-image {
-        height: 40px !important;   
+        height: 45px !important;   
         margin-right: 10px !important;
     }
     
@@ -1414,8 +1414,8 @@ footer {
     }
     
     .ballet-dancer {
-        width: 20px;  /* Más pequeña en móvil */
-        height: 40px; /* Más pequeña en móvil */
+        width: 15px;  /* Más pequeña en móvil */
+        height: 35px; /* Más pequeña en móvil */
         animation-duration: 3s; /* Más lento en móvil */
     }
     
