@@ -180,7 +180,7 @@ nav ul li a:hover {
         background-attachment: scroll !important;
         background-size: cover !important;
         background-position: center center !important;
-        min-height: 60vh;
+        min-height: 55vh;
         /* Forzar aceleración hardware en móvil */
         -webkit-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0);
