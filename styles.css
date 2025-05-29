@@ -942,18 +942,16 @@ footer {
 }
 
 /* Control de música */
-/* Control de música - FORZADO VISIBLE EN PC Y MÓVIL */
 .music-control {
     position: fixed !important;
     bottom: 80px !important; /* 4 pulgas desde abajo */
-    right: 20px !important;  /* Lado derecho */
+    right: 20px !important;  /* Lado derecho por defecto (PC) */
     z-index: 9999 !important;
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
     width: auto !important;
     height: auto !important;
-    /* Asegurar que no haya estilos conflictivos */
     transform: none !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -978,19 +976,16 @@ footer {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    /* Asegurar dimensiones exactas */
     min-width: 50px !important;
     min-height: 50px !important;
     max-width: 50px !important;
     max-height: 50px !important;
     padding: 0 !important;
     margin: 0 !important;
-    /* Eliminar cualquier posible conflicto */
     transform: none !important;
     position: relative !important;
     top: auto !important;
     left: auto !important;
-    /* Asegurar visibilidad */
     visibility: visible !important;
     opacity: 1 !important;
     overflow: visible !important;
@@ -1012,12 +1007,13 @@ footer {
     100% { box-shadow: 0 0 0 0 rgba(255, 115, 185, 0) !important; }
 }
 
-/* Específico para PC - Asegurar visibilidad */
+/* Específico para PC - Asegurar visibilidad y posición a la derecha */
 @media (min-width: 769px) {
     .music-control {
         position: fixed !important;
         bottom: 80px !important;
-        right: 20px !important;
+        right: 20px !important; /* Posición a la derecha para PC */
+        left: auto !important; /* Asegurar que left no interfiera */
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
@@ -1034,11 +1030,12 @@ footer {
     }
 }
 
-/* Responsive para móvil */
+/* Responsive para móvil - mantener en el borde derecho, ligeramente ajustado */
 @media (max-width: 768px) {
     .music-control {
         bottom: 80px !important;
-        right: 15px !important;
+        right: 15px !important; /* Lado derecho en móvil */
+        left: auto !important; /* Asegurar que left no interfiera */
     }
     
     .music-control button {
@@ -1076,20 +1073,45 @@ footer {
     isolation: isolate !important;
 }
 
-/* Debug - Temporal para verificar posición */
-.music-control::before {
-    content: "" !important;
-    position: absolute !important;
-    top: -5px !important;
-    left: -5px !important;
-    right: -5px !important;
-    bottom: -5px !important;
-    border: 1px dashed red !important;
-    pointer-events: none !important;
-    z-index: -1 !important;
-    /* Comentar o eliminar esta regla después de verificar */
-    /* display: none; */
+
+/* OVERRIDE TOTAL - ELIMINAR CUALQUIER CONFLICTO */
+/* Aplicar posición derecha para PC por defecto con alta especificidad */
+#musicControl,
+.music-control,
+div[id="musicControl"],
+*[id="musicControl"] {
+    position: fixed !important;
+    bottom: 80px !important;
+    right: 20px !important;  /* Lado derecho para PC */
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    translate: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
+
+/* Override específico para PC (redundante pero asegura) */
+@media (min-width: 769px) {
+    #musicControl,
+    .music-control,
+    div[id="musicControl"] {
+        right: 20px !important;  /* Confirmar lado derecho en PC */
+        left: auto !important;
+    }
+}
+
+/* Override específico para MÓVIL */
+@media (max-width: 768px) {
+    #musicControl,
+    .music-control,
+    div[id="musicControl"],
+    *[id="musicControl"] {
+        right: 15px !important; /* Lado derecho en móvil */
+        left: auto !important;
+    }
+}
+
 
 /* Botón de subir arriba (solo móvil) */
 .scroll-to-top {
@@ -1589,142 +1611,3 @@ footer {
     transform: scale(1.1); /* Esto anulará la animación mientras se pasa el ratón */
     animation-play-state: paused; /* Pausa la animación al pasar el ratón */
 }
-/* Control de música - CENTRO DERECHA EN PC */
-.music-control {
-    position: fixed !important;
-    bottom: 80px !important;
-    /* CAMBIO PRINCIPAL: En lugar de right: 20px, usar right: 45% para estar casi en el centro hacia la derecha */
-    right: 45% !important;
-    left: auto !important;
-    z-index: 9999 !important;
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    transform: none !important;
-    translate: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    /* Eliminar cualquier interferencia */
-    flex: none !important;
-    grid-area: none !important;
-    float: none !important;
-    width: auto !important;
-    height: auto !important;
-}
-
-.music-control button {
-    width: 50px !important;
-    height: 50px !important;
-    border-radius: 50% !important;
-    background-color: rgba(250, 228, 212, 0.95) !important;
-    border: 2px solid #ff73b9 !important;
-    cursor: pointer !important;
-    font-size: 20px !important;
-    transition: all 0.3s ease !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    position: relative !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    transform: none !important;
-    translate: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-.music-control button:hover {
-    background-color: #ff73b9 !important;
-    transform: scale(1.1) !important;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
-}
-
-.music-control button.playing {
-    animation: pulse 2s infinite !important;
-}
-
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(255, 115, 185, 0.7) !important; }
-    70% { box-shadow: 0 0 0 10px rgba(255, 115, 185, 0) !important; }
-    100% { box-shadow: 0 0 0 0 rgba(255, 115, 185, 0) !important; }
-}
-
-/* ESPECÍFICO PARA PC - CENTRO DERECHA */
-@media (min-width: 769px) {
-    .music-control {
-        position: fixed !important;
-        bottom: 80px !important;
-        right: 45% !important;      /* CENTRO DERECHA - casi a la mitad */
-        left: auto !important;
-        top: auto !important;
-        transform: none !important;
-        translate: none !important;
-    }
-}
-
-/* Móvil - mantener en el borde derecho */
-@media (max-width: 768px) {
-    .music-control {
-        bottom: 80px !important;
-        right: 15px !important;     /* En móvil sí va al borde */
-        left: auto !important;
-    }
-    
-    .music-control button {
-        width: 45px !important;
-        height: 45px !important;
-        font-size: 18px !important;
-    }
-}
-
-/* OVERRIDE TOTAL - ELIMINAR CUALQUIER CONFLICTO */
-#musicControl,
-.music-control,
-div[id="musicControl"],
-*[id="musicControl"] {
-    position: fixed !important;
-    bottom: 80px !important;
-    right: 45% !important;      /* CENTRO DERECHA */
-    left: auto !important;
-    top: auto !important;
-    transform: none !important;
-    translate: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-/* Override específico para PC */
-@media (min-width: 769px) {
-    #musicControl,
-    .music-control,
-    div[id="musicControl"] {
-        right: 45% !important;  /* CONFIRMAR CENTRO DERECHA EN PC */
-        left: auto !important;
-    }
-}
-
-/* Debug temporal - línea roja MÁS VISIBLE */
-.music-control {
-    outline: 3px solid red !important;
-    outline-offset: 3px !important;
-    background: rgba(255, 0, 0, 0.1) !important; /* Fondo rojo semi-transparente para debug */
-}
-
-.music-control button {
-    outline: 2px solid blue !important; /* Borde azul en el botón para debug */
-}
-
-/* ELIMINAR DESPUÉS DE VERIFICAR POSICIÓN:
-.music-control {
-    outline: none !important;
-    background: none !important;
-}
-.music-control button {
-    outline: none !important;
-}
-*/
