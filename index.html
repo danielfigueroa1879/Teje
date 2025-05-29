@@ -48,6 +48,29 @@
             order: 2;
         }
 
+        /* Imagen corriente.png más grande en PC */
+        .logo-image {
+            height: 65px; /* Aumentada de tamaño base (antes 50-60px) */
+            width: auto;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            transform-origin: top center;
+            animation: pendulumSwing 3s infinite alternate ease-in-out;
+        }
+
+        .logo-image:hover {
+            transform: scale(1.1);
+            animation-play-state: paused;
+        }
+
+        /* Animación de péndulo */
+        @keyframes pendulumSwing {
+            0% { transform: rotateZ(-12deg); }
+            50% { transform: rotateZ(12deg); }
+            100% { transform: rotateZ(-12deg); }
+        }
+
         /* ==========================================================================
            BAILARINA - OPTIMIZADO
         ========================================================================== */
@@ -55,7 +78,7 @@
         .ballet-dancer-container {
             position: absolute;
             top: 50%;
-            left: 90px;
+            left: 75px; /* Movida más a la izquierda (era 90px) */
             transform: translateY(-50%);
             z-index: 50;
             perspective: 200px;
@@ -63,8 +86,8 @@
 
         .ballet-dancer {
             position: relative;
-            width: 50px;
-            height: 75px;
+            width: 55px; /* Aumentada un poco (era 50px) */
+            height: 82px; /* Aumentada proporcionalmente (era 75px) */
             animation: balletPirouette 2.5s linear infinite;
             transform-origin: center center;
             filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.3));
@@ -116,10 +139,10 @@
         .ballet-dancer::before {
             content: '✨';
             position: absolute;
-            top: -10px;
+            top: -12px; /* Ajustado para bailarina más grande */
             left: 50%;
             transform: translateX(-50%);
-            font-size: 14px;
+            font-size: 16px; /* Más grande también */
             animation: pirouetteSparkle 2.5s ease-in-out infinite;
             opacity: 0.8;
             z-index: 15;
@@ -128,11 +151,11 @@
         .ballet-dancer::after {
             content: '';
             position: absolute;
-            bottom: -6px;
+            bottom: -7px; /* Ajustado para bailarina más grande */
             left: 50%;
             transform: translateX(-50%);
-            width: 30px;
-            height: 10px;
+            width: 35px; /* Sombra más grande */
+            height: 12px; /* Sombra más grande */
             background: rgba(0, 0, 0, 0.2);
             border-radius: 50%;
             animation: shadowPirouette 2.5s ease-in-out infinite;
@@ -148,8 +171,8 @@
 
         .ballet-dancer:hover::before {
             content: "⏸️";
-            font-size: 16px;
-            top: -12px;
+            font-size: 18px; /* Ajustado para bailarina más grande */
+            top: -14px;
         }
 
         /* ==========================================================================
@@ -240,7 +263,7 @@
                     <div class="ballet-dancer-container">
                         <div class="ballet-dancer">
                             <img src="Fotos/bailarina1.png" alt="Bailarina de Ballet" class="ballet-dancer-image" 
-                                 onerror="this.src='https://via.placeholder.com/50x75/ff73b9/ffffff?text=🩰'">
+                                 onerror="this.src='https://via.placeholder.com/55x82/ff73b9/ffffff?text=🩰'">
                         </div>
                     </div>
                 </div>
