@@ -564,6 +564,153 @@
             window.zoomOut = function() { console.log('🔍 Zoom out'); };
             window.resetZoom = function() { console.log('🔄 Reset zoom'); };
             window.toggleMusic = function() { console.log('🎵 Toggle music'); };
+            // Script de debug para el botón de música - Agregar temporalmente al final del HTML
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🔍 Iniciando debug del botón de música...');
+    
+    // Verificar elementos
+    const musicControl = document.getElementById('musicControl');
+    const musicToggle = document.getElementById('musicToggle');
+    const musicIcon = document.getElementById('musicIcon');
+    
+    console.log('📱 musicControl encontrado:', !!musicControl);
+    console.log('🔘 musicToggle encontrado:', !!musicToggle);
+    console.log('🎵 musicIcon encontrado:', !!musicIcon);
+    
+    if (musicControl) {
+        console.log('📍 Posición del botón:', {
+            position: getComputedStyle(musicControl).position,
+            bottom: getComputedStyle(musicControl).bottom,
+            right: getComputedStyle(musicControl).right,
+            zIndex: getComputedStyle(musicControl).zIndex,
+            display: getComputedStyle(musicControl).display,
+            visibility: getComputedStyle(musicControl).visibility,
+            opacity: getComputedStyle(musicControl).opacity
+        });
+        
+        // Forzar estilos directamente
+        musicControl.style.cssText = `
+            position: fixed !important;
+            bottom: 80px !important;
+            right: 20px !important;
+            z-index: 9999 !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            width: auto !important;
+            height: auto !important;
+        `;
+        
+        if (musicToggle) {
+            musicToggle.style.cssText = `
+                width: 50px !important;
+                height: 50px !important;
+                border-radius: 50% !important;
+                background-color: rgba(250, 228, 212, 0.95) !important;
+                border: 2px solid #ff73b9 !important;
+                cursor: pointer !important;
+                font-size: 20px !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+                backdrop-filter: blur(10px) !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+            `;
+        }
+        
+        if (musicIcon) {
+            musicIcon.style.cssText = `
+                display: inline-block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                font-size: 20px !important;
+                color: #333 !important;
+            `;
+        }
+        
+        console.log('✅ Estilos forzados aplicados');
+        
+        // Verificar si está visible después de 1 segundo
+        setTimeout(() => {
+            const rect = musicControl.getBoundingClientRect();
+            console.log('📐 Dimensiones del botón:', {
+                width: rect.width,
+                height: rect.height,
+                top: rect.top,
+                left: rect.left,
+                right: rect.right,
+                bottom: rect.bottom,
+                visible: rect.width > 0 && rect.height > 0
+            });
+            
+            if (rect.width === 0 || rect.height === 0) {
+                console.error('❌ El botón tiene dimensiones 0 - revisar CSS');
+            } else {
+                console.log('✅ El botón debería ser visible');
+            }
+        }, 1000);
+        
+    } else {
+        console.error('❌ No se encontró el contenedor #musicControl en el HTML');
+        
+        // Crear el botón si no existe
+        const newMusicControl = document.createElement('div');
+        newMusicControl.id = 'musicControl';
+        newMusicControl.className = 'music-control';
+        newMusicControl.innerHTML = `
+            <button id="musicToggle" onclick="toggleMusic()" aria-label="Control de música">
+                <span id="musicIcon">🎵</span>
+            </button>
+        `;
+        
+        document.body.appendChild(newMusicControl);
+        console.log('🔧 Botón de música creado dinámicamente');
+    }
+    
+    // Test de ancho de pantalla
+    console.log('💻 Ancho de pantalla:', window.innerWidth);
+    console.log('📱 Es móvil?', window.innerWidth <= 768);
+    
+    // Verificar conflictos de z-index
+    const allFixedElements = document.querySelectorAll('*');
+    const highZIndex = [];
+    allFixedElements.forEach(el => {
+        const style = getComputedStyle(el);
+        if (style.position === 'fixed' && parseInt(style.zIndex) > 1000) {
+            highZIndex.push({
+                element: el.tagName + (el.id ? '#' + el.id : '') + (el.className ? '.' + el.className.split(' ')[0] : ''),
+                zIndex: style.zIndex
+            });
+        }
+    });
+    
+    if (highZIndex.length > 0) {
+        console.log('⚠️ Elementos con z-index alto que podrían cubrir el botón:', highZIndex);
+    }
+});
+
+// Función adicional para forzar visibilidad
+function forceShowMusicButton() {
+    const musicControl = document.getElementById('musicControl');
+    if (musicControl) {
+        musicControl.style.cssText = `
+            position: fixed !important;
+            bottom: 80px !important;
+            right: 20px !important;
+            z-index: 99999 !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            background: red !important;
+            width: 50px !important;
+            height: 50px !important;
+        `;
+        console.log('🔴 Botón forzado con fondo rojo para debug');
+    }
+}
         });
     </script>
 </body>
