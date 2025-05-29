@@ -7,12 +7,18 @@
     <meta name="keywords" content="tejidos, tejido, artesanal, Susana, Luna, bebé, pasamontañas, punto, creaciones">
     <meta name="author" content="Tejidos Luna">
     <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#ff73b9">
+    <meta name="msapplication-TileColor" content="#ff73b9">
     
     <title>Tejidos Luna - Creaciones Únicas de Susana</title>
     
+    <!-- Favicon corregido -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧶</text></svg>">
+    
+    <!-- Preload de recursos críticos -->
     <link rel="preload" href="styles.css" as="style">
     <link rel="preload" href="Fotos/su.jpg" as="image">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="preload" href="menu-script.js" as="script">
     
     <link rel="stylesheet" href="styles.css">
     <script src="menu-script.js" defer></script>
@@ -263,7 +269,7 @@
                     <div class="ballet-dancer-container">
                         <div class="ballet-dancer">
                             <img src="Fotos/bailarina1.png" alt="Bailarina de Ballet" class="ballet-dancer-image" 
-                                 onerror="this.src='https://via.placeholder.com/55x82/ff73b9/ffffff?text=🩰'">
+                                 onerror="this.style.display='none';">
                         </div>
                     </div>
                 </div>
@@ -300,7 +306,7 @@
                     <div class="product-image">
                         <img src="./Fotos/trajeBebe.jpeg" alt="Traje de Bebé" 
                              onclick="openModal(this)" style="cursor: pointer;" 
-                             onerror="this.src='https://via.placeholder.com/300x300/ff73b9/ffffff?text=Traje+de+Bebé'">
+                             onerror="this.style.display='none';">
                     </div>
                     <div class="product-info">
                         <h3>Traje de Bebé</h3>
@@ -312,7 +318,7 @@
                     <div class="product-image">
                         <img src="./Fotos/trajeBebe1.jpeg" alt="Traje Bebé" 
                              onclick="openModal(this)" style="cursor: pointer;" 
-                             onerror="this.src='https://via.placeholder.com/300x300/ff73b9/ffffff?text=Traje+Bebé+1'">
+                             onerror="this.style.display='none';">
                     </div>
                     <div class="product-info">
                         <h3>Traje Bebé</h3>
@@ -324,7 +330,7 @@
                     <div class="product-image">
                         <img src="./Fotos/trajeBebe2.jpeg" alt="Pasamontañas De Punto" 
                              onclick="openModal(this)" style="cursor: pointer;" 
-                             onerror="this.src='https://via.placeholder.com/300x300/ff73b9/ffffff?text=Pasamontañas'">
+                             onerror="this.style.display='none';">
                     </div>
                     <div class="product-info">
                         <h3>Pasamontañas De Punto</h3>
@@ -336,7 +342,7 @@
                     <div class="product-image">
                         <img src="./Fotos/traje.jpeg" alt="Traje de Bebé" 
                              onclick="openModal(this)" style="cursor: pointer;" 
-                             onerror="this.src='https://via.placeholder.com/300x300/ff73b9/ffffff?text=Traje+de+Bebé'">
+                             onerror="this.style.display='none';">
                     </div>
                     <div class="product-info">
                         <h3>Traje de Bebé</h3>
@@ -354,17 +360,17 @@
                     <div class="featured-image">
                         <img src="Fotos/trajeMujer.jpg" alt="Tejido artesanal" 
                              onclick="openModal(this)" style="cursor: pointer;" 
-                             onerror="this.src='https://via.placeholder.com/300x300/cccccc/ffffff?text=Tejido+1'">
+                             onerror="this.style.display='none';">
                     </div>
                     <div class="featured-image">
                         <img src="Fotos/tejido.jpg" alt="Tejido artesanal" 
                              onclick="openModal(this)" style="cursor: pointer;" 
-                             onerror="this.src='https://via.placeholder.com/300x300/cccccc/ffffff?text=Tejido+2'">
+                             onerror="this.style.display='none';">
                     </div>
                     <div class="featured-image">
                         <img src="Fotos/cubre.jpeg" alt="Tejido artesanal" 
                              onclick="openModal(this)" style="cursor: pointer;" 
-                             onerror="this.src='https://via.placeholder.com/300x300/cccccc/ffffff?text=Tejido+3'">
+                             onerror="this.style.display='none';">
                     </div>
                 </div>
                 <a href="#productos" class="btn">Ver más</a>
@@ -381,28 +387,28 @@
                 <div class="gallery-grid">
                     <div class="gallery-item">
                         <video autoplay muted loop preload="metadata" 
-                               poster="https://via.placeholder.com/300x300/ff73b9/ffffff?text=Video+Tejido">
+                               poster="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'><rect width='300' height='300' fill='%23ff73b9'/><text x='150' y='150' text-anchor='middle' dy='.3em' font-size='60' fill='white'>🧶</text></svg>">
                             <source src="Fotos/teje.mp4" type="video/mp4">
                             Tu navegador no soporta el elemento de video.
                         </video>
                     </div>
                     <div class="gallery-item">
                         <video autoplay muted loop preload="metadata" 
-                               poster="https://via.placeholder.com/300x300/c5e8e8/333333?text=Video+Granne">
+                               poster="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'><rect width='300' height='300' fill='%23c5e8e8'/><text x='150' y='150' text-anchor='middle' dy='.3em' font-size='60' fill='%23333'>🪡</text></svg>">
                             <source src="Fotos/granne.mp4" type="video/mp4">
                             Tu navegador no soporta el elemento de video.
                         </video>
                     </div>
                     <div class="gallery-item">
                         <video autoplay muted loop preload="metadata" 
-                               poster="https://via.placeholder.com/300x300/ff73b9/ffffff?text=Video+1">
+                               poster="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'><rect width='300' height='300' fill='%23ff73b9'/><text x='150' y='150' text-anchor='middle' dy='.3em' font-size='60' fill='white'>✂️</text></svg>">
                             <source src="Fotos/1.mp4" type="video/mp4">
                             Tu navegador no soporta el elemento de video.
                         </video>
                     </div>
                     <div class="gallery-item">
                         <video autoplay muted loop preload="metadata" 
-                               poster="https://via.placeholder.com/300x300/c5e8e8/333333?text=Video+Cafe">
+                               poster="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'><rect width='300' height='300' fill='%23c5e8e8'/><text x='150' y='150' text-anchor='middle' dy='.3em' font-size='60' fill='%23333'>☕</text></svg>">
                             <source src="Fotos/cafe.mp4" type="video/mp4">
                             Tu navegador no soporta el elemento de video.
                         </video>
@@ -418,7 +424,7 @@
                     <div class="blog-image">
                         <img src="Fotos/su1.jpg" alt="Blog 1" 
                              onclick="openModal(this)" style="cursor: pointer;" 
-                             onerror="this.src='https://via.placeholder.com/300x200/cccccc/ffffff?text=Blog+1'">
+                             onerror="this.style.display='none';">
                     </div>
                     <div class="blog-content">
                         <time class="blog-date" datetime="2025-05">Mayo 2025</time>
@@ -432,7 +438,7 @@
                     <div class="blog-image">
                         <img src="Fotos/granne1.jpg" alt="Blog 2" 
                              onclick="openModal(this)" style="cursor: pointer;" 
-                             onerror="this.src='https://via.placeholder.com/300x200/cccccc/ffffff?text=Blog+2'">
+                             onerror="this.style.display='none';">
                     </div>
                     <div class="blog-content">
                         <time class="blog-date" datetime="2025-04">Abril 2025</time>
@@ -446,7 +452,7 @@
                     <div class="blog-image">
                         <img src="Fotos/cubre.jpeg" alt="Blog 3" 
                              onclick="openModal(this)" style="cursor: pointer;" 
-                             onerror="this.src='https://via.placeholder.com/300x200/cccccc/ffffff?text=Blog+3'">
+                             onerror="this.style.display='none';">
                     </div>
                     <div class="blog-content">
                         <time class="blog-date" datetime="2025-03">Marzo 2025</time>
@@ -500,7 +506,7 @@
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; 2025 Tejidos Luna. Todos los derechos reservados.</p>
+            <p>&copy; <span id="current-year">2025</span> Tejidos Luna. Todos los derechos reservados.</p>
         </div>
     </footer>
 
@@ -520,19 +526,44 @@
     <button class="scroll-to-top" id="scrollToTop" aria-label="Subir al inicio"></button>
 
     <script>
-        // JavaScript optimizado y minificado
+        // Manejar errores de carga de recursos
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Tejidos Luna cargado');
+            console.log('🧶 Tejidos Luna cargado');
             
-            // Definir funciones globales necesarias
-            window.openModal = function(img) { console.log('Modal:', img.src); };
-            window.closeModal = function() { console.log('Cerrar modal'); };
-            window.prevImage = function(e) { e?.stopPropagation(); };
-            window.nextImage = function(e) { e?.stopPropagation(); };
-            window.zoomIn = function() { console.log('Zoom in'); };
-            window.zoomOut = function() { console.log('Zoom out'); };
-            window.resetZoom = function() { console.log('Reset zoom'); };
-            window.toggleMusic = function() { console.log('Toggle music'); };
+            // Actualizar año actual
+            const currentYearElement = document.getElementById('current-year');
+            if (currentYearElement) {
+                currentYearElement.textContent = new Date().getFullYear();
+            }
+            
+            // Encontrar todas las imágenes y videos
+            const images = document.querySelectorAll('img');
+            const videos = document.querySelectorAll('video');
+            
+            images.forEach(img => {
+                img.addEventListener('error', function() {
+                    console.warn('⚠️ Error cargando imagen:', this.src);
+                    this.style.display = 'none';
+                    this.alt = 'Imagen no disponible';
+                });
+            });
+            
+            videos.forEach(video => {
+                video.addEventListener('error', function() {
+                    console.warn('⚠️ Error cargando video:', this.src);
+                    this.style.display = 'none';
+                });
+            });
+            
+            // Definir funciones globales necesarias (serán sobrescritas por menu-script.js)
+            window.openModal = function(img) { console.log('📷 Modal:', img.src); };
+            window.closeModal = function() { console.log('❌ Cerrar modal'); };
+            window.prevImage = function(e) { e?.stopPropagation(); console.log('⬅️ Prev'); };
+            window.nextImage = function(e) { e?.stopPropagation(); console.log('➡️ Next'); };
+            window.zoomIn = function() { console.log('🔍 Zoom in'); };
+            window.zoomOut = function() { console.log('🔍 Zoom out'); };
+            window.resetZoom = function() { console.log('🔄 Reset zoom'); };
+            window.toggleMusic = function() { console.log('🎵 Toggle music'); };
         });
     </script>
 </body>
