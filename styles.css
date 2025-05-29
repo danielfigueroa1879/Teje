@@ -77,10 +77,25 @@ header {
     border-radius: 50%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+    transform-origin: top center;
+    animation: pendulumSwing 3s infinite alternate ease-in-out;
 }
 
 .logo-image:hover {
     transform: scale(1.1);
+    animation-play-state: paused;
+}
+
+@keyframes pendulumSwing {
+    0% {
+        transform: rotateZ(-12deg);
+    }
+    50% {
+        transform: rotateZ(12deg);
+    }
+    100% {
+        transform: rotateZ(-12deg);
+    }
 }
 
 .logo-emoji {
@@ -775,304 +790,7 @@ footer {
     font-size: 0.9rem;
 }
 
-/* Media Queries */
-@media (max-width: 768px) {
-    .logo h1 {
-        font-size: 2.2rem; /* Título más grande */
-        font-weight: 700; /* Más negrilla */
-    }
-    
-    .logo-image {
-        height: 25px;
-        margin-right: 9px;
-    }
-    
-    .logo-emoji {
-        font-size: 22px;
-        margin-right: 9px;
-    }
-
-    .mobile-menu-btn {
-        display: block;
-    }
-
-    nav ul {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background-color: rgba(250, 228, 212, 0.7); /* Fondo melocotón con 70% de transparencia */
-        backdrop-filter: blur(12px); /* Efecto de desenfoque ajustado */
-        -webkit-backdrop-filter: blur(12px); /* Para Safari */
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        border-radius: 0 0 12px 12px; /* Bordes redondeados en la parte inferior */
-        z-index: 999;
-        border: 1px solid rgba(255, 255, 255, 0.4); /* Borde ajustado */
-    }
-
-    nav ul.show {
-        display: flex;
-    }
-
-    nav ul li {
-        margin: 0;
-        text-align: center;
-        border-bottom: 1px solid rgba(51, 51, 51, 0.1); /* Borde muy sutil */
-    }
-
-    nav ul li:last-child {
-        border-bottom: none;
-    }
-
-    nav ul li a {
-        padding: 20px; /* Padding aumentado para mejor toque */
-        display: block;
-        font-size: 1.1rem; /* Tamaño de letra más legible */
-        font-weight: 600; /* Texto más grueso */
-        color: var(--dark-gray); /* Texto oscuro para mejor contraste */
-        text-transform: uppercase;
-        letter-spacing: 0.5px; /* Espaciado entre letras */
-        transition: all 0.3s ease;
-    }
-
-    nav ul li a:hover {
-        color: var(--primary-color); /* Color rosa al hacer hover */
-        background-color: rgba(255, 115, 185, 0.1); /* Fondo rosa muy sutil al hover */
-        transform: translateX(5px); /* Ligero desplazamiento al hover */
-    }
-
-    .hero h2 {
-        font-size: 2.2rem;
-    }
-
-    .hero p {
-        font-size: 1.2rem;
-    }
-
-    .featured-section {
-        padding: 40px 0;
-    }
-
-    .featured-content {
-        padding: 0 20px;
-    }
-    
-    .featured-content h2 {
-        font-size: 2rem;
-    }
-    
-    .featured-content p {
-        margin-bottom: 30px;
-        font-size: 1rem;
-    }
-    
-    .featured-images {
-        gap: 15px; /* Menor espacio entre imágenes en móvil */
-        margin-bottom: 30px;
-    }
-    
-    .featured-image img {
-        width: 150px; /* Imágenes más pequeñas en móvil para que quepan las 3 */
-        height: 150px;
-    }
-
-    .product-image,
-    .gallery-item {
-        height: 200px;
-    }
-}
-
-@media (max-width: 576px) {
-    .logo h1 {
-        font-size: 2rem; /* Título más grande para pantallas muy pequeñas */
-        font-weight: 700; /* Mantener negrilla */
-    }
-    
-    .logo-image {
-        height: 20px;
-        margin-right: 6px;
-    }
-    
-    .logo-emoji {
-        font-size: 20px;
-        margin-right: 8px;
-    }
-
-    .hero h2 {
-        font-size: 1.8rem;
-    }
-
-    .hero p {
-        font-size: 1rem;
-    }
-
-    .section-title h2,
-    .bestsellers-title,
-    .gallery-title,
-    .blog-title {
-        font-size: 2rem;
-    }
-
-    .products-grid,
-    .gallery-grid,
-    .blog-grid {
-        grid-template-columns: 1fr;
-        padding: 0 15px; /* Añadir padding para margen */
-    }
-    
-    .gallery-item {
-        margin: 0 10px; /* Margen adicional para elementos de galería */
-    }
-
-    nav ul li a {
-        font-size: 1rem; /* Tamaño ajustado para pantallas muy pequeñas */
-        font-weight: 600; /* Mantener peso */
-        padding: 18px; /* Padding ajustado */
-    }
-}
-
-/* Control de música */
-.music-control {
-    position: fixed;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    z-index: 1500;
-}
-
-.music-control button {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: rgba(250, 228, 212, 0.9);
-    border: 2px solid var(--primary-color);
-    cursor: pointer;
-    font-size: 20px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.music-control button:hover {
-    background-color: var(--primary-color);
-    transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-.music-control button.playing {
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(255, 115, 185, 0.7); }
-    70% { box-shadow: 0 0 0 10px rgba(255, 115, 185, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(255, 115, 185, 0); }
-}
-
-/* Responsive para control de música */
-@media (max-width: 768px) {
-    .music-control {
-        top: auto;
-        bottom: 80px;
-        right: 15px;
-        transform: none;
-    }
-    
-    .music-control button {
-        width: 45px;
-        height: 45px;
-        font-size: 18px;
-    }
-}
-
-/* Botón de subir arriba (solo móvil) */
-.scroll-to-top {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    right:  20px;
-    width:  40px;
-    height: 40px;
-    background-color: #FAE4D4;
-    border: 2px solid var(--dark-gray);
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 1000;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Crear triángulo con dos líneas dentro del círculo */
-.scroll-to-top::before {
-    content: '';
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    border-top: 3px solid #000;
-    border-right: 3px solid #000;
-    transform: rotate(-45deg);
-    transition: all 0.3s ease;
-}
-
-.scroll-to-top:hover {
-    background-color: var(--primary-color);
-    transform: translateY(-3px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-}
-
-.scroll-to-top:hover::before {
-    border-color: var(--white);
-    transform: rotate(-45deg) translateY(-1px);
-}
-
-.scroll-to-top.show {
-    display: flex;
-    animation: fadeInUp 0.3s ease;
-}
-
-.scroll-to-top.hide {
-    animation: fadeOutDown 0.3s ease;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeOutDown {
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    to {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-}
-
-/* Mostrar solo en móvil */
-@media (min-width: 769px) {
-    .scroll-to-top {
-        display: none !important;
-    }
-}
 /* BAILARINA DE BALLET RUBIA EN PIRUETA PARA TEJIDOS LUNA */
-/* Agregar este CSS al archivo styles.css existente */
-
 /* Contenedor de la bailarina FIJO al lado del perro */
 .ballet-dancer-container {
     position: absolute;
@@ -1405,48 +1123,6 @@ footer {
     50% { transform: translateX(-50%) scale(0.8); opacity: 0.3; }
 }
 
-/* Responsive para móvil - FIJA al lado del perro */
-@media (max-width: 768px) {
-    .ballet-dancer-container {
-        left: 90px; /* Al lado del logo en móvil */
-        top: 50%;
-        transform: translateY(-50%);
-    }
-    
-    .ballet-dancer {
-        width: 20px;  /* Más pequeña en móvil */
-        height: 40px; /* Más pequeña en móvil */
-        animation-duration: 3s; /* Más lento en móvil */
-    }
-    
-    /* Ajustes para elementos muy pequeños en móvil */
-    .ballet-dancer .head { width: 7px; height: 7px; left: 6.5px; top: 3px; }
-    .ballet-dancer .hair { width: 9px; height: 6px; left: 5.5px; top: 2px; }
-    .ballet-dancer .bun { width: 5px; height: 5px; left: 7.5px; top: 0.5px; }
-    .ballet-dancer .torso { width: 4px; height: 14px; left: 8px; top: 10px; }
-    .ballet-dancer .tutu { width: 10px; height: 5px; left: 5px; top: 20px; }
-    
-    .ballet-dancer .arm { width: 2px; height: 7px; }
-    .ballet-dancer .arm.left { left: 3px; top: 6px; }
-    .ballet-dancer .arm.right { right: 3px; top: 6px; }
-    
-    .ballet-dancer .hand { width: 2px; height: 2px; }
-    .ballet-dancer .hand.left { left: 5px; top: 3px; }
-    .ballet-dancer .hand.right { right: 5px; top: 3px; }
-    
-    .ballet-dancer .leg { width: 1.5px; height: 10px; }
-    .ballet-dancer .leg.left { left: 8px; top: 24px; }
-    .ballet-dancer .leg.right { right: 8px; top: 24px; }
-    
-    .ballet-dancer .shoe { width: 3px; height: 4px; }
-    
-    .ballet-dancer .ribbon { width: 0.5px; height: 5px; }
-    .ballet-dancer .ribbon.left-1 { bottom: 8px; left: 6px; }
-    .ballet-dancer .ribbon.left-2 { bottom: 7px; left: 7px; }
-    .ballet-dancer .ribbon.right-1 { bottom: 8px; right: 6px; }
-    .ballet-dancer .ribbon.right-2 { bottom: 7px; right: 7px; }
-}
-
 /* Efectos adicionales para mejor visualización del giro horizontal */
 .ballet-dancer * {
     backface-visibility: visible; /* Mantiene visibles ambos lados durante el giro */
@@ -1457,35 +1133,349 @@ footer {
     animation-play-state: paused;
 }
 
-
-/* Modifica esto en tu archivo styles.css */
-
-@keyframes pendulumSwing {
-    0% {
-        transform: rotateZ(-12deg); /* Aumentamos la inclinación inicial (antes era -5deg) */
+/* Media Queries - CORRECCIÓN PARA ACHICAR LOGO EN MÓVIL */
+@media (max-width: 768px) {
+    .logo h1 {
+        font-size: 2.2rem; /* Título más grande */
+        font-weight: 700; /* Más negrilla */
     }
-    50% {
-        transform: rotateZ(12deg); /* Aumentamos la inclinación al otro lado (antes era 5deg) */
+    
+    /* AQUÍ SE ACHICA LA IMAGEN corriente.png EN MÓVIL */
+    .logo-image {
+        height: 25px !important; /* FORZAMOS EL TAMAÑO PEQUEÑO */
+        margin-right: 8px !important;
+        animation: pendulumSwing 3s infinite alternate ease-in-out; /* Mantener animación */
     }
-    100% {
-        transform: rotateZ(-12deg); /* Vuelve a la posición inicial */
+    
+    .logo-emoji {
+        font-size: 22px !important; /* También achicamos el emoji de respaldo */
+        margin-right: 8px !important;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(250, 228, 212, 0.7); /* Fondo melocotón con 70% de transparencia */
+        backdrop-filter: blur(12px); /* Efecto de desenfoque ajustado */
+        -webkit-backdrop-filter: blur(12px); /* Para Safari */
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        border-radius: 0 0 12px 12px; /* Bordes redondeados en la parte inferior */
+        z-index: 999;
+        border: 1px solid rgba(255, 255, 255, 0.4); /* Borde ajustado */
+    }
+
+    nav ul.show {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 0;
+        text-align: center;
+        border-bottom: 1px solid rgba(51, 51, 51, 0.1); /* Borde muy sutil */
+    }
+
+    nav ul li:last-child {
+        border-bottom: none;
+    }
+
+    nav ul li a {
+        padding: 20px; /* Padding aumentado para mejor toque */
+        display: block;
+        font-size: 1.1rem; /* Tamaño de letra más legible */
+        font-weight: 600; /* Texto más grueso */
+        color: var(--dark-gray); /* Texto oscuro para mejor contraste */
+        text-transform: uppercase;
+        letter-spacing: 0.5px; /* Espaciado entre letras */
+        transition: all 0.3s ease;
+    }
+
+    nav ul li a:hover {
+        color: var(--primary-color); /* Color rosa al hacer hover */
+        background-color: rgba(255, 115, 185, 0.1); /* Fondo rosa muy sutil al hover */
+        transform: translateX(5px); /* Ligero desplazamiento al hover */
+    }
+
+    .hero h2 {
+        font-size: 2.2rem;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+    }
+
+    .featured-section {
+        padding: 40px 0;
+    }
+
+    .featured-content {
+        padding: 0 20px;
+    }
+    
+    .featured-content h2 {
+        font-size: 2rem;
+    }
+    
+    .featured-content p {
+        margin-bottom: 30px;
+        font-size: 1rem;
+    }
+    
+    .featured-images {
+        gap: 15px; /* Menor espacio entre imágenes en móvil */
+        margin-bottom: 30px;
+    }
+    
+    .featured-image img {
+        width: 150px; /* Imágenes más pequeñas en móvil para que quepan las 3 */
+        height: 150px;
+    }
+
+    .product-image,
+    .gallery-item {
+        height: 200px;
+    }
+    
+    /* BAILARINA TAMBIÉN SE AJUSTA PARA MÓVIL */
+    .ballet-dancer-container {
+        left: 60px !important; /* Ajustada para el logo más pequeño */
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        perspective: 150px;
+    }
+    
+    .ballet-dancer {
+        width: 18px !important; /* Más pequeña en móvil */
+        height: 36px !important; /* Más pequeña en móvil */
+        animation-duration: 3s; /* Más lento en móvil */
+    }
+    
+    .ballet-dancer::before { 
+        font-size: 5px !important; 
+        top: -3px !important; 
+    }
+    
+    .ballet-dancer::after { 
+        width: 12px !important; 
+        height: 3px !important; 
+        bottom: -2px !important; 
     }
 }
 
-.logo-image {
-    /* Mantén tus estilos existentes para .logo-image */
-    height: 40px;
-    width: auto;
-    margin-right: 12px;
+@media (max-width: 576px) {
+    .logo h1 {
+        font-size: 2rem; /* Título más grande para pantallas muy pequeñas */
+        font-weight: 700; /* Mantener negrilla */
+    }
+    
+    /* IMAGEN AÚN MÁS PEQUEÑA para móviles muy pequeños */
+    .logo-image {
+        height: 20px !important; /* FORZAMOS TAMAÑO MUY PEQUEÑO */
+        margin-right: 6px !important;
+        animation: pendulumSwing 3s infinite alternate ease-in-out; /* Mantener animación */
+    }
+    
+    .logo-emoji {
+        font-size: 18px !important;
+        margin-right: 6px !important;
+    }
+
+    .hero h2 {
+        font-size: 1.8rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .section-title h2,
+    .bestsellers-title,
+    .gallery-title,
+    .blog-title {
+        font-size: 2rem;
+    }
+
+    .products-grid,
+    .gallery-grid,
+    .blog-grid {
+        grid-template-columns: 1fr;
+        padding: 0 15px; /* Añadir padding para margen */
+    }
+    
+    .gallery-item {
+        margin: 0 10px; /* Margen adicional para elementos de galería */
+    }
+
+    nav ul li a {
+        font-size: 1rem; /* Tamaño ajustado para pantallas muy pequeñas */
+        font-weight: 600; /* Mantener peso */
+        padding: 18px; /* Padding ajustado */
+    }
+    
+    /* BAILARINA MÁS PEQUEÑA PARA MÓVILES MUY PEQUEÑOS */
+    .ballet-dancer-container {
+        left: 50px !important; /* Posición ajustada */
+    }
+    
+    .ballet-dancer {
+        width: 15px !important; /* Aún más pequeña */
+        height: 30px !important; /* Aún más pequeña */
+    }
+    
+    .ballet-dancer::before { 
+        font-size: 4px !important; 
+        top: -2px !important; 
+    }
+    
+    .ballet-dancer::after { 
+        width: 10px !important; 
+        height: 2px !important; 
+        bottom: -1px !important; 
+    }
+}
+
+/* Control de música */
+.music-control {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    z-index: 1500;
+}
+
+.music-control button {
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease; /* Mantén esto para el efecto hover */
-
-    transform-origin: top center; /* Sigue rotando desde la parte superior central */
-    animation: pendulumSwing 3s infinite alternate ease-in-out; /* Velocidad ajustada a 3s (antes 4s) */
+    background-color: rgba(250, 228, 212, 0.9);
+    border: 2px solid var(--primary-color);
+    cursor: pointer;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.logo-image:hover {
-    transform: scale(1.1); /* Esto anulará la animación mientras se pasa el ratón */
-    animation-play-state: paused; /* Pausa la animación al pasar el ratón */
+.music-control button:hover {
+    background-color: var(--primary-color);
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.music-control button.playing {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 115, 185, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 115, 185, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 115, 185, 0); }
+}
+
+/* Responsive para control de música */
+@media (max-width: 768px) {
+    .music-control {
+        top: auto;
+        bottom: 80px;
+        right: 15px;
+        transform: none;
+    }
+    
+    .music-control button {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+}
+
+/* Botón de subir arriba (solo móvil) */
+.scroll-to-top {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right:  20px;
+    width:  40px;
+    height: 40px;
+    background-color: #FAE4D4;
+    border: 2px solid var(--dark-gray);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Crear triángulo con dos líneas dentro del círculo */
+.scroll-to-top::before {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-top: 3px solid #000;
+    border-right: 3px solid #000;
+    transform: rotate(-45deg);
+    transition: all 0.3s ease;
+}
+
+.scroll-to-top:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.scroll-to-top:hover::before {
+    border-color: var(--white);
+    transform: rotate(-45deg) translateY(-1px);
+}
+
+.scroll-to-top.show {
+    display: flex;
+    animation: fadeInUp 0.3s ease;
+}
+
+.scroll-to-top.hide {
+    animation: fadeOutDown 0.3s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOutDown {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+
+/* Mostrar solo en móvil */
+@media (min-width: 769px) {
+    .scroll-to-top {
+        display: none !important;
+    }
 }
