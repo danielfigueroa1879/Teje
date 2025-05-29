@@ -783,13 +783,13 @@ footer {
     }
     
     .logo-image {
-        height: 28px;
-        margin-right: 10px;
+        height: 25px;
+        margin-right: 9px;
     }
     
     .logo-emoji {
-        font-size: 30px;
-        margin-right: 10px;
+        font-size: 22px;
+        margin-right: 9px;
     }
 
     .mobile-menu-btn {
@@ -896,7 +896,7 @@ footer {
     }
     
     .logo-emoji {
-        font-size: 28px;
+        font-size: 20px;
         margin-right: 8px;
     }
 
