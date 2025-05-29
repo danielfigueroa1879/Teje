@@ -942,12 +942,13 @@ footer {
 }
 
 /* Control de música */
+/* Control de música - CORREGIDO SUTILMENTE PARA PC */
 .music-control {
     position: fixed;
     top: 50%;
     right: 20px;
     transform: translateY(-50%);
-    z-index: 1500;
+    z-index: 1600; /* LIGERO AUMENTO para estar por encima del header */
 }
 
 .music-control button {
