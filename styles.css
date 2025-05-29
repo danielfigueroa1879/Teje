@@ -776,6 +776,13 @@ footer {
     font-size: 0.9rem;
 }
 
+@media (max-width: 768px) {
+    /* Header más angosto en móvil */
+    header {
+        padding: 5px 0 !important; /* MENOS PADDING VERTICAL */
+    }
+
+
 /* Media Queries */
 @media (max-width: 768px) {
     .logo h1 {
