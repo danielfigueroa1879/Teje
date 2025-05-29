@@ -783,8 +783,8 @@ footer {
     }
     
     .logo-image {
-        height: 35px;
-        margin-right: 10px;
+        height: 75px; !important;  
+        margin-right: 10px; !important; 
     }
     
     .logo-emoji {
