@@ -1278,7 +1278,7 @@ footer {
     
     /* IMAGEN AÚN MÁS PEQUEÑA para móviles muy pequeños */
     .logo-image {
-        height: 20px !important; /* FORZAMOS TAMAÑO MUY PEQUEÑO */
+        height: 30px !important; /* FORZAMOS TAMAÑO MUY PEQUEÑO */
         margin-right: 6px !important;
         animation: pendulumSwing 3s infinite alternate ease-in-out; /* Mantener animación */
     }
