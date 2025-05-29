@@ -942,16 +942,13 @@ footer {
 }
 
 /* Control de música */
-/* Control de música - SOLUCIONADO */
+/* Control de música */
 .music-control {
     position: fixed;
     top: 50%;
     right: 20px;
     transform: translateY(-50%);
-    z-index: 9999; /* Z-index alto para estar por encima de todo */
-    display: block;
-    visibility: visible;
-    opacity: 1;
+    z-index: 1600;
 }
 
 .music-control button {
