@@ -59,7 +59,7 @@ header {
     padding: 5px 0;
     width: 100%;
     display: flex;
-    flex-direction: row;  /* CAMBIAR: de column a row para poner lado a lado */
+     flex-direction: row-reverse;  /* CAMBIAR: row-reverse invierte el orden */
     align-items: center;  /* CAMBIAR: para alinear verticalmente */
     justify-content: flex-start;  /* CAMBIAR: todo empieza desde la izquierda */
 }
