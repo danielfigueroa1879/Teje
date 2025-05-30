@@ -39,7 +39,7 @@ body {
 header {
     background-color: #FAE4D4; /* Nuevo color melocotón */
     color: var(--dark-gray);
-    padding: 7px 0;
+    padding: 5px 0;
     width: 100%;
     position: fixed; /* Agregado para que sea fijo */
     top: 0;
@@ -56,7 +56,7 @@ header {
 
 .logo {
     text-align: center;
-    padding: 7px 0;
+    padding: 9px 0;
     width: 100%;
     display: flex;
     flex-direction: column;
