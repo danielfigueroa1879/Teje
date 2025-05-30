@@ -104,6 +104,8 @@ header {
     font-weight: 500;
     color: var(--dark-gray); /* Cambiado a oscuro para mejor contraste con fondo claro */
     margin: 5px 0 0 0;
+    order: 2;  /* AGREGAR: imágenes van segundo (derecha) */
+    margin-left: 0;  /* QUITAR el margin-left: auto */
 }
 
 /* Navegación principal */
