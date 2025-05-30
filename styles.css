@@ -100,7 +100,7 @@ header {
     font-size: 2.5rem;
     font-weight: 500;
     color: var(--dark-gray); /* Cambiado a oscuro para mejor contraste con fondo claro */
-    margin: 0;
+    margin: 5px 0 0 0;
 }
 
 /* Navegación principal */
