@@ -103,7 +103,6 @@ header {
     font-size: 2.5rem;
     font-weight: 500;
     color: var(--dark-gray); /* Cambiado a oscuro para mejor contraste con fondo claro */
-    order: 2;  /* AGREGAR: imágenes van segundo (derecha) */
     margin-right: auto;  /* AGREGAR: empuja las imágenes a la derecha */
 }
 
