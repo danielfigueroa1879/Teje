@@ -778,22 +778,25 @@ footer {
 /* Media Queries */
 @media (max-width: 768px) {
     header {
-        padding: 3px 0;
+        padding: 2px 0;
     }
     
     .logo {
-        padding: 3px 0;
+        padding: 2px 0;
     }
     .logo-container {
         margin-bottom: 1px;  /* AÚN MENOS margen en móvil */
     }
-    
+    .logo-container {
+        margin-bottom: 1px;
+    }
     .hero {
         margin-top: 55px;
     }
     .logo h1 {
         font-size: 2.1rem; /* Título más grande */
         font-weight: 700; /* Más negrilla */
+        margin: 2px 0 0 0;  /* Título más abajo en móvil */
     }
     
     .logo-image {
@@ -802,7 +805,7 @@ footer {
     }
     
     .logo-emoji {
-        font-size: 30px;
+        font-size: 35px;
         margin-right: 10px;
     }
 
@@ -900,15 +903,17 @@ footer {
 
 @media (max-width: 576px) {
     header {
-        padding: 3px 0;  /* MÁS CHICO en celular */
+        padding: 1px 0;  /* MÁS CHICO en celular */
     }
     
     .logo {
-        padding: 3px 0;  /* MÁS CHICO en celular */
+        padding: 1px 0;  /* MÁS CHICO en celular */
     }
-    
+    .logo h1 {
+        margin: 1px 0 0 0;  /* Título más abajo en celular */
+    }
     .hero {
-        margin-top: 60px;  /* Ajustar para header más chico */
+        margin-top: 50px;  /* Ajustar para header más chico */
     }
     .logo h1 {
         font-size: 2rem; /* Título más grande para pantallas muy pequeñas */
