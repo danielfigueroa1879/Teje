@@ -785,6 +785,18 @@ footer {
     .logo {
         padding: 2px 0;
     }
+.logo {
+        text-align: center;  /* CENTRADO en móvil */
+        align-items: center;  /* CENTRADO en móvil */
+    }
+    
+    .logo-container {
+        justify-content: center;  /* CENTRADO en móvil */
+        margin-bottom: 1px;
+        margin-top: 2px;
+    }
+
+    
     .logo-container {
         margin-bottom: 1px;  /* AÚN MENOS margen en móvil */
     }
