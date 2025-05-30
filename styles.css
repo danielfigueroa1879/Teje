@@ -67,7 +67,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
 .logo-image {
@@ -783,6 +783,9 @@ footer {
     
     .logo {
         padding: 3px 0;
+    }
+    .logo-container {
+        margin-bottom: 1px;  /* AÚN MENOS margen en móvil */
     }
     
     .hero {
