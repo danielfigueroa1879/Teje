@@ -55,12 +55,12 @@ header {
 }
 
 .logo {
-    text-align: center;
+    text-align: left;
     padding: 5px 0;
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;  /* CAMBIAR: de center a flex-start */
 }
 
 .logo-container {
