@@ -785,7 +785,7 @@ footer {
     .logo {
         padding: 2px 0;
     }
-.logo {
+    .logo {
         text-align: center;  /* CENTRADO en móvil */
         align-items: center;  /* CENTRADO en móvil */
     }
@@ -807,7 +807,7 @@ footer {
         margin-top: 55px;
     }
     .logo h1 {
-        font-size: 2.1rem; /* Título más grande */
+        font-size: 1.8rem; /* Título más grande */
         font-weight: 700; /* Más negrilla */
         margin: 2px 0 0 0;  /* Título más abajo en móvil */
     }
