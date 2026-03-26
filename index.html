@@ -345,27 +345,35 @@
             <p style="text-align: center; margin-bottom: 30px;">Te invitamos a conocer nuestro proceso creativo, donde cada pieza está hecha a mano para cumplir con tus demandas creativas. ¡Déjanos ser parte de tu próximo proyecto!</p>
             
             <div class="gallery-grid">
-                    <div class="gallery-item">
-                    <video autoplay muted loop poster="https://via.placeholder.com/300x300/ff73b9/ffffff?text=Video+Tejido" preload="metadata">
-                        <source src="Fotos/teje.mp4" type="video/mp4">
+                <div class="gallery-item">
+                    <video class="lazy-video" muted loop playsinline
+                        poster="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%23ff73b9'/%3E%3Ctext x='150' y='165' text-anchor='middle' font-size='60' fill='white'%3E%E2%96%B6%3C/text%3E%3C/svg%3E"
+                        preload="none" data-src="Fotos/teje.mp4">
+                        <source data-src="Fotos/teje.mp4" type="video/mp4">
                         Tu navegador no soporta el elemento de video.
                     </video>
                 </div>
                 <div class="gallery-item">
-                    <video autoplay muted loop poster="https://via.placeholder.com/300x300/c5e8e8/333333?text=Video+Granne" preload="metadata">
-                        <source src="Fotos/granne.mp4" type="video/mp4">
+                    <video class="lazy-video" muted loop playsinline
+                        poster="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%23c5e8e8'/%3E%3Ctext x='150' y='165' text-anchor='middle' font-size='60' fill='%23333'%3E%E2%96%B6%3C/text%3E%3C/svg%3E"
+                        preload="none" data-src="Fotos/granne.mp4">
+                        <source data-src="Fotos/granne.mp4" type="video/mp4">
                         Tu navegador no soporta el elemento de video.
                     </video>
                 </div>
                 <div class="gallery-item">
-                    <video autoplay muted loop poster="https://via.placeholder.com/300x300/ff73b9/ffffff?text=Video+1" preload="metadata">
-                        <source src="Fotos/1.mp4" type="video/mp4">
+                    <video class="lazy-video" muted loop playsinline
+                        poster="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%23ff73b9'/%3E%3Ctext x='150' y='165' text-anchor='middle' font-size='60' fill='white'%3E%E2%96%B6%3C/text%3E%3C/svg%3E"
+                        preload="none" data-src="Fotos/1.mp4">
+                        <source data-src="Fotos/1.mp4" type="video/mp4">
                         Tu navegador no soporta el elemento de video.
                     </video>
                 </div>
                 <div class="gallery-item">
-                    <video autoplay muted loop poster="https://via.placeholder.com/300x300/c5e8e8/333333?text=Video+Cafe" preload="metadata">
-                        <source src="Fotos/cafe.mp4" type="video/mp4">
+                    <video class="lazy-video" muted loop playsinline
+                        poster="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%23c5e8e8'/%3E%3Ctext x='150' y='165' text-anchor='middle' font-size='60' fill='%23333'%3E%E2%96%B6%3C/text%3E%3C/svg%3E"
+                        preload="none" data-src="Fotos/cafe.mp4">
+                        <source data-src="Fotos/cafe.mp4" type="video/mp4">
                         Tu navegador no soporta el elemento de video.
                     </video>
                 </div>
@@ -439,10 +447,10 @@
         </div>
     </footer>
 
-    <!-- Banner de instalación PWA -->
+    <!-- Banner Android/Chrome: aparece automáticamente -->
     <div id="pwa-install-banner" class="pwa-install-banner" style="display:none;" role="banner" aria-label="Instalar aplicación">
         <div class="pwa-install-content">
-            <img src="Fotos/icon.svg" alt="Logo Tejidos Luna" class="pwa-install-icon">
+            <img src="favicon/apple-touch-icon.png" alt="Logo Tejidos Luna" class="pwa-install-icon">
             <div class="pwa-install-text">
                 <strong>Tejidos Luna</strong>
                 <span>Instala la app en tu dispositivo</span>
@@ -454,8 +462,22 @@
         </div>
     </div>
 
-    <!-- Audio de fondo -->
-    <audio id="backgroundMusic" loop preload="auto">
+    <!-- Banner iOS/iPhone: instrucciones manuales (Safari no tiene prompt automático) -->
+    <div id="pwa-ios-banner" class="pwa-install-banner pwa-ios-banner" style="display:none;" role="banner" aria-label="Instalar en iPhone">
+        <div class="pwa-install-content">
+            <img src="favicon/apple-touch-icon.png" alt="Logo Tejidos Luna" class="pwa-install-icon">
+            <div class="pwa-install-text">
+                <strong>Agregar a inicio</strong>
+                <span>Toca <strong>Compartir</strong> <span class="ios-share-icon">⬆</span> → "Agregar a pantalla de inicio"</span>
+            </div>
+        </div>
+        <div class="pwa-install-actions">
+            <button id="pwa-ios-close" class="pwa-install-close" aria-label="Cerrar">✕</button>
+        </div>
+    </div>
+
+    <!-- Audio de fondo: preload="none" para no bloquear la carga inicial -->
+    <audio id="backgroundMusic" loop preload="none">
         <source src="Fotos/musica.mp3" type="audio/mpeg">
         <source src="Fotos/musica.ogg" type="audio/ogg">
         Tu navegador no soporta el elemento de audio.
@@ -482,9 +504,9 @@
         });
     </script>
 
-    <!-- ===== PWA: Service Worker + Install Prompt ===== -->
+    <!-- ===== PWA: Service Worker + Install Prompt + Lazy Videos ===== -->
     <script>
-    // Registro del Service Worker
+    // ---- 1. Registro del Service Worker ----
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('/sw.js')
@@ -493,38 +515,87 @@
         });
     }
 
-    // Botón de instalación PWA (Android/Chrome)
-    let deferredPrompt = null;
-    const installBanner = document.getElementById('pwa-install-banner');
-    const installBtn    = document.getElementById('pwa-install-btn');
-    const installClose  = document.getElementById('pwa-install-close');
+    // ---- 2. Lazy load de videos con IntersectionObserver ----
+    document.addEventListener('DOMContentLoaded', () => {
+        const lazyVideos = document.querySelectorAll('video.lazy-video');
+        if ('IntersectionObserver' in window) {
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const video = entry.target;
+                        // Cargar fuentes del video
+                        video.querySelectorAll('source[data-src]').forEach(source => {
+                            source.src = source.dataset.src;
+                        });
+                        if (video.dataset.src) video.src = video.dataset.src;
+                        video.load();
+                        video.play().catch(() => {});
+                        videoObserver.unobserve(video);
+                    }
+                });
+            }, { rootMargin: '200px' });
+            lazyVideos.forEach(v => videoObserver.observe(v));
+        } else {
+            // Fallback: cargar todos los videos si no hay IntersectionObserver
+            lazyVideos.forEach(video => {
+                video.querySelectorAll('source[data-src]').forEach(s => s.src = s.dataset.src);
+                if (video.dataset.src) video.src = video.dataset.src;
+                video.load();
+                video.play().catch(() => {});
+            });
+        }
+    });
 
+    // ---- 3. Install Banner (Android/Chrome) ----
+    let deferredPrompt = null;
+
+    function showBanner(id) {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'flex';
+    }
+    function hideBanner(id) {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+    }
+
+    // Capturar evento ANTES de DOMContentLoaded (puede llegar en cualquier momento)
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredPrompt = e;
-        if (installBanner) installBanner.style.display = 'flex';
+        showBanner('pwa-install-banner');
     });
 
-    if (installBtn) {
-        installBtn.addEventListener('click', async () => {
-            if (!deferredPrompt) return;
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            console.log('Instalación:', outcome);
-            deferredPrompt = null;
-            if (installBanner) installBanner.style.display = 'none';
-        });
-    }
-
-    if (installClose) {
-        installClose.addEventListener('click', () => {
-            if (installBanner) installBanner.style.display = 'none';
-        });
-    }
-
     window.addEventListener('appinstalled', () => {
-        console.log('Tejidos Luna instalada como app');
-        if (installBanner) installBanner.style.display = 'none';
+        hideBanner('pwa-install-banner');
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Botón instalar (Android)
+        const installBtn = document.getElementById('pwa-install-btn');
+        if (installBtn) {
+            installBtn.addEventListener('click', async () => {
+                if (!deferredPrompt) return;
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                deferredPrompt = null;
+                hideBanner('pwa-install-banner');
+            });
+        }
+        document.getElementById('pwa-install-close')?.addEventListener('click',
+            () => hideBanner('pwa-install-banner'));
+
+        // Botón cerrar iOS
+        document.getElementById('pwa-ios-close')?.addEventListener('click',
+            () => hideBanner('pwa-ios-banner'));
+
+        // ---- 4. Detección iOS: mostrar instrucciones manuales ----
+        const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent.toLowerCase());
+        const isStandalone = ('standalone' in navigator && navigator.standalone)
+                          || window.matchMedia('(display-mode: standalone)').matches;
+        if (isIOS && !isStandalone) {
+            // Esperar 3s para no interrumpir la carga inicial
+            setTimeout(() => showBanner('pwa-ios-banner'), 3000);
+        }
     });
     </script>
 </body>

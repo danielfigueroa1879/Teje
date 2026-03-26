@@ -1539,26 +1539,53 @@ footer {
 }
 
 /* ===== BANNER DE INSTALACIÓN PWA ===== */
+
+/* Móvil: banner en la PARTE INFERIOR */
 .pwa-install-banner {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
+    top: auto;
     background: linear-gradient(135deg, #fff5f9 0%, #ffffff 100%);
     border-top: 2px solid var(--primary-color);
+    border-radius: 0;
     padding: 12px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
     z-index: 9999;
-    box-shadow: 0 -4px 20px rgba(255, 115, 185, 0.2);
-    animation: slideUp 0.4s ease-out;
+    box-shadow: 0 -4px 20px rgba(255, 115, 185, 0.25);
+    animation: slideBannerUp 0.4s ease-out;
 }
 
-@keyframes slideUp {
+@keyframes slideBannerUp {
     from { transform: translateY(100%); opacity: 0; }
     to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* Escritorio: banner en la PARTE SUPERIOR debajo del header */
+@media (min-width: 769px) {
+    .pwa-install-banner {
+        top: 80px;        /* justo debajo del header fijo */
+        bottom: auto;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        width: auto;
+        min-width: 420px;
+        max-width: 620px;
+        border-radius: 14px;
+        border: 2px solid var(--primary-color);
+        border-top: 2px solid var(--primary-color);
+        box-shadow: 0 8px 32px rgba(255, 115, 185, 0.25);
+        animation: slideBannerDown 0.4s ease-out;
+    }
+    @keyframes slideBannerDown {
+        from { transform: translateX(-50%) translateY(-20px); opacity: 0; }
+        to   { transform: translateX(-50%) translateY(0);     opacity: 1; }
+    }
 }
 
 .pwa-install-content {
@@ -1661,12 +1688,34 @@ footer {
     }
 }
 
+/* Banner iOS: fondo levemente azulado para diferenciar */
+.pwa-ios-banner {
+    background: linear-gradient(135deg, #f0f8ff 0%, #ffffff 100%);
+    border-color: #007aff;
+    box-shadow: 0 -4px 20px rgba(0, 122, 255, 0.15);
+}
+.pwa-ios-banner .pwa-install-text strong {
+    color: #007aff;
+}
+.ios-share-icon {
+    display: inline-block;
+    font-style: normal;
+    font-weight: bold;
+    color: #007aff;
+}
+@media (min-width: 769px) {
+    .pwa-ios-banner {
+        border-color: #007aff;
+    }
+}
+
 /* Ajustes cuando app está instalada (standalone mode) */
 @media (display-mode: standalone) {
     header, .header {
         padding-top: env(safe-area-inset-top, 0px);
     }
-    .pwa-install-banner {
+    .pwa-install-banner,
+    .pwa-ios-banner {
         display: none !important;
     }
 }

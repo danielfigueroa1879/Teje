@@ -326,15 +326,21 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleInteraction(e) {
         // No interferir con otras funcionalidades
         if (musicStarted) return;
-        
+
+        // Guard: closest() solo existe en nodos Element, no en Text ni otros
+        if (!e.target || typeof e.target.closest !== 'function') {
+            startMusic();
+            return;
+        }
+
         // No iniciar música si el usuario está interactuando con controles específicos
-        if (e.target.closest('.modal-nav') || 
-            e.target.closest('.modal-controls') || 
+        if (e.target.closest('.modal-nav') ||
+            e.target.closest('.modal-controls') ||
             e.target.closest('#musicToggle') ||
             e.target.closest('.close')) {
             return;
         }
-        
+
         startMusic();
     }
 

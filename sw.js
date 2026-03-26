@@ -1,5 +1,5 @@
 // Service Worker - Tejidos Luna PWA
-const CACHE_NAME = 'tejidos-luna-v2';
+const CACHE_NAME = 'tejidos-luna-v3';
 
 // Archivos esenciales para funcionamiento offline
 const STATIC_ASSETS = [
@@ -68,8 +68,11 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       fetch(event.request)
         .then((response) => {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          // No cachear respuestas parciales (206) ni errores
+          if (response.ok && response.status !== 206) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          }
           return response;
         })
         .catch(() => caches.match(event.request).then((cached) => cached || caches.match('/index.html')))
@@ -82,7 +85,8 @@ self.addEventListener('fetch', (event) => {
     caches.match(event.request).then((cached) => {
       if (cached) return cached;
       return fetch(event.request).then((response) => {
-        if (response.ok) {
+        // Solo cachear respuestas completas y exitosas (no 206 Partial Content)
+        if (response.ok && response.status !== 206) {
           const clone = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
         }
