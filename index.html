@@ -345,30 +345,28 @@
             <p style="text-align: center; margin-bottom: 30px;">Te invitamos a conocer nuestro proceso creativo, donde cada pieza está hecha a mano para cumplir con tus demandas creativas. ¡Déjanos ser parte de tu próximo proyecto!</p>
             
             <div class="gallery-grid">
-                <!-- Video 1: carga inmediata (visible al llegar a la sección) -->
                 <div class="gallery-item">
-                    <video class="gallery-video" muted loop playsinline autoplay preload="metadata"
-                        aria-label="Proceso creativo - tejido">
+                    <video autoplay muted loop playsinline preload="metadata">
                         <source src="Fotos/teje.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <!-- Videos 2-4: lazy — cargan solo cuando son visibles -->
-                <div class="gallery-item">
-                    <video class="gallery-video lazy-video" muted loop playsinline
-                        preload="none" aria-label="Proceso creativo - granne">
-                        <source data-src="Fotos/granne.mp4" type="video/mp4">
+                        Tu navegador no soporta el elemento de video.
                     </video>
                 </div>
                 <div class="gallery-item">
-                    <video class="gallery-video lazy-video" muted loop playsinline
-                        preload="none" aria-label="Proceso creativo - demostración">
-                        <source data-src="Fotos/1.mp4" type="video/mp4">
+                    <video autoplay muted loop playsinline preload="metadata">
+                        <source src="Fotos/granne.mp4" type="video/mp4">
+                        Tu navegador no soporta el elemento de video.
                     </video>
                 </div>
                 <div class="gallery-item">
-                    <video class="gallery-video lazy-video" muted loop playsinline
-                        preload="none" aria-label="Proceso creativo - café">
-                        <source data-src="Fotos/cafe.mp4" type="video/mp4">
+                    <video autoplay muted loop playsinline preload="metadata">
+                        <source src="Fotos/1.mp4" type="video/mp4">
+                        Tu navegador no soporta el elemento de video.
+                    </video>
+                </div>
+                <div class="gallery-item">
+                    <video autoplay muted loop playsinline preload="metadata">
+                        <source src="Fotos/cafe.mp4" type="video/mp4">
+                        Tu navegador no soporta el elemento de video.
                     </video>
                 </div>
             </div>
@@ -509,7 +507,7 @@
     <!-- Botón scroll to top (solo móvil) -->
     <button class="scroll-to-top" id="scrollToTop" aria-label="Subir al inicio"></button>
 
-    <!-- ===== PWA + Videos lazy ===== -->
+    <!-- ===== PWA ===== -->
     <script>
     // ── Service Worker ────────────────────────────────────────────────────────
     if ('serviceWorker' in navigator) {
@@ -517,34 +515,6 @@
             navigator.serviceWorker.register('/sw.js').catch(function() {});
         });
     }
-
-    // ── Lazy-load videos 2-4 (solo cuando son visibles) ──────────────────────
-    document.addEventListener('DOMContentLoaded', function() {
-        var lazyVideos = document.querySelectorAll('video.lazy-video');
-        if (!lazyVideos.length) return;
-
-        function loadVideo(video) {
-            video.querySelectorAll('source[data-src]').forEach(function(s) {
-                s.src = s.dataset.src;
-            });
-            video.preload = 'metadata';
-            video.load();
-            video.play().catch(function() {});
-        }
-
-        if ('IntersectionObserver' in window) {
-            var obs = new IntersectionObserver(function(entries) {
-                entries.forEach(function(entry) {
-                    if (!entry.isIntersecting) return;
-                    loadVideo(entry.target);
-                    obs.unobserve(entry.target);
-                });
-            }, { rootMargin: '300px' });
-            lazyVideos.forEach(function(v) { obs.observe(v); });
-        } else {
-            lazyVideos.forEach(loadVideo);
-        }
-    });
 
     // ── PWA Install Banner (solo celular — desktop lo oculta el CSS) ─────────
     var deferredPrompt = null;
