@@ -469,22 +469,13 @@
         </div>
     </footer>
 
-    <!-- Banner Android/Chrome: aparece automáticamente -->
     <!-- Banner Android/Chrome: aparece cuando Chrome lanza beforeinstallprompt -->
     <div id="pwa-install-banner" class="pwa-install-banner" role="banner" aria-label="Instalar aplicación">
         <div class="pwa-install-content">
-            <!-- Ícono inline: sin descarga, aparece instantáneo -->
-            <svg class="pwa-install-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <rect width="64" height="64" rx="14" fill="#fff5f9"/>
-                <circle cx="44" cy="18" r="12" fill="#FDDCB0"/>
-                <circle cx="49" cy="15" r="11" fill="#fff5f9"/>
-                <circle cx="26" cy="22" r="5" fill="#ff73b9"/>
-                <ellipse cx="26" cy="20" rx="3" ry="2.5" fill="#e0569e"/>
-                <line x1="26" y1="27" x2="26" y2="40" stroke="#ff73b9" stroke-width="3" stroke-linecap="round"/>
-                <line x1="21" y1="31" x2="31" y2="33" stroke="#ff73b9" stroke-width="2.5" stroke-linecap="round"/>
-                <line x1="23" y1="40" x2="22" y2="53" stroke="#ff73b9" stroke-width="3" stroke-linecap="round"/>
-                <line x1="29" y1="40" x2="34" y2="48" stroke="#ff73b9" stroke-width="3" stroke-linecap="round"/>
-            </svg>
+            <picture>
+                <source srcset="Fotos/luna.webp" type="image/webp">
+                <img src="Fotos/luna.png" alt="Tejidos Luna" class="pwa-install-icon">
+            </picture>
             <div class="pwa-install-text">
                 <strong>Tejidos Luna</strong>
                 <span>Instala la app en tu dispositivo</span>
@@ -499,17 +490,10 @@
     <!-- Banner iOS/iPhone: instrucciones manuales -->
     <div id="pwa-ios-banner" class="pwa-install-banner pwa-ios-banner" role="banner" aria-label="Instalar en iPhone">
         <div class="pwa-install-content">
-            <svg class="pwa-install-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <rect width="64" height="64" rx="14" fill="#fff5f9"/>
-                <circle cx="44" cy="18" r="12" fill="#FDDCB0"/>
-                <circle cx="49" cy="15" r="11" fill="#fff5f9"/>
-                <circle cx="26" cy="22" r="5" fill="#ff73b9"/>
-                <ellipse cx="26" cy="20" rx="3" ry="2.5" fill="#e0569e"/>
-                <line x1="26" y1="27" x2="26" y2="40" stroke="#ff73b9" stroke-width="3" stroke-linecap="round"/>
-                <line x1="21" y1="31" x2="31" y2="33" stroke="#ff73b9" stroke-width="2.5" stroke-linecap="round"/>
-                <line x1="23" y1="40" x2="22" y2="53" stroke="#ff73b9" stroke-width="3" stroke-linecap="round"/>
-                <line x1="29" y1="40" x2="34" y2="48" stroke="#ff73b9" stroke-width="3" stroke-linecap="round"/>
-            </svg>
+            <picture>
+                <source srcset="Fotos/luna.webp" type="image/webp">
+                <img src="Fotos/luna.png" alt="Tejidos Luna" class="pwa-install-icon">
+            </picture>
             <div class="pwa-install-text">
                 <strong>Agregar a inicio</strong>
                 <span>Toca <strong>Compartir ⬆</strong> → "Agregar a pantalla de inicio"</span>
@@ -562,7 +546,10 @@
 
     function showBanner(id) {
         var el = document.getElementById(id);
-        if (el) el.classList.add('pwa-visible');
+        if (!el) return;
+        el.classList.add('pwa-visible');
+        // Auto-ocultar después de 10 segundos
+        setTimeout(function() { hideBanner(id); }, 10000);
     }
     function hideBanner(id) {
         var el = document.getElementById(id);
