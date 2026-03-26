@@ -515,7 +515,18 @@
         });
     }
 
-    // ---- 2. Lazy load de videos con IntersectionObserver ----
+    // ---- 2. Medir altura real del header y fijar --header-h ----
+    function setHeaderHeight() {
+        const h = document.querySelector('header');
+        if (h) {
+            document.documentElement.style.setProperty('--header-h', h.offsetHeight + 'px');
+        }
+    }
+    // Ejecutar al cargar y al cambiar tamaño de ventana
+    document.addEventListener('DOMContentLoaded', setHeaderHeight);
+    window.addEventListener('resize', setHeaderHeight);
+
+    // ---- 3. Lazy load de videos con IntersectionObserver ----
     document.addEventListener('DOMContentLoaded', () => {
         const lazyVideos = document.querySelectorAll('video.lazy-video');
         if ('IntersectionObserver' in window) {
