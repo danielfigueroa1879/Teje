@@ -1,5 +1,5 @@
 // Service Worker - Tejidos Luna PWA
-const CACHE_NAME = 'tejidos-luna-v5';
+const CACHE_NAME = 'tejidos-luna-v6';
 
 // Archivos esenciales para funcionamiento offline
 const STATIC_ASSETS = [
