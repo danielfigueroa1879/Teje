@@ -345,36 +345,48 @@
             <p style="text-align: center; margin-bottom: 30px;">Te invitamos a conocer nuestro proceso creativo, donde cada pieza está hecha a mano para cumplir con tus demandas creativas. ¡Déjanos ser parte de tu próximo proyecto!</p>
             
             <div class="gallery-grid">
-                <div class="gallery-item">
-                    <video class="lazy-video" muted loop playsinline
-                        poster="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%23ff73b9'/%3E%3Ctext x='150' y='165' text-anchor='middle' font-size='60' fill='white'%3E%E2%96%B6%3C/text%3E%3C/svg%3E"
-                        preload="none" data-src="Fotos/teje.mp4">
+                <!-- Video 1: teje.mp4 -->
+                <div class="gallery-item vid-loading">
+                    <video class="lazy-video"
+                        muted loop playsinline autoplay
+                        preload="none"
+                        data-src="Fotos/teje.mp4"
+                        poster="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Crect width='300' height='400' fill='%23FAE4D4'/%3E%3Ccircle cx='150' cy='180' r='40' fill='%23ff73b9' opacity='0.3'/%3E%3C/svg%3E"
+                        aria-label="Video proceso creativo tejido">
                         <source data-src="Fotos/teje.mp4" type="video/mp4">
-                        Tu navegador no soporta el elemento de video.
                     </video>
                 </div>
-                <div class="gallery-item">
-                    <video class="lazy-video" muted loop playsinline
-                        poster="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%23c5e8e8'/%3E%3Ctext x='150' y='165' text-anchor='middle' font-size='60' fill='%23333'%3E%E2%96%B6%3C/text%3E%3C/svg%3E"
-                        preload="none" data-src="Fotos/granne.mp4">
+                <!-- Video 2: granne.mp4 -->
+                <div class="gallery-item vid-loading">
+                    <video class="lazy-video"
+                        muted loop playsinline autoplay
+                        preload="none"
+                        data-src="Fotos/granne.mp4"
+                        poster="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Crect width='300' height='400' fill='%23c5e8e8'/%3E%3Ccircle cx='150' cy='180' r='40' fill='%23333' opacity='0.2'/%3E%3C/svg%3E"
+                        aria-label="Video proceso creativo granne">
                         <source data-src="Fotos/granne.mp4" type="video/mp4">
-                        Tu navegador no soporta el elemento de video.
                     </video>
                 </div>
-                <div class="gallery-item">
-                    <video class="lazy-video" muted loop playsinline
-                        poster="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%23ff73b9'/%3E%3Ctext x='150' y='165' text-anchor='middle' font-size='60' fill='white'%3E%E2%96%B6%3C/text%3E%3C/svg%3E"
-                        preload="none" data-src="Fotos/1.mp4">
+                <!-- Video 3: 1.mp4 -->
+                <div class="gallery-item vid-loading">
+                    <video class="lazy-video"
+                        muted loop playsinline autoplay
+                        preload="none"
+                        data-src="Fotos/1.mp4"
+                        poster="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Crect width='300' height='400' fill='%23FAE4D4'/%3E%3Ccircle cx='150' cy='180' r='40' fill='%23ff73b9' opacity='0.3'/%3E%3C/svg%3E"
+                        aria-label="Video proceso creativo 1">
                         <source data-src="Fotos/1.mp4" type="video/mp4">
-                        Tu navegador no soporta el elemento de video.
                     </video>
                 </div>
-                <div class="gallery-item">
-                    <video class="lazy-video" muted loop playsinline
-                        poster="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%23c5e8e8'/%3E%3Ctext x='150' y='165' text-anchor='middle' font-size='60' fill='%23333'%3E%E2%96%B6%3C/text%3E%3C/svg%3E"
-                        preload="none" data-src="Fotos/cafe.mp4">
+                <!-- Video 4: cafe.mp4 -->
+                <div class="gallery-item vid-loading">
+                    <video class="lazy-video"
+                        muted loop playsinline autoplay
+                        preload="none"
+                        data-src="Fotos/cafe.mp4"
+                        poster="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Crect width='300' height='400' fill='%23c5e8e8'/%3E%3Ccircle cx='150' cy='180' r='40' fill='%23333' opacity='0.2'/%3E%3C/svg%3E"
+                        aria-label="Video proceso creativo café">
                         <source data-src="Fotos/cafe.mp4" type="video/mp4">
-                        Tu navegador no soporta el elemento de video.
                     </video>
                 </div>
             </div>
@@ -526,33 +538,109 @@
     document.addEventListener('DOMContentLoaded', setHeaderHeight);
     window.addEventListener('resize', setHeaderHeight);
 
-    // ---- 3. Lazy load de videos con IntersectionObserver ----
+    // ---- 3. Lazy load de videos OPTIMIZADO para móvil y PC ----
     document.addEventListener('DOMContentLoaded', () => {
-        const lazyVideos = document.querySelectorAll('video.lazy-video');
+        const lazyVideos = Array.from(document.querySelectorAll('video.lazy-video'));
+        if (!lazyVideos.length) return;
+
+        // ---- Función principal de carga de un video ----
+        function loadVideo(video) {
+            if (video.dataset.loaded) return; // ya iniciado
+            video.dataset.loaded = '1';
+
+            const item = video.closest('.gallery-item');
+
+            // 1. Asignar src a los <source>
+            video.querySelectorAll('source[data-src]').forEach(s => {
+                s.src = s.dataset.src;
+                s.removeAttribute('data-src');
+            });
+            // 2. Asignar src directo al video (compatibilidad iOS/Android)
+            if (video.dataset.src) {
+                video.src = video.dataset.src;
+                video.removeAttribute('data-src');
+            }
+
+            // 3. Escuchar cuando puede reproducir
+            function onCanPlay() {
+                tryPlay(video, item);
+            }
+            video.addEventListener('canplay',  onCanPlay, { once: true });
+            video.addEventListener('canplaythrough', onCanPlay, { once: true });
+
+            // 4. Error: quitar skeleton igual
+            video.addEventListener('error', () => {
+                if (item) {
+                    item.classList.remove('vid-loading');
+                    item.classList.add('vid-loaded');
+                }
+            }, { once: true });
+
+            // 5. Iniciar carga
+            video.load();
+
+            // 6. Fallback: si en 4s no disparó canplay, mostrar igual
+            setTimeout(() => {
+                if (item && item.classList.contains('vid-loading')) {
+                    item.classList.remove('vid-loading');
+                    item.classList.add('vid-loaded');
+                    tryPlay(video, item);
+                }
+            }, 4000);
+        }
+
+        // ---- Intentar reproducir — maneja bloqueo de autoplay ----
+        function tryPlay(video, item) {
+            if (item) {
+                item.classList.remove('vid-loading');
+                item.classList.add('vid-loaded');
+            }
+            const p = video.play();
+            if (p && typeof p.then === 'function') {
+                p.catch(() => {
+                    // Autoplay bloqueado: mostrar botón "tap to play"
+                    if (item) item.classList.add('tap-to-play');
+                    // Al tocar el video, reproducir
+                    video.addEventListener('click', () => {
+                        video.play().then(() => {
+                            if (item) item.classList.remove('tap-to-play');
+                        }).catch(() => {});
+                    }, { once: true });
+                });
+            }
+        }
+
+        // ---- IntersectionObserver: cargar 600px antes de entrar en pantalla ----
         if ('IntersectionObserver' in window) {
-            const videoObserver = new IntersectionObserver((entries) => {
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        const video = entry.target;
-                        // Cargar fuentes del video
-                        video.querySelectorAll('source[data-src]').forEach(source => {
-                            source.src = source.dataset.src;
-                        });
-                        if (video.dataset.src) video.src = video.dataset.src;
-                        video.load();
-                        video.play().catch(() => {});
-                        videoObserver.unobserve(video);
+                        loadVideo(entry.target);
+                        observer.unobserve(entry.target);
                     }
                 });
-            }, { rootMargin: '200px' });
-            lazyVideos.forEach(v => videoObserver.observe(v));
+            }, {
+                rootMargin: '600px 0px', // precarga 600px antes de ser visible
+                threshold: 0.01
+            });
+            lazyVideos.forEach(v => observer.observe(v));
         } else {
-            // Fallback: cargar todos los videos si no hay IntersectionObserver
-            lazyVideos.forEach(video => {
-                video.querySelectorAll('source[data-src]').forEach(s => s.src = s.dataset.src);
-                if (video.dataset.src) video.src = video.dataset.src;
-                video.load();
-                video.play().catch(() => {});
+            // Sin IntersectionObserver: cargar todos de inmediato
+            lazyVideos.forEach(loadVideo);
+        }
+
+        // ---- En móvil: al primer scroll/touch cargar los que aún no empezaron ----
+        function loadPending() {
+            lazyVideos.forEach(v => { if (!v.dataset.loaded) loadVideo(v); });
+        }
+        document.addEventListener('scroll',     loadPending, { once: true, passive: true });
+        document.addEventListener('touchstart', loadPending, { once: true, passive: true });
+
+        // ---- Página ya visible (tab activo): verificar visibles de inmediato ----
+        if (!document.hidden) {
+            lazyVideos.forEach(v => {
+                const rect = v.getBoundingClientRect();
+                if (rect.top < window.innerHeight + 600) loadVideo(v);
             });
         }
     });
