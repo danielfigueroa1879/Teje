@@ -232,7 +232,7 @@
                     <!-- BAILARINA CON IMAGEN bailarina1.png AL LADO DEL PERRO -->
                     <div class="ballet-dancer-container">
                         <div class="ballet-dancer">
-                            <img src="Fotos/bailarina1.png" alt="Bailarina de Ballet" class="ballet-dancer-image" onerror="this.src='https://via.placeholder.com/50x75/ff73b9/ffffff?text=🩰'">
+                            <img src="Fotos/bailarina1.png" alt="Bailarina de Ballet" class="ballet-dancer-image" onerror="this.style.opacity='0'">
                         </div>
                     </div>
                 </div>
@@ -269,7 +269,7 @@
         <div class="products-grid">
             <div class="product-card">
                 <div class="product-image">
-                    <img src="./Fotos/trajeBebe.jpeg" alt="Traje de Bebé" onclick="openModal(this)" style="cursor: pointer;" onerror="this.src='https://via.placeholder.com/300x300/ff73b9/ffffff?text=Traje+de+Bebé'">
+                    <img src="./Fotos/trajeBebe.jpeg" alt="Traje de Bebé" onclick="openModal(this)" style="cursor: pointer;" loading="lazy" decoding="async" onerror="this.style.opacity='0'">
                 </div>
                 <div class="product-info">
                     <h3>Traje de Bebé</h3>
@@ -278,7 +278,7 @@
             </div>
             <div class="product-card">
                 <div class="product-image">
-                    <img src="./Fotos/trajeBebe1.jpeg" alt="Traje Bebé" onclick="openModal(this)" style="cursor: pointer;" onerror="this.src='https://via.placeholder.com/300x300/ff73b9/ffffff?text=Traje+Bebé+1'">
+                    <img src="./Fotos/trajeBebe1.jpeg" alt="Traje Bebé" onclick="openModal(this)" style="cursor: pointer;" loading="lazy" decoding="async" onerror="this.style.opacity='0'">
                 </div>
                 <div class="product-info">
                     <h3>Traje Bebé</h3>
@@ -287,7 +287,7 @@
             </div>
             <div class="product-card">
                 <div class="product-image">
-                    <img src="./Fotos/trajeBebe2.jpeg" alt="Pasamontañas De Punto" onclick="openModal(this)" style="cursor: pointer;" onerror="this.src='https://via.placeholder.com/300x300/ff73b9/ffffff?text=Pasamontañas'">
+                    <img src="./Fotos/trajeBebe2.jpeg" alt="Pasamontañas De Punto" onclick="openModal(this)" style="cursor: pointer;" loading="lazy" decoding="async" onerror="this.style.opacity='0'">
                 </div>
                 <div class="product-info">
                     <h3>Pasamontañas De Punto</h3>
@@ -296,7 +296,7 @@
             </div>
             <div class="product-card">
                 <div class="product-image">
-                    <img src="./Fotos/traje.jpeg" alt="Traje de Bebé" onclick="openModal(this)" style="cursor: pointer;" onerror="this.src='https://via.placeholder.com/300x300/ff73b9/ffffff?text=Traje+de+Bebé'">
+                    <img src="./Fotos/traje.jpeg" alt="Traje de Bebé" onclick="openModal(this)" style="cursor: pointer;" loading="lazy" decoding="async" onerror="this.style.opacity='0'">
                 </div>
                 <div class="product-info">
                     <h3>Traje de Bebé</h3>
@@ -312,13 +312,13 @@
             <p>Descubre nuestras creaciones artesanales confeccionadas con cariño y dedicación para hacer de cada pieza algo único y especial.</p>
             <div class="featured-images">
                 <div class="featured-image">
-                    <img src="Fotos/trajeMujer.jpg" alt="Tejido artesanal" onclick="openModal(this)" style="cursor: pointer;" onerror="this.src='https://via.placeholder.com/300x300/cccccc/ffffff?text=Tejido+1'">
+                    <img src="Fotos/trajeMujer.jpg" alt="Tejido artesanal" onclick="openModal(this)" style="cursor: pointer;" loading="lazy" decoding="async" onerror="this.style.opacity='0'">
                 </div>
                 <div class="featured-image">
-                    <img src="Fotos/tejido.jpg" alt="Tejido artesanal" onclick="openModal(this)" style="cursor: pointer;" onerror="this.src='https://via.placeholder.com/300x300/cccccc/ffffff?text=Tejido+2'">
+                    <img src="Fotos/tejido.jpg" alt="Tejido artesanal" onclick="openModal(this)" style="cursor: pointer;" loading="lazy" decoding="async" onerror="this.style.opacity='0'">
                 </div>
                 <div class="featured-image">
-                    <img src="Fotos/cubre.jpeg" alt="Tejido artesanal" onclick="openModal(this)" style="cursor: pointer;" onerror="this.src='https://via.placeholder.com/300x300/cccccc/ffffff?text=Tejido+3'">
+                    <img src="Fotos/cubre.jpeg" alt="Tejido artesanal" onclick="openModal(this)" style="cursor: pointer;" loading="lazy" decoding="async" onerror="this.style.opacity='0'">
                 </div>
             </div>
             <a href="#productos" class="btn">Ver más</a>
@@ -349,32 +349,30 @@
             <p style="text-align: center; margin-bottom: 30px;">Te invitamos a conocer nuestro proceso creativo, donde cada pieza está hecha a mano para cumplir con tus demandas creativas. ¡Déjanos ser parte de tu próximo proyecto!</p>
             
             <div class="gallery-grid">
-                <!-- Video 1 -->
+                <!-- Video 1: carga inmediata (visible al llegar a la sección) -->
                 <div class="gallery-item">
                     <video class="gallery-video" muted loop playsinline autoplay preload="metadata"
                         aria-label="Proceso creativo - tejido">
                         <source src="Fotos/teje.mp4" type="video/mp4">
                     </video>
                 </div>
-                <!-- Video 2 -->
+                <!-- Videos 2-4: lazy — cargan solo cuando son visibles -->
                 <div class="gallery-item">
-                    <video class="gallery-video" muted loop playsinline autoplay preload="metadata"
-                        aria-label="Proceso creativo - granne">
-                        <source src="Fotos/granne.mp4" type="video/mp4">
+                    <video class="gallery-video lazy-video" muted loop playsinline
+                        preload="none" aria-label="Proceso creativo - granne">
+                        <source data-src="Fotos/granne.mp4" type="video/mp4">
                     </video>
                 </div>
-                <!-- Video 3 -->
                 <div class="gallery-item">
-                    <video class="gallery-video" muted loop playsinline autoplay preload="metadata"
-                        aria-label="Proceso creativo - demostración">
-                        <source src="Fotos/1.mp4" type="video/mp4">
+                    <video class="gallery-video lazy-video" muted loop playsinline
+                        preload="none" aria-label="Proceso creativo - demostración">
+                        <source data-src="Fotos/1.mp4" type="video/mp4">
                     </video>
                 </div>
-                <!-- Video 4 -->
                 <div class="gallery-item">
-                    <video class="gallery-video" muted loop playsinline autoplay preload="metadata"
-                        aria-label="Proceso creativo - café">
-                        <source src="Fotos/cafe.mp4" type="video/mp4">
+                    <video class="gallery-video lazy-video" muted loop playsinline
+                        preload="none" aria-label="Proceso creativo - café">
+                        <source data-src="Fotos/cafe.mp4" type="video/mp4">
                     </video>
                 </div>
             </div>
@@ -386,7 +384,7 @@
         <div class="blog-grid">
             <div class="blog-card">
                 <div class="blog-image">
-                    <img src="Fotos/su1.jpg" alt="Blog 1" onclick="openModal(this)" style="cursor: pointer;" onerror="this.src='https://via.placeholder.com/300x200/cccccc/ffffff?text=Blog+1'">
+                    <img src="Fotos/su1.jpg" alt="Blog 1" onclick="openModal(this)" style="cursor: pointer;" loading="lazy" decoding="async" onerror="this.style.opacity='0'">
                 </div>
                 <div class="blog-content">
                     <span class="blog-date">Mayo 2025</span>
@@ -397,7 +395,7 @@
             </div>
             <div class="blog-card">
                 <div class="blog-image">
-                    <img src="Fotos/granne1.jpg" alt="Blog 2" onclick="openModal(this)" style="cursor: pointer;" onerror="this.src='https://via.placeholder.com/300x200/cccccc/ffffff?text=Blog+2'">
+                    <img src="Fotos/granne1.jpg" alt="Blog 2" onclick="openModal(this)" style="cursor: pointer;" loading="lazy" decoding="async" onerror="this.style.opacity='0'">
                 </div>
                 <div class="blog-content">
                     <span class="blog-date">Abril 2025</span>
@@ -408,7 +406,7 @@
             </div>
             <div class="blog-card">
                 <div class="blog-image">
-                    <img src="Fotos/cubre.jpeg" alt="Blog 3" onclick="openModal(this)" style="cursor: pointer;" onerror="this.src='https://via.placeholder.com/300x200/cccccc/ffffff?text=Blog+3'">
+                    <img src="Fotos/cubre.jpeg" alt="Blog 3" onclick="openModal(this)" style="cursor: pointer;" loading="lazy" decoding="async" onerror="this.style.opacity='0'">
                 </div>
                 <div class="blog-content">
                     <span class="blog-date">Marzo 2025</span>
@@ -526,133 +524,151 @@
         });
     </script>
 
-    <!-- ===== PWA: Service Worker + Install Prompt + Lazy Videos ===== -->
+    <!-- ===== PWA + Videos lazy + Performance ===== -->
     <script>
-    // ---- 1. Registro del Service Worker ----
+    // ── 1. --header-h: medir AHORA antes del primer paint ──────────────────
+    (function() {
+        // Intento rápido inline; si el header aún no tiene tamaño, se reajusta en DOMContentLoaded
+        var hdr = document.querySelector('header');
+        if (hdr && hdr.offsetHeight > 0) {
+            document.documentElement.style.setProperty('--header-h', hdr.offsetHeight + 'px');
+        }
+    })();
+
+    // ── 2. Service Worker ───────────────────────────────────────────────────
     if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js')
-                .then(reg => console.log('SW registrado:', reg.scope))
-                .catch(err => console.warn('SW error:', err));
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/sw.js').catch(function() {});
         });
     }
 
-    // ---- 2. Medir altura real del header y fijar --header-h ----
+    // ── 3. Ajuste final de --header-h tras render completo ──────────────────
     function setHeaderHeight() {
-        const h = document.querySelector('header');
-        if (h) {
-            document.documentElement.style.setProperty('--header-h', h.offsetHeight + 'px');
-        }
+        var hdr = document.querySelector('header');
+        if (hdr) document.documentElement.style.setProperty('--header-h', hdr.offsetHeight + 'px');
     }
-    // Ejecutar al cargar y al cambiar tamaño de ventana
     document.addEventListener('DOMContentLoaded', setHeaderHeight);
-    window.addEventListener('resize', setHeaderHeight);
+    window.addEventListener('resize', setHeaderHeight, { passive: true });
 
-    // ---- 3. Videos: autoplay + tap-to-play si el navegador lo bloquea ----
-    document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('video.gallery-video').forEach(video => {
-            const item = video.closest('.gallery-item');
+    // ── 4. Lazy-load videos 2-4 con IntersectionObserver ───────────────────
+    document.addEventListener('DOMContentLoaded', function() {
+        var lazyVideos = document.querySelectorAll('video.lazy-video');
+        if (!lazyVideos.length) return;
 
-            // Intentar reproducir (con preload="metadata" ya tiene el primer frame listo)
-            const p = video.play();
-            if (p && typeof p.then === 'function') {
-                p.catch(() => {
-                    // Autoplay bloqueado (algunos navegadores móvil) → mostrar ▶
-                    if (item) item.classList.add('tap-to-play');
-                    video.addEventListener('click', () => {
-                        video.play().then(() => {
-                            if (item) item.classList.remove('tap-to-play');
-                        }).catch(() => {});
-                    }, { once: true });
+        if ('IntersectionObserver' in window) {
+            var videoObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (!entry.isIntersecting) return;
+                    var video = entry.target;
+                    // Asignar src desde data-src
+                    video.querySelectorAll('source[data-src]').forEach(function(s) {
+                        s.src = s.dataset.src;
+                    });
+                    video.load();
+                    video.play().catch(function() {});
+                    videoObserver.unobserve(video);
                 });
-            }
+            }, { rootMargin: '200px' }); // pre-carga 200px antes de entrar en pantalla
 
-            // Cuando termina de cargar metadata → asegurar reproducción
-            video.addEventListener('loadedmetadata', () => {
-                video.play().catch(() => {});
-            }, { once: true });
+            lazyVideos.forEach(function(v) { videoObserver.observe(v); });
+        } else {
+            // Fallback para navegadores sin IntersectionObserver
+            lazyVideos.forEach(function(video) {
+                video.querySelectorAll('source[data-src]').forEach(function(s) { s.src = s.dataset.src; });
+                video.load();
+                video.play().catch(function() {});
+            });
+        }
+    });
+
+    // ── 5. Autoplay del video 1 (preload=metadata) ─────────────────────────
+    document.addEventListener('DOMContentLoaded', function() {
+        var v1 = document.querySelector('video.gallery-video:not(.lazy-video)');
+        if (!v1) return;
+        v1.play().catch(function() {
+            // Si autoplay bloqueado, reproducir en primer toque
+            v1.addEventListener('click', function() { v1.play().catch(function(){}); }, { once: true });
         });
     });
 
-    // ---- 3. PWA Install Banner ----
-    let deferredPrompt = null;
+    // ── 6. PWA Install Banner ───────────────────────────────────────────────
+    var deferredPrompt = null;
+    var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    var isStandalone = (navigator.standalone === true)
+                    || window.matchMedia('(display-mode: standalone)').matches;
 
-    // Detectar plataforma una sola vez
-    const isIOS        = /iphone|ipad|ipod/i.test(navigator.userAgent);
-    const isStandalone = ('standalone' in navigator && navigator.standalone)
-                       || window.matchMedia('(display-mode: standalone)').matches;
-
-    // Mostrar/ocultar banners con clase CSS (sin recálculo de layout)
     function showBanner(id) {
-        const el = document.getElementById(id);
+        var el = document.getElementById(id);
         if (el) el.classList.add('pwa-visible');
     }
     function hideBanner(id) {
-        const el = document.getElementById(id);
+        var el = document.getElementById(id);
         if (el) el.classList.remove('pwa-visible');
     }
-
-    // Mostrar/ocultar botón del nav (siempre disponible, sin esperar eventos)
-    function showNavInstallBtn() {
-        const item = document.getElementById('nav-install-item');
-        if (item) item.style.display = '';
+    function showNavBtn() {
+        var el = document.getElementById('nav-install-item');
+        if (el) el.style.display = '';
     }
-    function hideNavInstallBtn() {
-        const item = document.getElementById('nav-install-item');
-        if (item) item.style.display = 'none';
+    function hideNavBtn() {
+        var el = document.getElementById('nav-install-item');
+        if (el) el.style.display = 'none';
     }
 
-    // Android/Chrome: capturar evento de instalación
-    window.addEventListener('beforeinstallprompt', (e) => {
+    // Android/Chrome: capturar prompt ANTES de DOMContentLoaded si es necesario
+    window.addEventListener('beforeinstallprompt', function(e) {
         e.preventDefault();
         deferredPrompt = e;
         showBanner('pwa-install-banner');
-        showNavInstallBtn();
+        showNavBtn();
     });
 
-    // App instalada: ocultar todo
-    window.addEventListener('appinstalled', () => {
+    window.addEventListener('appinstalled', function() {
         hideBanner('pwa-install-banner');
-        hideNavInstallBtn();
+        hideNavBtn();
         deferredPrompt = null;
     });
 
-    document.addEventListener('DOMContentLoaded', () => {
-
-        // ---- Botón instalar en el banner (Android) ----
-        document.getElementById('pwa-install-btn')?.addEventListener('click', async () => {
-            if (!deferredPrompt) return;
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            deferredPrompt = null;
-            hideBanner('pwa-install-banner');
-        });
-
-        // ---- Botón instalar en el NAV (Android + iOS) ----
-        document.getElementById('nav-install-btn')?.addEventListener('click', async (e) => {
-            e.preventDefault();
-            if (deferredPrompt) {
-                // Android: lanza el diálogo nativo de Chrome
+    document.addEventListener('DOMContentLoaded', function() {
+        // Botón instalar (banner Android)
+        var installBtn = document.getElementById('pwa-install-btn');
+        if (installBtn) {
+            installBtn.addEventListener('click', function() {
+                if (!deferredPrompt) return;
                 deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                deferredPrompt = null;
-                hideNavInstallBtn();
-            } else if (isIOS && !isStandalone) {
-                // iOS: mostrar instrucciones
-                showBanner('pwa-ios-banner');
-            }
-        });
+                deferredPrompt.userChoice.then(function() {
+                    deferredPrompt = null;
+                    hideBanner('pwa-install-banner');
+                });
+            });
+        }
 
-        // ---- Cerrar banners ----
-        document.getElementById('pwa-install-close')?.addEventListener('click',
-            () => hideBanner('pwa-install-banner'));
-        document.getElementById('pwa-ios-close')?.addEventListener('click',
-            () => hideBanner('pwa-ios-banner'));
+        // Botón instalar (nav — Android + iOS)
+        var navBtn = document.getElementById('nav-install-btn');
+        if (navBtn) {
+            navBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then(function() {
+                        deferredPrompt = null;
+                        hideNavBtn();
+                    });
+                } else if (isIOS && !isStandalone) {
+                    showBanner('pwa-ios-banner');
+                }
+            });
+        }
 
-        // ---- iOS: mostrar botón del nav inmediatamente (sin esperar eventos) ----
+        // Cerrar banners
+        var closeAndroid = document.getElementById('pwa-install-close');
+        if (closeAndroid) closeAndroid.addEventListener('click', function() { hideBanner('pwa-install-banner'); });
+        var closeIOS = document.getElementById('pwa-ios-close');
+        if (closeIOS) closeIOS.addEventListener('click', function() { hideBanner('pwa-ios-banner'); });
+
+        // iOS: mostrar banner y botón nav de inmediato
         if (isIOS && !isStandalone) {
-            showNavInstallBtn();                        // botón en nav al instante
-            setTimeout(() => showBanner('pwa-ios-banner'), 500); // banner en 500ms
+            showNavBtn();
+            setTimeout(function() { showBanner('pwa-ios-banner'); }, 300);
         }
     });
     </script>

@@ -1615,13 +1615,17 @@ footer {
     border-bottom: 3px solid var(--primary-color);
     box-shadow: 0 4px 18px rgba(255, 115, 185, 0.22);
 
-    /* OCULTO por defecto: sin display:none, solo invisible
-       → el navegador lo renderiza de una vez, aparece al instante */
+    /* GPU: evita repaint al animar */
+    will-change: opacity, transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+    /* OCULTO por defecto: sin display:none → renderizado de una vez */
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transform: translateY(-8px);
-    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+    transform: translateY(-6px);
+    transition: opacity 0.18s ease, visibility 0.18s ease, transform 0.18s ease;
 }
 
 /* Clase que añade JS para mostrar el banner */
