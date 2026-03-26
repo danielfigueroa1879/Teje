@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \":*)",
+      "Bash(del \"C:\\\\Users\\\\USUARIO\\\\Documents\\\\CODIGO\\\\LABORATORIO\\\\Teje-main\\\\Fotos\\\\_bailarina_preview.png\" \"C:\\\\Users\\\\USUARIO\\\\Documents\\\\CODIGO\\\\LABORATORIO\\\\Teje-main\\\\Fotos\\\\_luna_preview.png\" \"C:\\\\Users\\\\USUARIO\\\\Documents\\\\CODIGO\\\\LABORATORIO\\\\Teje-main\\\\Fotos\\\\_icon_preview.png\")"
+    ]
+  }
+}
