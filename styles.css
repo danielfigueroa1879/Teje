@@ -1590,64 +1590,85 @@ footer {
     animation-play-state: paused; /* Pausa la animación al pasar el ratón */
 }
 
-/* ===== BANNER DE INSTALACIÓN PWA ===== */
-/* Igual en móvil y escritorio: franja completa DEBAJO del header */
+/* ===================================================
+   BANNER PWA — siempre en el DOM, oculto con opacity
+   Sin display:none = sin recálculo de layout al mostrar
+   =================================================== */
 .pwa-install-banner {
+    /* Posición: franja completa bajo el header */
     position: fixed;
-    top: var(--header-h, 82px); /* JS lo calcula con la altura real del header */
-    bottom: auto;
+    top: var(--header-h, 82px);
     left: 0;
     right: 0;
     width: 100%;
-    background: linear-gradient(135deg, #fff5f9 0%, #ffffff 100%);
-    border-top: none;
-    border-bottom: 3px solid var(--primary-color);
-    border-radius: 0;
-    padding: 10px 24px;
+    z-index: 998;
+
+    /* Layout */
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 14px;
-    z-index: 998; /* debajo del header (1000) pero encima del contenido */
+    padding: 10px 24px;
+
+    /* Estilo */
+    background: linear-gradient(135deg, #fff5f9 0%, #ffffff 100%);
+    border-bottom: 3px solid var(--primary-color);
     box-shadow: 0 4px 18px rgba(255, 115, 185, 0.22);
-    animation: slideBannerDown 0.35s ease-out;
+
+    /* OCULTO por defecto: sin display:none, solo invisible
+       → el navegador lo renderiza de una vez, aparece al instante */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
 }
 
-@keyframes slideBannerDown {
-    from { transform: translateY(-100%); opacity: 0; }
-    to   { transform: translateY(0);     opacity: 1; }
+/* Clase que añade JS para mostrar el banner */
+.pwa-install-banner.pwa-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
 }
 
+/* ---- Partes internas ---- */
 .pwa-install-content {
     display: flex;
     align-items: center;
     gap: 12px;
     flex: 1;
+    min-width: 0;
 }
 
 .pwa-install-icon {
     width: 48px;
     height: 48px;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(255, 115, 185, 0.3);
     flex-shrink: 0;
+    /* SVG inline: no necesita descarga */
 }
 
 .pwa-install-text {
     display: flex;
     flex-direction: column;
     gap: 2px;
+    min-width: 0;
 }
 
 .pwa-install-text strong {
     font-size: 0.95rem;
     color: #333;
     font-weight: 700;
+    white-space: nowrap;
 }
 
 .pwa-install-text span {
     font-size: 0.8rem;
     color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .pwa-install-actions {
@@ -1666,11 +1687,11 @@ footer {
     font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
     white-space: nowrap;
 }
-
-.pwa-install-btn:hover {
+.pwa-install-btn:hover,
+.pwa-install-btn:active {
     background: #e0569e;
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(255, 115, 185, 0.4);
@@ -1680,71 +1701,58 @@ footer {
     background: transparent;
     border: none;
     color: #999;
-    font-size: 1rem;
+    font-size: 1.1rem;
     cursor: pointer;
-    padding: 4px 8px;
+    padding: 6px 10px;
     border-radius: 50%;
-    transition: all 0.2s ease;
+    transition: background 0.15s, color 0.15s;
     line-height: 1;
 }
+.pwa-install-close:hover { background: #f0f0f0; color: #333; }
 
-.pwa-install-close:hover {
-    background: #f0f0f0;
-    color: #333;
+/* ---- iOS: fondo azul para diferenciar de Android ---- */
+.pwa-ios-banner {
+    background: linear-gradient(135deg, #f0f8ff 0%, #ffffff 100%);
+    border-bottom-color: #007aff;
+    box-shadow: 0 4px 18px rgba(0, 122, 255, 0.18);
+}
+.pwa-ios-banner .pwa-install-text strong { color: #007aff; }
+
+/* ---- Botón instalar en el nav ---- */
+.nav-install-item { }
+.nav-install-link {
+    background: var(--primary-color);
+    color: white !important;
+    border-radius: 20px;
+    padding: 6px 14px !important;
+    font-size: 0.85rem !important;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+}
+.nav-install-link:hover {
+    background: #e0569e;
+    transform: translateY(-1px);
 }
 
-/* Pantallas pequeñas: ajustar solo tamaños, nunca la posición */
+/* ---- Móvil pequeño ---- */
 @media (max-width: 480px) {
-    .pwa-install-banner {
-        padding: 9px 14px;
-        gap: 10px;
-    }
-    .pwa-install-icon {
-        width: 40px;
-        height: 40px;
-    }
+    .pwa-install-banner { padding: 9px 14px; gap: 10px; }
+    .pwa-install-icon   { width: 38px; height: 38px; }
+    .pwa-install-text span { display: none; } /* solo título en pantallas muy chicas */
 }
 
-/* ===== safe-area para notch/iPhone ===== */
-@supports (padding: env(safe-area-inset-top)) {
+/* ---- Safe-area notch iPhone ---- */
+@supports (padding: env(safe-area-inset-left)) {
     .pwa-install-banner {
-        /* El top ya lo calcula JS; solo añadimos padding extra si hay notch */
         padding-left:  max(14px, env(safe-area-inset-left));
         padding-right: max(14px, env(safe-area-inset-right));
     }
-    header, .header {
-        padding-top: env(safe-area-inset-top);
-    }
 }
 
-/* Banner iOS: fondo levemente azulado para diferenciar */
-.pwa-ios-banner {
-    background: linear-gradient(135deg, #f0f8ff 0%, #ffffff 100%);
-    border-color: #007aff;
-    box-shadow: 0 -4px 20px rgba(0, 122, 255, 0.15);
-}
-.pwa-ios-banner .pwa-install-text strong {
-    color: #007aff;
-}
-.ios-share-icon {
-    display: inline-block;
-    font-style: normal;
-    font-weight: bold;
-    color: #007aff;
-}
-@media (min-width: 769px) {
-    .pwa-ios-banner {
-        border-color: #007aff;
-    }
-}
-
-/* Ajustes cuando app está instalada (standalone mode) */
+/* ---- App instalada (standalone): ocultar banners y botón nav ---- */
 @media (display-mode: standalone) {
-    header, .header {
-        padding-top: env(safe-area-inset-top, 0px);
-    }
     .pwa-install-banner,
-    .pwa-ios-banner {
-        display: none !important;
-    }
+    .nav-install-item { display: none !important; }
 }

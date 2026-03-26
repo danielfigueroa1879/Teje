@@ -247,6 +247,10 @@
                     <li><a href="#proceso">Proceso Creativo</a></li>
                     <li><a href="#blog">Blog</a></li>
                     <li><a href="#contacto">Contacto</a></li>
+                    <!-- Botón instalar PWA: siempre visible, sin esperar eventos -->
+                    <li id="nav-install-item" class="nav-install-item" style="display:none">
+                        <a id="nav-install-btn" href="#" class="nav-install-link" aria-label="Instalar aplicación">📲 Instalar App</a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -444,9 +448,21 @@
     </footer>
 
     <!-- Banner Android/Chrome: aparece automáticamente -->
-    <div id="pwa-install-banner" class="pwa-install-banner" style="display:none;" role="banner" aria-label="Instalar aplicación">
+    <!-- Banner Android/Chrome: aparece cuando Chrome lanza beforeinstallprompt -->
+    <div id="pwa-install-banner" class="pwa-install-banner" role="banner" aria-label="Instalar aplicación">
         <div class="pwa-install-content">
-            <img src="favicon/apple-touch-icon.png" alt="Logo Tejidos Luna" class="pwa-install-icon">
+            <!-- Ícono inline: sin descarga, aparece instantáneo -->
+            <svg class="pwa-install-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect width="64" height="64" rx="14" fill="#fff5f9"/>
+                <circle cx="44" cy="18" r="12" fill="#FDDCB0"/>
+                <circle cx="49" cy="15" r="11" fill="#fff5f9"/>
+                <circle cx="26" cy="22" r="5" fill="#ff73b9"/>
+                <ellipse cx="26" cy="20" rx="3" ry="2.5" fill="#e0569e"/>
+                <line x1="26" y1="27" x2="26" y2="40" stroke="#ff73b9" stroke-width="3" stroke-linecap="round"/>
+                <line x1="21" y1="31" x2="31" y2="33" stroke="#ff73b9" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="23" y1="40" x2="22" y2="53" stroke="#ff73b9" stroke-width="3" stroke-linecap="round"/>
+                <line x1="29" y1="40" x2="34" y2="48" stroke="#ff73b9" stroke-width="3" stroke-linecap="round"/>
+            </svg>
             <div class="pwa-install-text">
                 <strong>Tejidos Luna</strong>
                 <span>Instala la app en tu dispositivo</span>
@@ -458,13 +474,23 @@
         </div>
     </div>
 
-    <!-- Banner iOS/iPhone: instrucciones manuales (Safari no tiene prompt automático) -->
-    <div id="pwa-ios-banner" class="pwa-install-banner pwa-ios-banner" style="display:none;" role="banner" aria-label="Instalar en iPhone">
+    <!-- Banner iOS/iPhone: instrucciones manuales -->
+    <div id="pwa-ios-banner" class="pwa-install-banner pwa-ios-banner" role="banner" aria-label="Instalar en iPhone">
         <div class="pwa-install-content">
-            <img src="favicon/apple-touch-icon.png" alt="Logo Tejidos Luna" class="pwa-install-icon">
+            <svg class="pwa-install-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect width="64" height="64" rx="14" fill="#fff5f9"/>
+                <circle cx="44" cy="18" r="12" fill="#FDDCB0"/>
+                <circle cx="49" cy="15" r="11" fill="#fff5f9"/>
+                <circle cx="26" cy="22" r="5" fill="#ff73b9"/>
+                <ellipse cx="26" cy="20" rx="3" ry="2.5" fill="#e0569e"/>
+                <line x1="26" y1="27" x2="26" y2="40" stroke="#ff73b9" stroke-width="3" stroke-linecap="round"/>
+                <line x1="21" y1="31" x2="31" y2="33" stroke="#ff73b9" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="23" y1="40" x2="22" y2="53" stroke="#ff73b9" stroke-width="3" stroke-linecap="round"/>
+                <line x1="29" y1="40" x2="34" y2="48" stroke="#ff73b9" stroke-width="3" stroke-linecap="round"/>
+            </svg>
             <div class="pwa-install-text">
                 <strong>Agregar a inicio</strong>
-                <span>Toca <strong>Compartir</strong> <span class="ios-share-icon">⬆</span> → "Agregar a pantalla de inicio"</span>
+                <span>Toca <strong>Compartir ⬆</strong> → "Agregar a pantalla de inicio"</span>
             </div>
         </div>
         <div class="pwa-install-actions">
@@ -548,55 +574,85 @@
         });
     });
 
-    // ---- 3. Install Banner (Android/Chrome) ----
+    // ---- 3. PWA Install Banner ----
     let deferredPrompt = null;
 
+    // Detectar plataforma una sola vez
+    const isIOS        = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const isStandalone = ('standalone' in navigator && navigator.standalone)
+                       || window.matchMedia('(display-mode: standalone)').matches;
+
+    // Mostrar/ocultar banners con clase CSS (sin recálculo de layout)
     function showBanner(id) {
         const el = document.getElementById(id);
-        if (el) el.style.display = 'flex';
+        if (el) el.classList.add('pwa-visible');
     }
     function hideBanner(id) {
         const el = document.getElementById(id);
-        if (el) el.style.display = 'none';
+        if (el) el.classList.remove('pwa-visible');
     }
 
-    // Capturar evento ANTES de DOMContentLoaded (puede llegar en cualquier momento)
+    // Mostrar/ocultar botón del nav (siempre disponible, sin esperar eventos)
+    function showNavInstallBtn() {
+        const item = document.getElementById('nav-install-item');
+        if (item) item.style.display = '';
+    }
+    function hideNavInstallBtn() {
+        const item = document.getElementById('nav-install-item');
+        if (item) item.style.display = 'none';
+    }
+
+    // Android/Chrome: capturar evento de instalación
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredPrompt = e;
         showBanner('pwa-install-banner');
+        showNavInstallBtn();
     });
 
+    // App instalada: ocultar todo
     window.addEventListener('appinstalled', () => {
         hideBanner('pwa-install-banner');
+        hideNavInstallBtn();
+        deferredPrompt = null;
     });
 
     document.addEventListener('DOMContentLoaded', () => {
-        // Botón instalar (Android)
-        const installBtn = document.getElementById('pwa-install-btn');
-        if (installBtn) {
-            installBtn.addEventListener('click', async () => {
-                if (!deferredPrompt) return;
+
+        // ---- Botón instalar en el banner (Android) ----
+        document.getElementById('pwa-install-btn')?.addEventListener('click', async () => {
+            if (!deferredPrompt) return;
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            deferredPrompt = null;
+            hideBanner('pwa-install-banner');
+        });
+
+        // ---- Botón instalar en el NAV (Android + iOS) ----
+        document.getElementById('nav-install-btn')?.addEventListener('click', async (e) => {
+            e.preventDefault();
+            if (deferredPrompt) {
+                // Android: lanza el diálogo nativo de Chrome
                 deferredPrompt.prompt();
                 const { outcome } = await deferredPrompt.userChoice;
                 deferredPrompt = null;
-                hideBanner('pwa-install-banner');
-            });
-        }
+                hideNavInstallBtn();
+            } else if (isIOS && !isStandalone) {
+                // iOS: mostrar instrucciones
+                showBanner('pwa-ios-banner');
+            }
+        });
+
+        // ---- Cerrar banners ----
         document.getElementById('pwa-install-close')?.addEventListener('click',
             () => hideBanner('pwa-install-banner'));
-
-        // Botón cerrar iOS
         document.getElementById('pwa-ios-close')?.addEventListener('click',
             () => hideBanner('pwa-ios-banner'));
 
-        // ---- 4. Detección iOS: mostrar instrucciones manuales ----
-        const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent.toLowerCase());
-        const isStandalone = ('standalone' in navigator && navigator.standalone)
-                          || window.matchMedia('(display-mode: standalone)').matches;
+        // ---- iOS: mostrar botón del nav inmediatamente (sin esperar eventos) ----
         if (isIOS && !isStandalone) {
-            // Esperar 3s para no interrumpir la carga inicial
-            setTimeout(() => showBanner('pwa-ios-banner'), 3000);
+            showNavInstallBtn();                        // botón en nav al instante
+            setTimeout(() => showBanner('pwa-ios-banner'), 500); // banner en 500ms
         }
     });
     </script>
