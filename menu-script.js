@@ -1,17 +1,26 @@
 // Script súper optimizado para carga instantánea de imagen - ADAPTADO para Fotos/su.jpg
 document.addEventListener('DOMContentLoaded', function() {
-    // Carga de la imagen hero (una sola instancia)
+    // Carga de la imagen hero con WebP si el navegador lo soporta
     function forceLoadHeroImage() {
-        const img = new Image();
-        img.onload = function() {
+        const webp = new Image();
+        webp.onload = function() {
             const hero = document.querySelector('.hero');
             if (hero) {
-                hero.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Fotos/su.jpg')";
+                const src = webp.width > 0 ? 'Fotos/su.webp' : 'Fotos/su.jpg';
+                hero.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('${src}')`;
                 hero.style.backgroundSize = 'cover';
                 hero.style.backgroundPosition = 'center center';
             }
         };
-        img.src = 'Fotos/su.jpg';
+        webp.onerror = function() {
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('Fotos/su.jpg')";
+                hero.style.backgroundSize = 'cover';
+                hero.style.backgroundPosition = 'center center';
+            }
+        };
+        webp.src = 'Fotos/su.webp';
     }
     
     // Función para cargar imágenes de productos - SIMPLIFICADA

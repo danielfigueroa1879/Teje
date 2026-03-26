@@ -151,9 +151,13 @@ nav ul li a:hover {
     z-index: 1001;
 }
 
-/* Hero Banner - CAMBIO SOLO LA RUTA A Fotos/su.jpg */
+/* Hero Banner */
 .hero {
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Fotos/su.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                -webkit-image-set(url('Fotos/su.webp') 1x, url('Fotos/su.jpg') 1x);
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                image-set(url('Fotos/su.webp') type("image/webp"), url('Fotos/su.jpg') type("image/jpeg"));
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
