@@ -1760,3 +1760,9 @@ footer {
     .pwa-install-banner,
     .nav-install-item { display: none !important; }
 }
+
+/* ---- DESKTOP: banners de instalación solo en celular ---- */
+@media (min-width: 769px) {
+    .pwa-install-banner,
+    .nav-install-item { display: none !important; }
+}

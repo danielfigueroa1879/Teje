@@ -247,10 +247,6 @@
                     <li><a href="#proceso">Proceso Creativo</a></li>
                     <li><a href="#blog">Blog</a></li>
                     <li><a href="#contacto">Contacto</a></li>
-                    <!-- Botón instalar PWA: siempre visible, sin esperar eventos -->
-                    <li id="nav-install-item" class="nav-install-item" style="display:none">
-                        <a id="nav-install-btn" href="#" class="nav-install-link" aria-label="Instalar aplicación">📲 Instalar App</a>
-                    </li>
                 </ul>
             </nav>
         </div>
@@ -513,85 +509,44 @@
     <!-- Botón scroll to top (solo móvil) -->
     <button class="scroll-to-top" id="scrollToTop" aria-label="Subir al inicio"></button>
 
+    <!-- ===== PWA + Videos lazy ===== -->
     <script>
-        // Script completo del sitio con todas las funcionalidades
-        document.addEventListener('DOMContentLoaded', function() {
-            // Resto del código JavaScript...
-            console.log('Sitio Tejidos Luna cargado con bailarina bailarina1.png');
-
-            // Aquí iría todo el JavaScript original del sitio
-            // (omitido por brevedad, pero incluye todas las funcionalidades)
-        });
-    </script>
-
-    <!-- ===== PWA + Videos lazy + Performance ===== -->
-    <script>
-    // ── 1. --header-h: medir AHORA antes del primer paint ──────────────────
-    (function() {
-        // Intento rápido inline; si el header aún no tiene tamaño, se reajusta en DOMContentLoaded
-        var hdr = document.querySelector('header');
-        if (hdr && hdr.offsetHeight > 0) {
-            document.documentElement.style.setProperty('--header-h', hdr.offsetHeight + 'px');
-        }
-    })();
-
-    // ── 2. Service Worker ───────────────────────────────────────────────────
+    // ── Service Worker ────────────────────────────────────────────────────────
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
             navigator.serviceWorker.register('/sw.js').catch(function() {});
         });
     }
 
-    // ── 3. Ajuste final de --header-h tras render completo ──────────────────
-    function setHeaderHeight() {
-        var hdr = document.querySelector('header');
-        if (hdr) document.documentElement.style.setProperty('--header-h', hdr.offsetHeight + 'px');
-    }
-    document.addEventListener('DOMContentLoaded', setHeaderHeight);
-    window.addEventListener('resize', setHeaderHeight, { passive: true });
-
-    // ── 4. Lazy-load videos 2-4 con IntersectionObserver ───────────────────
+    // ── Lazy-load videos 2-4 (solo cuando son visibles) ──────────────────────
     document.addEventListener('DOMContentLoaded', function() {
         var lazyVideos = document.querySelectorAll('video.lazy-video');
         if (!lazyVideos.length) return;
 
+        function loadVideo(video) {
+            video.querySelectorAll('source[data-src]').forEach(function(s) {
+                s.src = s.dataset.src;
+            });
+            video.preload = 'metadata';
+            video.load();
+            video.play().catch(function() {});
+        }
+
         if ('IntersectionObserver' in window) {
-            var videoObserver = new IntersectionObserver(function(entries) {
+            var obs = new IntersectionObserver(function(entries) {
                 entries.forEach(function(entry) {
                     if (!entry.isIntersecting) return;
-                    var video = entry.target;
-                    // Asignar src desde data-src
-                    video.querySelectorAll('source[data-src]').forEach(function(s) {
-                        s.src = s.dataset.src;
-                    });
-                    video.load();
-                    video.play().catch(function() {});
-                    videoObserver.unobserve(video);
+                    loadVideo(entry.target);
+                    obs.unobserve(entry.target);
                 });
-            }, { rootMargin: '200px' }); // pre-carga 200px antes de entrar en pantalla
-
-            lazyVideos.forEach(function(v) { videoObserver.observe(v); });
+            }, { rootMargin: '300px' });
+            lazyVideos.forEach(function(v) { obs.observe(v); });
         } else {
-            // Fallback para navegadores sin IntersectionObserver
-            lazyVideos.forEach(function(video) {
-                video.querySelectorAll('source[data-src]').forEach(function(s) { s.src = s.dataset.src; });
-                video.load();
-                video.play().catch(function() {});
-            });
+            lazyVideos.forEach(loadVideo);
         }
     });
 
-    // ── 5. Autoplay del video 1 (preload=metadata) ─────────────────────────
-    document.addEventListener('DOMContentLoaded', function() {
-        var v1 = document.querySelector('video.gallery-video:not(.lazy-video)');
-        if (!v1) return;
-        v1.play().catch(function() {
-            // Si autoplay bloqueado, reproducir en primer toque
-            v1.addEventListener('click', function() { v1.play().catch(function(){}); }, { once: true });
-        });
-    });
-
-    // ── 6. PWA Install Banner ───────────────────────────────────────────────
+    // ── PWA Install Banner (solo celular — desktop lo oculta el CSS) ─────────
     var deferredPrompt = null;
     var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
     var isStandalone = (navigator.standalone === true)
@@ -605,31 +560,21 @@
         var el = document.getElementById(id);
         if (el) el.classList.remove('pwa-visible');
     }
-    function showNavBtn() {
-        var el = document.getElementById('nav-install-item');
-        if (el) el.style.display = '';
-    }
-    function hideNavBtn() {
-        var el = document.getElementById('nav-install-item');
-        if (el) el.style.display = 'none';
-    }
 
-    // Android/Chrome: capturar prompt ANTES de DOMContentLoaded si es necesario
+    // Android/Chrome: captura el prompt antes del DOMContentLoaded
     window.addEventListener('beforeinstallprompt', function(e) {
         e.preventDefault();
         deferredPrompt = e;
         showBanner('pwa-install-banner');
-        showNavBtn();
     });
 
     window.addEventListener('appinstalled', function() {
         hideBanner('pwa-install-banner');
-        hideNavBtn();
         deferredPrompt = null;
     });
 
     document.addEventListener('DOMContentLoaded', function() {
-        // Botón instalar (banner Android)
+        // Botón Instalar (Android)
         var installBtn = document.getElementById('pwa-install-btn');
         if (installBtn) {
             installBtn.addEventListener('click', function() {
@@ -642,33 +587,19 @@
             });
         }
 
-        // Botón instalar (nav — Android + iOS)
-        var navBtn = document.getElementById('nav-install-btn');
-        if (navBtn) {
-            navBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                if (deferredPrompt) {
-                    deferredPrompt.prompt();
-                    deferredPrompt.userChoice.then(function() {
-                        deferredPrompt = null;
-                        hideNavBtn();
-                    });
-                } else if (isIOS && !isStandalone) {
-                    showBanner('pwa-ios-banner');
-                }
-            });
-        }
-
         // Cerrar banners
         var closeAndroid = document.getElementById('pwa-install-close');
-        if (closeAndroid) closeAndroid.addEventListener('click', function() { hideBanner('pwa-install-banner'); });
+        if (closeAndroid) {
+            closeAndroid.addEventListener('click', function() { hideBanner('pwa-install-banner'); });
+        }
         var closeIOS = document.getElementById('pwa-ios-close');
-        if (closeIOS) closeIOS.addEventListener('click', function() { hideBanner('pwa-ios-banner'); });
+        if (closeIOS) {
+            closeIOS.addEventListener('click', function() { hideBanner('pwa-ios-banner'); });
+        }
 
-        // iOS: mostrar banner y botón nav de inmediato
+        // iOS Safari: mostrar instrucciones manuales
         if (isIOS && !isStandalone) {
-            showNavBtn();
-            setTimeout(function() { showBanner('pwa-ios-banner'); }, 300);
+            setTimeout(function() { showBanner('pwa-ios-banner'); }, 400);
         }
     });
     </script>

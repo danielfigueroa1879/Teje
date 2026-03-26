@@ -1,23 +1,17 @@
 // Script súper optimizado para carga instantánea de imagen - ADAPTADO para Fotos/su.jpg
 document.addEventListener('DOMContentLoaded', function() {
-    // Carga agresiva e inmediata de la imagen hero
+    // Carga de la imagen hero (una sola instancia)
     function forceLoadHeroImage() {
-        // Crear múltiples instancias para asegurar carga
-        for (let i = 0; i < 3; i++) {
-            const img = new Image();
-            img.src = 'Fotos/su.jpg'; // CAMBIO AQUÍ: Nueva ruta
-            img.onload = function() {
-                // Aplicar imagen inmediatamente al elemento hero
-                const hero = document.querySelector('.hero');
-                if (hero) {
-                    hero.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Fotos/su.jpg')"; // CAMBIO AQUÍ
-                    hero.style.backgroundSize = 'cover';
-                    hero.style.backgroundPosition = 'center center';
-                }
-            };
-            // Mantener referencias globales
-            window['heroImg' + i] = img;
-        }
+        const img = new Image();
+        img.onload = function() {
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Fotos/su.jpg')";
+                hero.style.backgroundSize = 'cover';
+                hero.style.backgroundPosition = 'center center';
+            }
+        };
+        img.src = 'Fotos/su.jpg';
     }
     
     // Función para cargar imágenes de productos - SIMPLIFICADA
@@ -47,32 +41,10 @@ document.addEventListener('DOMContentLoaded', function() {
     forceLoadHeroImage();
     // forceLoadProductImages(); // Comentado para evitar interferencia
     
-    // Para móviles: técnicas adicionales de optimización
+    // Para móviles: activar aceleración GPU en el hero una sola vez
     if (window.innerWidth <= 768) {
-        // Crear canvas invisible para pre-renderizar
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        const tempImg = new Image();
-        tempImg.onload = function() {
-            canvas.width = this.width;
-            canvas.height = this.height;
-            ctx.drawImage(this, 0, 0);
-            // Mantener canvas en memoria
-            window.heroCanvas = canvas;
-        };
-        tempImg.src = 'Fotos/su.jpg'; // CAMBIO AQUÍ: Nueva ruta
-        
-        // Forzar repaint del hero cada 100ms por 1 segundo
-        let attempts = 0;
-        const forceRepaint = setInterval(() => {
-            const hero = document.querySelector('.hero');
-            if (hero && attempts < 10) {
-                hero.style.transform = 'translateZ(0)';
-                attempts++;
-            } else {
-                clearInterval(forceRepaint);
-            }
-        }, 100);
+        const hero = document.querySelector('.hero');
+        if (hero) hero.style.transform = 'translateZ(0)';
     }
     
     // Resto del código del menú
