@@ -3,7 +3,12 @@
     "allow": [
       "Bash(python -c \":*)",
       "Bash(del \"C:\\\\Users\\\\USUARIO\\\\Documents\\\\CODIGO\\\\LABORATORIO\\\\Teje-main\\\\Fotos\\\\_bailarina_preview.png\" \"C:\\\\Users\\\\USUARIO\\\\Documents\\\\CODIGO\\\\LABORATORIO\\\\Teje-main\\\\Fotos\\\\_luna_preview.png\" \"C:\\\\Users\\\\USUARIO\\\\Documents\\\\CODIGO\\\\LABORATORIO\\\\Teje-main\\\\Fotos\\\\_icon_preview.png\")",
-      "Bash(del \"C:\\\\Users\\\\USUARIO\\\\Documents\\\\CODIGO\\\\LABORATORIO\\\\Teje-main\\\\generar-iconos.html\")"
+      "Bash(del \"C:\\\\Users\\\\USUARIO\\\\Documents\\\\CODIGO\\\\LABORATORIO\\\\Teje-main\\\\generar-iconos.html\")",
+      "Bash(sort -k5 -rn)",
+      "Bash(magick --version)",
+      "Bash(ffmpeg -version)",
+      "Bash(python:*)",
+      "mcp__Claude_Preview__preview_start"
     ]
   }
 }
