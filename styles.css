@@ -1537,3 +1537,136 @@ footer {
     transform: scale(1.1); /* Esto anulará la animación mientras se pasa el ratón */
     animation-play-state: paused; /* Pausa la animación al pasar el ratón */
 }
+
+/* ===== BANNER DE INSTALACIÓN PWA ===== */
+.pwa-install-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #fff5f9 0%, #ffffff 100%);
+    border-top: 2px solid var(--primary-color);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    z-index: 9999;
+    box-shadow: 0 -4px 20px rgba(255, 115, 185, 0.2);
+    animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+}
+
+.pwa-install-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.pwa-install-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(255, 115, 185, 0.3);
+    flex-shrink: 0;
+}
+
+.pwa-install-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.pwa-install-text strong {
+    font-size: 0.95rem;
+    color: #333;
+    font-weight: 700;
+}
+
+.pwa-install-text span {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.pwa-install-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.pwa-install-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.pwa-install-btn:hover {
+    background: #e0569e;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 115, 185, 0.4);
+}
+
+.pwa-install-close {
+    background: transparent;
+    border: none;
+    color: #999;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    line-height: 1;
+}
+
+.pwa-install-close:hover {
+    background: #f0f0f0;
+    color: #333;
+}
+
+@media (max-width: 480px) {
+    .pwa-install-banner {
+        padding: 10px 14px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .pwa-install-text span {
+        display: none;
+    }
+    .pwa-install-icon {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* ===== MEJORAS RESPONSIVE PWA (safe-area para notch/iPhone) ===== */
+@supports (padding: env(safe-area-inset-bottom)) {
+    .pwa-install-banner {
+        padding-bottom: calc(12px + env(safe-area-inset-bottom));
+    }
+    header, .header {
+        padding-top: env(safe-area-inset-top);
+    }
+}
+
+/* Ajustes cuando app está instalada (standalone mode) */
+@media (display-mode: standalone) {
+    header, .header {
+        padding-top: env(safe-area-inset-top, 0px);
+    }
+    .pwa-install-banner {
+        display: none !important;
+    }
+}

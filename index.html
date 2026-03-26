@@ -13,7 +13,33 @@
     <!-- Preload critical assets -->
     <link rel="preload" href="styles.css" as="style">
     <link rel="preload" href="Fotos/su.jpg" as="image">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- ====== FAVICONS & PWA ====== -->
+
+    <!-- Manifest principal (Android, Chrome, Edge, escritorio) -->
+    <link rel="manifest" href="favicon/site.webmanifest">
+
+    <!-- Favicon estándar (navegadores de escritorio) -->
+    <link rel="icon" href="favicon/favicon.ico" sizes="16x16 32x32 48x48" type="image/x-icon">
+    <link rel="icon" href="favicon/favicon-96x96.png" sizes="96x96" type="image/png">
+    <link rel="icon" href="favicon/favicon.svg" type="image/svg+xml">
+
+    <!-- iOS / iPhone / iPad (Safari) -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Tejidos Luna">
+    <link rel="apple-touch-icon" href="favicon/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+
+    <!-- Android / Chrome / PWA -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#ff73b9">
+    <meta name="application-name" content="Tejidos Luna">
+
+    <!-- Windows / Microsoft Edge -->
+    <meta name="msapplication-TileColor" content="#ff73b9">
+    <meta name="msapplication-TileImage" content="favicon/web-app-manifest-192x192.png">
+    <meta name="msapplication-config" content="none">
     
     <link rel="stylesheet" href="styles.css">
     <script src="menu-script.js" defer></script>
@@ -413,6 +439,21 @@
         </div>
     </footer>
 
+    <!-- Banner de instalación PWA -->
+    <div id="pwa-install-banner" class="pwa-install-banner" style="display:none;" role="banner" aria-label="Instalar aplicación">
+        <div class="pwa-install-content">
+            <img src="Fotos/icon.svg" alt="Logo Tejidos Luna" class="pwa-install-icon">
+            <div class="pwa-install-text">
+                <strong>Tejidos Luna</strong>
+                <span>Instala la app en tu dispositivo</span>
+            </div>
+        </div>
+        <div class="pwa-install-actions">
+            <button id="pwa-install-btn" class="pwa-install-btn" aria-label="Instalar app">Instalar</button>
+            <button id="pwa-install-close" class="pwa-install-close" aria-label="Cerrar">✕</button>
+        </div>
+    </div>
+
     <!-- Audio de fondo -->
     <audio id="backgroundMusic" loop preload="auto">
         <source src="Fotos/musica.mp3" type="audio/mpeg">
@@ -435,10 +476,56 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Resto del código JavaScript...
             console.log('Sitio Tejidos Luna cargado con bailarina bailarina1.png');
-            
+
             // Aquí iría todo el JavaScript original del sitio
             // (omitido por brevedad, pero incluye todas las funcionalidades)
         });
+    </script>
+
+    <!-- ===== PWA: Service Worker + Install Prompt ===== -->
+    <script>
+    // Registro del Service Worker
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then(reg => console.log('SW registrado:', reg.scope))
+                .catch(err => console.warn('SW error:', err));
+        });
+    }
+
+    // Botón de instalación PWA (Android/Chrome)
+    let deferredPrompt = null;
+    const installBanner = document.getElementById('pwa-install-banner');
+    const installBtn    = document.getElementById('pwa-install-btn');
+    const installClose  = document.getElementById('pwa-install-close');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        if (installBanner) installBanner.style.display = 'flex';
+    });
+
+    if (installBtn) {
+        installBtn.addEventListener('click', async () => {
+            if (!deferredPrompt) return;
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log('Instalación:', outcome);
+            deferredPrompt = null;
+            if (installBanner) installBanner.style.display = 'none';
+        });
+    }
+
+    if (installClose) {
+        installClose.addEventListener('click', () => {
+            if (installBanner) installBanner.style.display = 'none';
+        });
+    }
+
+    window.addEventListener('appinstalled', () => {
+        console.log('Tejidos Luna instalada como app');
+        if (installBanner) installBanner.style.display = 'none';
+    });
     </script>
 </body>
 </html>
