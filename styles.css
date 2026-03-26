@@ -1539,53 +1539,31 @@ footer {
 }
 
 /* ===== BANNER DE INSTALACIÓN PWA ===== */
-
-/* Móvil: banner en la PARTE INFERIOR */
+/* Igual en móvil y escritorio: franja completa DEBAJO del header */
 .pwa-install-banner {
     position: fixed;
-    bottom: 0;
+    top: var(--header-h, 82px); /* JS lo calcula con la altura real del header */
+    bottom: auto;
     left: 0;
     right: 0;
-    top: auto;
+    width: 100%;
     background: linear-gradient(135deg, #fff5f9 0%, #ffffff 100%);
-    border-top: 2px solid var(--primary-color);
+    border-top: none;
+    border-bottom: 3px solid var(--primary-color);
     border-radius: 0;
-    padding: 12px 20px;
+    padding: 10px 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    z-index: 9999;
-    box-shadow: 0 -4px 20px rgba(255, 115, 185, 0.25);
-    animation: slideBannerUp 0.4s ease-out;
+    gap: 14px;
+    z-index: 998; /* debajo del header (1000) pero encima del contenido */
+    box-shadow: 0 4px 18px rgba(255, 115, 185, 0.22);
+    animation: slideBannerDown 0.35s ease-out;
 }
 
-@keyframes slideBannerUp {
-    from { transform: translateY(100%); opacity: 0; }
-    to   { transform: translateY(0);    opacity: 1; }
-}
-
-/* Escritorio: banner en la PARTE SUPERIOR debajo del header */
-@media (min-width: 769px) {
-    .pwa-install-banner {
-        top: 80px;        /* justo debajo del header fijo */
-        bottom: auto;
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-        width: auto;
-        min-width: 420px;
-        max-width: 620px;
-        border-radius: 14px;
-        border: 2px solid var(--primary-color);
-        border-top: 2px solid var(--primary-color);
-        box-shadow: 0 8px 32px rgba(255, 115, 185, 0.25);
-        animation: slideBannerDown 0.4s ease-out;
-    }
-    @keyframes slideBannerDown {
-        from { transform: translateX(-50%) translateY(-20px); opacity: 0; }
-        to   { transform: translateX(-50%) translateY(0);     opacity: 1; }
-    }
+@keyframes slideBannerDown {
+    from { transform: translateY(-100%); opacity: 0; }
+    to   { transform: translateY(0);     opacity: 1; }
 }
 
 .pwa-install-content {
@@ -1663,14 +1641,11 @@ footer {
     color: #333;
 }
 
+/* Pantallas pequeñas: ajustar solo tamaños, nunca la posición */
 @media (max-width: 480px) {
     .pwa-install-banner {
-        padding: 10px 14px;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-    .pwa-install-text span {
-        display: none;
+        padding: 9px 14px;
+        gap: 10px;
     }
     .pwa-install-icon {
         width: 40px;
@@ -1678,10 +1653,12 @@ footer {
     }
 }
 
-/* ===== MEJORAS RESPONSIVE PWA (safe-area para notch/iPhone) ===== */
-@supports (padding: env(safe-area-inset-bottom)) {
+/* ===== safe-area para notch/iPhone ===== */
+@supports (padding: env(safe-area-inset-top)) {
     .pwa-install-banner {
-        padding-bottom: calc(12px + env(safe-area-inset-bottom));
+        /* El top ya lo calcula JS; solo añadimos padding extra si hay notch */
+        padding-left:  max(14px, env(safe-area-inset-left));
+        padding-right: max(14px, env(safe-area-inset-right));
     }
     header, .header {
         padding-top: env(safe-area-inset-top);
